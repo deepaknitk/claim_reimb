@@ -3,9 +3,6 @@ package com.coviam.reimbursement.claims.controllers;
 import com.coviam.reimbursement.claims.TestUtils;
 import com.coviam.reimbursement.claims.controllers.FileController;
 import com.coviam.reimbursement.claims.service.api.FileService;
-import com.gdn.lts.backend.master.model.constants.LtsApiPath;
-import com.gdn.lts.backend.master.model.enums.Error;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +40,7 @@ public class FileControllerTest {
     @Mock
     private FileService fileService;
 
-    @Before
+/*    @Before
     public void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(this.fileController).build();
@@ -99,5 +96,5 @@ public class FileControllerTest {
             .param("channelId", TestUtils.CHANNEL_ID).param("rfqItemId", TestUtils.ID)
             .param("rfqId", TestUtils.ID).param("rfqTypeId", TestUtils.ID))
             .andExpect(status().isOk()).andExpect(jsonPath("$.success", equalTo(false)));
-    }
+    }*/
 }

@@ -1,9 +1,7 @@
 package com.coviam.reimbursement.claims.controllers;
 
-import com.coviam.reimbursement.claims.controllers.LTSExceptionController;
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
-import com.gdn.lts.backend.master.model.enums.Error;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
+import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
+import com.coviam.reimbursement.claims.model.exceptions.BusinessException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +16,10 @@ import java.util.Collections;
 /**
  * Created by jugalkishorsahu on Jan, 2018
  */
-public class LTSExceptionControllerTest {
+public class ClaimExceptionControllerTest {
 
   @InjectMocks
-  private LTSExceptionController ltsExceptionController;
+  private ClaimExceptionController claimExceptionController;
 
   @Before
   public void init() {
@@ -31,19 +29,10 @@ public class LTSExceptionControllerTest {
   @Test
   public void throwable_test() {
     Exception e = new Exception();
-    BaseRestResponse<Object> result = ltsExceptionController.throwable(e);
+    BaseRestResponse<Object> result = claimExceptionController.throwable(e);
     Assert.assertNotNull(result);
     Assert.assertEquals(e.getClass().getName(), result.getErrorCode());
     Assert.assertEquals(e.getMessage(), result.getErrorMessage());
-  }
-
-  @Test
-  public void illegalArgumentException_test() {
-    BusinessException e = new BusinessException(Error.COMPANY_NAME_NULL);
-    BaseRestResponse<Object> result = ltsExceptionController.illegalArgumentException(e);
-    Assert.assertNotNull(result);
-    Assert.assertEquals(Error.COMPANY_NAME_NULL.getCode(), result.getErrorCode());
-    Assert.assertEquals(Error.COMPANY_NAME_NULL.getMessage(), result.getErrorMessage());
   }
 
   @Test
@@ -51,7 +40,7 @@ public class LTSExceptionControllerTest {
     MapBindingResult mapBindingResult = new MapBindingResult(Collections.emptyMap(), "");
     mapBindingResult.addError(new ObjectError("objectName", "message"));
     MethodArgumentNotValidException e = new MethodArgumentNotValidException(null, mapBindingResult);
-    BaseRestResponse<Object> result = ltsExceptionController.methodArgumentNotValidException(e);
+    BaseRestResponse<Object> result = claimExceptionController.methodArgumentNotValidException(e);
     Assert.assertNotNull(result);
     Assert.assertEquals(e.getClass().getName(), result.getErrorCode());
     Assert.assertEquals("[message, ]", result.getErrorMessage());

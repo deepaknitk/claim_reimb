@@ -1,15 +1,13 @@
 /*
- * Copyright (C) 2018 PT Global Digital Niaga - All Rights Reserved
- *
- * NOTICE:  All information contained herein is, and remains the property of PT Global Digital Niaga.
- *
- * Dissemination of this information or reproduction of this material is strictly forbidden.
+ * Copyright (C) 2018 PT Global Digital Niaga - All Rights Reserved NOTICE: All information
+ * contained herein is, and remains the property of PT Global Digital Niaga. Dissemination of this
+ * information or reproduction of this material is strictly forbidden.
  */
 
 package com.coviam.reimbursement.claims.controllers;
 
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
+import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
+import com.coviam.reimbursement.claims.model.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class LTSExceptionController {
+public class ClaimExceptionController {
 
   @ExceptionHandler(Throwable.class)
   BaseRestResponse<Object> throwable(Throwable e) {

@@ -45,7 +45,7 @@ public class ViewConfig {
     return viewResolver;
   }
 
-  /**
+    /**
    * Configures the {@link ScriptEngine} that will render our views.
    */
   @Bean

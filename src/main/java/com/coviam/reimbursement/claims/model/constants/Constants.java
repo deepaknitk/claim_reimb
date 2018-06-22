@@ -8,16 +8,8 @@
 
 package com.coviam.reimbursement.claims.model.constants;
 
-/**
- * Created by jugalkishorsahu on Feb, 2018
- */
 public interface Constants {
 
-    String STORE_ID = "storeId";
-    String CLIENT_ID = "clientId";
-    String CHANNEL_ID = "channelId";
-    String REQUEST_ID = "requestId";
-    String LTS_BACKEND_SERVICE = "ltsBackendService";
     String CONTEXT_PATH = "__contextPath";
     String USERNAME = "__username";
     String INDEX = "index";

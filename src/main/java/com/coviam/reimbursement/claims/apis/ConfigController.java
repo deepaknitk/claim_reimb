@@ -9,11 +9,10 @@
 package com.coviam.reimbursement.claims.apis;
 
 import com.coviam.reimbursement.claims.config.properties.FileServerProperties;
-import com.coviam.reimbursement.claims.config.properties.LtsBackendClientParamProperties;
+import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
 import com.coviam.reimbursement.claims.model.constants.Constants;
-import com.coviam.reimbursement.claims.model.constants.LtsUiApiPath;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 import com.coviam.reimbursement.claims.utils.CommonUtils;
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +37,7 @@ public class ConfigController {
     @Value("${spring.http.multipart.max-file-size}")
     private String fileSizeInMB;
 
-    @RequestMapping(value = {LtsUiApiPath.GET_CONFIGS}, method = RequestMethod.GET)
+    @RequestMapping(value = {ClaimReimbursementApiPath.GET_CONFIGS}, method = RequestMethod.GET)
     @ResponseBody
     public BaseRestResponse<Map<String, Object>> getConfig() {
 
