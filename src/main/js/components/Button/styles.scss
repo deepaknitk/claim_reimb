@@ -1,0 +1,43 @@
+@import "../../styles/theme";
+.default-button {
+    display: inline;
+    border-radius: 2px;
+    font-size: 14px;
+    color: $white-color;
+    text-align: center;
+    padding: 10px 25px;
+    border: solid 1px $secondary-color;
+    background-color: $secondary-color;
+    white-space: nowrap;
+    cursor: pointer;
+    &.cancel-button {
+        background-color: #ffffff;
+        border: solid 1px #cccccc;
+        color: $grey-darkest-color;
+        border-radius: 18px;
+        color: white;
+        &.reject{
+            border: solid 1px $error-color;
+            color: $error-color;
+        }
+    }
+    &.reject-button {
+        background-color: $error-color;
+        border: solid 1px $error-color;
+        color: $white-color;
+    }
+    &.success-button {
+        background-color: $tertiary-color;
+        border: solid 1px $tertiary-color;
+    }
+    &:focus {
+        outline: 0;
+    }
+    & + button{
+        margin-left: 10px;
+    }
+    &[disabled]{
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}

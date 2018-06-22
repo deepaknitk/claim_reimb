@@ -1,0 +1,90 @@
+@import "bootstrap/bootstrap.scss";
+@import "./alert-box.scss";
+@import "./overlay-message.scss";
+@import "./icons.scss";
+@import "./common.scss";
+@import "./RFQForm.scss";
+
+
+
+body {
+  margin: 0px 0px;
+}
+
+.ltsError {
+	color: $brinkPink;
+	input{
+		color: $brinkPink;
+		border-color: $brinkPink;
+		&:hover{
+			border-color: $brinkPink;
+		}
+	}
+	.error-msg {
+		display: block;
+	}
+}
+
+select.ltsError, input.ltsError, textarea.ltsError {
+	color: $brinkPink;
+	border: 1px solid $brinkPink;
+
+	&:focus {
+		border-color: $brinkPink;
+		box-shadow: none;
+	}
+	& + .error-msg {
+		display: block;
+	}
+}
+
+.error-msg {
+	display: none;
+	color: $brinkPink;
+	font-size: 0.80em;
+}
+
+.loader{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 100000;
+	background-color: rgba(0, 0, 0, 0.5);
+	img{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 100px;
+		background-color: $white-color;
+		margin: -50px 0 0 -50px;
+	    border-radius: 30px;
+	}
+}
+.language-container {
+	margin-right: 0px;
+	.langulage-devider{
+		margin: 0px 4px !important;
+		color: white;
+	}
+    span {
+        cursor: pointer;
+        color: black;
+        &.active {
+            color: $white;
+        }
+    }
+    .logout{
+        margin-left: 12px;
+        color: $white;
+    }
+}
+.navbar-expand-lg {
+    justify-content: space-between;
+}
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+     position: relative;
+	 color: #f0f8ff;
+	 border-radius: 0 !important;
+     background-color: #50e3c2 !important;
+     box-shadow: 0 2px 6px 0 rgba(171, 171, 171, 0.5) !important;
+}

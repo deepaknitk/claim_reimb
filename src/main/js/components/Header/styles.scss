@@ -1,0 +1,37 @@
+@import '../../styles/theme';
+@import '../../styles/common';
+
+
+.navbar_container{
+    padding: 0 20px !important;
+    background-color: $pictonBlue;
+    color: $white;
+    .navbar-brand span{
+        color:$white;
+    }
+}
+        .subheader_span{
+            font-family: HelveticaNeue;
+            font-size: 24px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 0.67;
+            letter-spacing: normal;
+            text-align: left;
+            color: $chambray;
+            line-height: 30px;
+        }
+        .sub_header_border_top{
+            width: 35px;
+            border-top: 2px solid $error-color;
+        }
+        .current_page_status{
+            font-size: 12px;
+            color: $tundora;
+            .sub_header_border_buttom{
+                font-size: 12px;
+                border-bottom: 1px solid $error-color;
+            }
+        }
+

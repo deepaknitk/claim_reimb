@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.coviam.reimbursement</groupId>
+    <artifactId>claims</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>${project.groupId}-${project.artifactId}</name>
+    <description>Claim Reimbursement Project</description>
+
+<!--
+    <scm>
+        <connection>
+            scm:git:ssh://git@gstash.gdn-app.com:7999/b2b/lts-ui.git
+        </connection>
+        <developerConnection>
+            scm:git:ssh://git@stash.gdn-app.com:7999/b2b/lts-ui.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>libs-releases-local.artifactory.gdn-app.com</id>
+            <name>libs-releases-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+-->
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>libs-releases-local.artifactory.gdn-app.com</id>
+            <name>libs-releases-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
+            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
+            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-bliblidotcom-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/bliblidotcom/maven</url>
+        </repository>
+    </repositories>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <source-code-level>1.8</source-code-level>
+        <javax-servlet-api-version>3.0.1</javax-servlet-api-version>
+        <spring-security-core.version>4.0.4.RELEASE</spring-security-core.version>
+        <slf4j-version>1.7.10</slf4j-version>
+        <javax.inject-version>1</javax.inject-version>
+        <junit-version>4.12</junit-version>
+        <maven.project.groupId>${project.groupId}</maven.project.groupId>
+        <maven.project.artifactId>${project.artifactId}</maven.project.artifactId>
+        <maven.project.version>${project.version}</maven.project.version>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <start-class>com.gdn.lts.ui.LtsUIApplication</start-class>
+        <jacoco-maven-plugin-version>0.7.4.201502262128</jacoco-maven-plugin-version>
+        <blibli.version.plugin.version>0.0.1</blibli.version.plugin.version>
+        <feign.form.version>3.2.2</feign.form.version>
+        <spring-cloud.version>Edgware.SR1</spring-cloud.version>
+        <sonar.exclusions>src/main/java/com/gdn/lts/ui/config/properties/*</sonar.exclusions>
+        <lts.backend.version>2.0.0-5</lts.backend.version>
+        <mock.ftp.server.version>2.3</mock.ftp.server.version>
+        <commons.net.version>3.3</commons.net.version>
+	<h2database.version>1.3.156</h2database.version>
+        <sonar.coverage.exclusions>
+             src/main/java/com/gdn/lts/ui/model/constants/**/*
+        </sonar.coverage.exclusions>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax-servlet-api-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.blibli.oss</groupId>
+            <artifactId>version-plugin</artifactId>
+            <version>${blibli.version.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign.form</groupId>
+            <artifactId>feign-form</artifactId>
+            <version>${feign.form.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign.form</groupId>
+            <artifactId>feign-form-spring</artifactId>
+            <version>${feign.form.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gdn.lts.backend</groupId>
+            <artifactId>lts-backend-web-model</artifactId>
+            <version>${lts.backend.version}</version>
+        </dependency>
+         <dependency>
+        	<groupId>com.h2database</groupId>
+        	<artifactId>h2</artifactId>
+        	<version>${h2database.version}</version>
+    	</dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>${commons.net.version}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
+
+                <configuration>
+                    <installDirectory>.mvn</installDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>Install Node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v8.9.3</nodeVersion>
+                            <yarnVersion>v1.3.2</yarnVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>run yarn</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Run webpack</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin-version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

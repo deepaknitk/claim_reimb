@@ -1,0 +1,68 @@
+@import "../../styles/theme";
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $grey;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 100;
+    .modal_wrapper {
+        padding: 15px;
+        border-radius: 12px !important;
+        background-color: $lts-modal-background-color;
+        margin: 0 auto;
+        overflow: auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 4px 0 $lightBlack;
+        &.vertical-modal {
+            width: 60% !important;
+        }
+        &.showImage {
+            width: 40% !important;
+            height: 55% !important;
+        }
+        &.horizontal {
+            width: 40% !important;
+        }
+        .modal_header {
+            padding: 0 !important;
+            margin-bottom: 5px !important;
+            border-bottom: 1px solid $mercury;
+            font-size: 18px;
+            .icon-close {
+                float: right;
+                font-size: 1.5rem;
+                font-weight: 700;
+                cursor: pointer;
+            }
+        }
+        .modal_body {
+            padding: 0 !important;
+            height: calc(100% - 33px);
+        }
+        .modal_footer {
+            text-align: center;
+            &.add_product {
+                padding: 25px !important;
+            }
+        }
+    }
+
+}
+
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
