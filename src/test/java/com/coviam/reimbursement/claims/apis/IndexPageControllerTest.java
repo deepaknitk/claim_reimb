@@ -8,8 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.coviam.reimbursement.claims.apis.IndexController;
-import com.coviam.reimbursement.claims.model.constants.LtsUiApiPath;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,7 +36,8 @@ public class IndexPageControllerTest {
 
     @Test
     public void index_test() throws Exception {
-        this.mockMvc.perform(get(LtsUiApiPath.BASE + LtsUiApiPath.LTS_UI + LtsUiApiPath.WILD_CARD)).andExpect(status().isOk());
+        this.mockMvc.perform(get(
+            ClaimReimbursementApiPath.BASE + ClaimReimbursementApiPath.LTS_UI + ClaimReimbursementApiPath.WILD_CARD)).andExpect(status().isOk());
     }
 
     // @Test

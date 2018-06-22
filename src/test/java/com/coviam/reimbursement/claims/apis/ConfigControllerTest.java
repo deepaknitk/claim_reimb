@@ -1,10 +1,9 @@
 package com.coviam.reimbursement.claims.apis;
 
 import com.coviam.reimbursement.claims.TestUtils;
-import com.coviam.reimbursement.claims.apis.ConfigController;
 import com.coviam.reimbursement.claims.config.properties.FileServerProperties;
 import com.coviam.reimbursement.claims.model.constants.Constants;
-import com.coviam.reimbursement.claims.model.constants.LtsUiApiPath;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,7 +49,7 @@ public class ConfigControllerTest {
 
     @Test
     public void getClientParams_test() throws Exception {
-        this.mockMvc.perform(get(LtsUiApiPath.GET_CONFIGS)).andExpect(status().isOk())
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.GET_CONFIGS)).andExpect(status().isOk())
             .andExpect(jsonPath("$.success", equalTo(true)))
             .andExpect(jsonPath("$.data." + Constants.FILE_SIZE_MB, equalTo("25")));
     }
@@ -60,7 +59,7 @@ public class ConfigControllerTest {
         ReflectionTestUtils
             .setField(this.propertiesController, "fileSizeInMB", "");
 
-        this.mockMvc.perform(get(LtsUiApiPath.GET_CONFIGS)).andExpect(status().isOk())
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.GET_CONFIGS)).andExpect(status().isOk())
             .andExpect(jsonPath("$.success", equalTo(true)))
             .andExpect(jsonPath("$.data." + Constants.FILE_SIZE_MB, equalTo("2")));
     }

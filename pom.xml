@@ -11,31 +11,6 @@
     <name>${project.groupId}-${project.artifactId}</name>
     <description>Claim Reimbursement Project</description>
 
-<!--
-    <scm>
-        <connection>
-            scm:git:ssh://git@gstash.gdn-app.com:7999/b2b/lts-ui.git
-        </connection>
-        <developerConnection>
-            scm:git:ssh://git@stash.gdn-app.com:7999/b2b/lts-ui.git
-        </developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>libs-releases-local.artifactory.gdn-app.com</id>
-            <name>libs-releases-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
-            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local</url>
-        </snapshotRepository>
-    </distributionManagement>
--->
-
     <repositories>
         <repository>
             <id>spring-milestones</id>
@@ -44,38 +19,6 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>libs-releases-local.artifactory.gdn-app.com</id>
-            <name>libs-releases-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>libs-snapshots-local.artifactory.gdn-app.com</id>
-            <name>libs-snapshots-local.artifactory.gdn-app.com</name>
-            <url>https://artifactory.gdn-app.com/artifactory/libs-snapshots-local/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>bintray-bliblidotcom-maven</id>
-            <name>bintray</name>
-            <url>https://dl.bintray.com/bliblidotcom/maven</url>
         </repository>
     </repositories>
 
@@ -105,14 +48,9 @@
         <blibli.version.plugin.version>0.0.1</blibli.version.plugin.version>
         <feign.form.version>3.2.2</feign.form.version>
         <spring-cloud.version>Edgware.SR1</spring-cloud.version>
-        <sonar.exclusions>src/main/java/com/gdn/lts/ui/config/properties/*</sonar.exclusions>
-        <lts.backend.version>2.0.0-5</lts.backend.version>
         <mock.ftp.server.version>2.3</mock.ftp.server.version>
         <commons.net.version>3.3</commons.net.version>
 	<h2database.version>1.3.156</h2database.version>
-        <sonar.coverage.exclusions>
-             src/main/java/com/gdn/lts/ui/model/constants/**/*
-        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -128,14 +66,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
@@ -164,11 +94,6 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.blibli.oss</groupId>
-            <artifactId>version-plugin</artifactId>
-            <version>${blibli.version.plugin.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
@@ -181,25 +106,10 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.openfeign.form</groupId>
-            <artifactId>feign-form</artifactId>
-            <version>${feign.form.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign.form</groupId>
-            <artifactId>feign-form-spring</artifactId>
-            <version>${feign.form.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock-standalone</artifactId>
             <version>2.5.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gdn.lts.backend</groupId>
-            <artifactId>lts-backend-web-model</artifactId>
-            <version>${lts.backend.version}</version>
         </dependency>
          <dependency>
         	<groupId>com.h2database</groupId>

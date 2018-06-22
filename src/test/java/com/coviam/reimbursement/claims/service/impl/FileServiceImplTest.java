@@ -1,18 +1,7 @@
 package com.coviam.reimbursement.claims.service.impl;
 
 import com.coviam.reimbursement.claims.TestUtils;
-import com.coviam.reimbursement.claims.outbound.feign.LtsBackendFeign;
 import com.coviam.reimbursement.claims.service.impl.FileServiceImpl;
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
-import com.gdn.lts.backend.api.web.model.request.RFQItemWebRequest;
-import com.gdn.lts.backend.api.web.model.response.RFQItemResponse;
-import com.gdn.lts.backend.api.web.model.response.RFQResponse;
-import com.gdn.lts.backend.api.web.model.response.RFQTypeResponse;
-import com.gdn.lts.backend.api.web.model.response.SystemParameterWebResponse;
-import com.gdn.lts.backend.master.model.constants.Constants;
-import com.gdn.lts.backend.master.model.constants.SystemParameterNames;
-import com.gdn.lts.backend.master.model.enums.Error;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
-import rx.Single;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,10 +32,7 @@ public class FileServiceImplTest {
     @InjectMocks
     private FileServiceImpl fileService;
 
-    @Mock
-    private LtsBackendFeign ltsBackendFeign;
-
-    private RFQTypeResponse rfqTypeResponse;
+    /*private RFQTypeResponse rfqTypeResponse;
     private BaseRestResponse<RFQTypeResponse> rfqTypeBaseResponse;
     private SystemParameterWebResponse systemParameterWebResponse;
     private BaseRestResponse<SystemParameterWebResponse> systemParameterBaseResponse;
@@ -249,5 +234,5 @@ public class FileServiceImplTest {
     @After
     public void tearDown() {
         verifyNoMoreInteractions(this.ltsBackendFeign);
-    }
+    }*/
 }

@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.coviam.reimbursement.claims.controllers.AuthController;
-import com.coviam.reimbursement.claims.model.constants.LtsUiApiPath;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 
 import java.util.Collections;
 
@@ -42,17 +41,17 @@ public class AuthControllerTest {
 
     @Test
     public void login_test() throws Exception {
-        this.mockMvc.perform(get(LtsUiApiPath.LOGIN)).andExpect(status().is3xxRedirection());
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.LOGIN)).andExpect(status().is3xxRedirection());
     }
 
     @Test
     public void logout_test() throws Exception {
-        this.mockMvc.perform(get(LtsUiApiPath.LOGOUT)).andExpect(status().is3xxRedirection());
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.LOGOUT)).andExpect(status().is3xxRedirection());
     }
 
     @Test
     public void secured_test() throws Exception {
-        this.mockMvc.perform(get(LtsUiApiPath.SECURED)).andExpect(status().isOk());
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.SECURED)).andExpect(status().isOk());
     }
 
     @Test
@@ -60,6 +59,6 @@ public class AuthControllerTest {
         SecurityContextHolder.getContext().setAuthentication(
             new UsernamePasswordAuthenticationToken(
                 new User("username", "password", Collections.EMPTY_LIST), null));
-        this.mockMvc.perform(get(LtsUiApiPath.SECURED)).andExpect(status().isOk());
+        this.mockMvc.perform(get(ClaimReimbursementApiPath.SECURED)).andExpect(status().isOk());
     }
 }

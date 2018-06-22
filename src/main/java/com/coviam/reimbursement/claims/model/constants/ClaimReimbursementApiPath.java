@@ -11,7 +11,7 @@ package com.coviam.reimbursement.claims.model.constants;
 /**
  * Created by jugalkishorsahu on Feb, 2018
  */
-public interface LtsUiApiPath {
+public interface ClaimReimbursementApiPath {
 
     String BASE = "/";
     String LTS_UI = "views/";
@@ -20,8 +20,6 @@ public interface LtsUiApiPath {
     String LOGIN = "/login";
     String LOGOUT = "/logout";
     String SECURED = "/secured";
-
-    String LTS_BACKEND = "ltsBackend/";
 
     String GET_CONFIGS = "/getConfigs";
     String SAVE_IMAGE = "/saveImage";

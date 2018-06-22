@@ -2,8 +2,6 @@ package com.coviam.reimbursement.claims;
 
 import org.junit.Test;
 
-import com.coviam.reimbursement.claims.ReimbursementClaimApplication;
-
 /**
  * Created by jugalkishorsahu on Feb, 2018
  */

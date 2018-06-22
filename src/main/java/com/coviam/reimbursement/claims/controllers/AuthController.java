@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.coviam.reimbursement.claims.model.constants.LtsUiApiPath;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 import com.coviam.reimbursement.claims.utils.CommonUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +23,17 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AuthController {
 
-    @RequestMapping(LtsUiApiPath.LOGIN)
+    @RequestMapping(ClaimReimbursementApiPath.LOGIN)
     public String login() {
         return "redirect:/secured";
     }
 
-    @RequestMapping(LtsUiApiPath.LOGOUT)
+    @RequestMapping(ClaimReimbursementApiPath.LOGOUT)
     public String logout() {
         return "redirect:/logout/cas";
     }
 
-    @RequestMapping(LtsUiApiPath.SECURED)
+    @RequestMapping(ClaimReimbursementApiPath.SECURED)
     public String index(Model model, HttpServletRequest servletRequest) {
         model.addAttribute("__username", CommonUtils.getUserName());
         model.addAttribute("__contextPath", servletRequest.getContextPath());

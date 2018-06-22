@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.coviam.reimbursement.claims.service.api.FileService;
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
-import com.gdn.lts.backend.master.model.constants.LtsApiPath;
-import com.gdn.lts.backend.master.model.enums.Error;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,13 +27,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = LtsApiPath.FILE)
 public class FileController {
 
   @Autowired
   FileService fileService;
 
-  @RequestMapping(value = LtsApiPath.FILE_UPLOAD, method = RequestMethod.POST,
+  /*@RequestMapping(value = LtsApiPath.FILE_UPLOAD, method = RequestMethod.POST,
       consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public BaseRestResponse<String> saveFile(
       @RequestParam(required = false, defaultValue = "lts-ui-user") String userName,
@@ -56,7 +51,7 @@ public class FileController {
           false);
     }
     return new BaseRestResponse<>(true, file.getOriginalFilename());
-  }
+  }*/
 
 
 }
