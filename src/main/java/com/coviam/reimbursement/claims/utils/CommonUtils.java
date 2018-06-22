@@ -9,9 +9,6 @@
 package com.coviam.reimbursement.claims.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.coviam.reimbursement.claims.model.constants.Constants;
 
@@ -20,15 +17,6 @@ import com.coviam.reimbursement.claims.model.constants.Constants;
  */
 @Slf4j
 public class CommonUtils {
-
-    public static String getUserName() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.getPrincipal() != null && auth
-            .getPrincipal() instanceof UserDetails) {
-            return ((UserDetails) auth.getPrincipal()).getUsername();
-        }
-        return null;
-    }
 
     public static String getMaxAllowedFileSize(String fileSizeInMb) {
         try {

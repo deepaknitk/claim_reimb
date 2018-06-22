@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.coviam.reimbursement.claims.model.constants.Constants;
 import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 import com.coviam.reimbursement.claims.utils.CommonUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +25,14 @@ public class IndexController {
     @RequestMapping(
         ClaimReimbursementApiPath.BASE + ClaimReimbursementApiPath.LTS_UI + ClaimReimbursementApiPath.WILD_CARD)
     public String index(Model model, HttpServletRequest servletRequest) {
-        model.addAttribute(Constants.USERNAME, (CommonUtils.getUserName()));
+        model.addAttribute(Constants.CONTEXT_PATH, servletRequest.getContextPath());
+        return Constants.INDEX;
+    }
+
+
+    @RequestMapping(
+        ClaimReimbursementApiPath.BASE)
+    public String index1(Model model, HttpServletRequest servletRequest) {
         model.addAttribute(Constants.CONTEXT_PATH, servletRequest.getContextPath());
         return Constants.INDEX;
     }
