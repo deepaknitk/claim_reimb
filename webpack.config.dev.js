@@ -19,7 +19,7 @@ let config = {
     output: {
         path: DEST,
         filename: 'bundle.js',
-        publicPath: 'http://localhost:9090/lts-ui/app/',
+        publicPath: 'http://localhost:9090/claims/app/',
         library: 'TMS'
     },
     module: {
@@ -112,14 +112,14 @@ let config = {
             '/mock/': 'http://localhost:3000',
             '/**': {
 
-                target: 'http://localhost:8080/lts-ui',
+                target: 'http://localhost:8080/claims',
 
                 secure: false,
                 // node-http-proxy option - don't add /localhost:8080/ to proxied request paths
                 prependPath: false
             }
         },
-        publicPath: 'http://localhost:9090/lts-ui/app/'
+        publicPath: 'http://localhost:9090/claims/app/'
     },
     devtool: 'inline-source-map',
     target: 'web'

@@ -21,7 +21,7 @@ let config = {
     output: {
         path: DEST,
         filename: 'bundle.js',
-        publicPath: '/lts-ui/app/',
+        publicPath: '/claims/app/',
         library: 'LTS'
     },
     module: {

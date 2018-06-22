@@ -100,7 +100,7 @@
         <maven.project.version>${project.version}</maven.project.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <start-class>com.gdn.lts.ui.LtsUIApplication</start-class>
+        <start-class>com.coviam.reimbursement.claims.ReimbursementClaimApplication</start-class>
         <jacoco-maven-plugin-version>0.7.4.201502262128</jacoco-maven-plugin-version>
         <blibli.version.plugin.version>0.0.1</blibli.version.plugin.version>
         <feign.form.version>3.2.2</feign.form.version>
