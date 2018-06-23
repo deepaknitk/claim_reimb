@@ -13,6 +13,7 @@ public enum Error {
     EXPENSE_TYPE_NULL("expense type should not be null"),
     EXPENSE_TYPE_NOT_FOUND("expense type not found"),
     EXPENSE_TYPE_CODE_INVALID("expense type code already exists"),
+    CONVERTING_EXCEPTION("error in converting"),
     EXPENSE_TYPE_NOT_SAVED("expense type is not saved");
 
   private String message;
