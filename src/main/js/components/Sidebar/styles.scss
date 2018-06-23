@@ -1,0 +1,13 @@
+@import '../../styles/theme';
+@import '../../styles/common';
+
+.sidebar {
+    background-color: #456C95;
+    height: 600px;
+    a {
+        display: block;
+        padding: 15px;
+        font-family: "Courier New";
+        font-weight: bold;
+    }
+}
