@@ -7,11 +7,6 @@ const InputPrice = (props) => {
         <div className="form-group">
             <label className={props.cssClassName}>{props.title}<span className= "required"> *</span></label>
             <div className="input-group">
-                <div className="input-group-prepend">
-                    <div className="input-group-text">
-                        <span>Rp</span>
-                    </div>
-                </div>
                 <input className={classNames('form-control', {ltsError: !props.errorValidationState})}
                     name={props.name}
                     placeholder={props.placeholder}

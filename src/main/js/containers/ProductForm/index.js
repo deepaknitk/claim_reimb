@@ -3,93 +3,134 @@ import Input from '../../components/Input/index';
 import InputPrice from '../../components/InputPrice/index';
 import UploadImage from '../../components/ImageInput/index';
 import TextArea from '../../components/TextArea/index';
-
+import SelectBox from '../../components/selectBox';
+import {formatDate} from 'react-day-picker/moment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 
 const ProductForm = (props) => {
-    return(
+    return (
         <div>
-        <div className="row">
-            <div className="col-md-12">
-                <Input
+            <div className="row">
+                <div className="col-md-12">
+                    <UploadImage
+                        cssClassName="input_span"
+                        changeHandler={props.readURL}
+                        inputType="file"
+                        id="productImage"
+                        fileName={props.fileName ? props.fileName :
+                            <span className="input_span">{props.localeFile.chooseFile}</span>}
+                        imageUrl={props.imageUrl}
+                        title="Upload Bill"
+                        errorValidationState={props.imageUrlErrorValidationState}
+                        errorMsg='Upload your bill'
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                    <Input
+                        cssClassName="input_span"
+                        required={true}
+                        changeHandler={props.changeHandler}
+                        name="billNo"
+                        placeholder="Bill NO"
+                        maxLength={255}
+                        value={props.billNo}
+                        validationFun="isEmpty"
+                        inputType="number"
+                        title="Bill NO"
+                        errorValidationState={props.billNoErrorValidationState}
+                        errorMsg="Bill NO is required"
+                    />
+                </div>
+                <div className="col-md-6">
+                    <span>Date <span className="required">*</span></span>
+                    <DayPickerInput
+                        onDayChange={(day) => props.onDayChange('date', 'isEmpty', day)}
+                        format="DD/MM/YYYY"
+                        formatDate={formatDate}
+                        placeholder="DD/MM/YYYY"
+                        value={props.date}
+                        inputProps={{
+                            readOnly: 'readOnly',
+                            id: 'date'
+                        }}
+                        dayPickerProps={{
+                            selectedDays: props.selectedDay,
+                            disabledDays: {
+                                before: new Date()
+                            }
+                        }}
+                    />
+                    {!props.dateErrorValidationState ? <span className="date error-msg" style={{color: 'red'}}>Enter Bill Date</span> : ''}
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6">
+                    <SelectBox
+                        cssClassName="input_span"
+                        changeHandler={props.changeHandler}
+                        title="Type"
+                        name="type"
+                        placeholder="Select claim type"
+                        validationFun="isEmpty"
+                        value={props.type}
+                        errorMsg="Select your claim type"
+                        errorValidationState={props.typeErrorValidationState}
+                        options={[{name: 'Meal', value: 'Meal'}, {name: 'Entertainment', value: 'Entertainment'}]}/>
+                </div>
+                <div className="col-md-6">
+                    <InputPrice
+                        cssClassName="input_span"
+                        changeHandler={props.changeHandler}
+                        name="price"
+                        placeholder="Amount"
+                        maxLength={255}
+                        value={props.price}
+                        validationFun="isValidFloat"
+                        inputType="number"
+                        title="Amount"
+                        errorValidationState={props.priceErrorValidationState}
+                        errorMsg="Amount is required"
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+                <TextArea
                     cssClassName="input_span"
+                    required={true}
                     changeHandler={props.changeHandler}
-                    name="productName"
-                    placeholder={props.localeFile.product_name}
-                    maxLength={255}
-                    value={props.productName}
+                    name="claimDiscription"
+                    placeholder="Claim Discriptions"
                     validationFun="isEmpty"
-                    inputType="text"
-                    title={props.localeFile.product_name}
-                    errorValidationState={props.ProductErrorValidationState}
-                     errorMsg={props.localeFile.err_product_name}
-                    />
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-5">
-                <Input
-                    cssClassName="input_span"
-                    changeHandler={props.changeHandler}
-                    name="quantity"
-                    placeholder={props.localeFile.qty}
-                    value={props.quantity}
-                    validationFun="isValidQuantity"
                     maxLength={255}
-                    inputType="number"
-                    title={props.localeFile.qty}
-                    errorValidationState={props.quantityErrorValidationState}
-                    errorMsg={props.localeFile.err_qty}
-                    />
+                    value={props.claimDiscription}
+                    title="Claim Discription"
+                    errorValidationState={props.discriptionErrorValidationState}
+                    errorMsg="Discription is required"
+                />
+                </div>
             </div>
-            <div className="col-md-7">
-                <InputPrice
-                    cssClassName="input_span"
-                    changeHandler={props.changeHandler}
-                    name="price"
-                    placeholder={props.localeFile.price}
-                    maxLength={255}
-                    value={props.price}
-                    validationFun="isValidFloat"
-                    inputType="number"
-                    title={props.localeFile.price}
-                    errorValidationState={props.priceErrorValidationState}
-                    errorMsg={props.localeFile.err_price}
-                    />
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-12">
-                <UploadImage
-                    cssClassName="input_span"
-                    changeHandler={props.readURL}
-                    inputType="file"
-                    id="productImage"
-                    fileName={props.fileName ? props.fileName : <span className="input_span">{props.localeFile.chooseFile}</span>}
-                    imageUrl = {props.imageUrl}
-                    title={props.localeFile.upload_img}
-                    errorValidationState={props.invalidImageFile || props.isLargeFileToUpload}
-                    errorMsg={ (props.invalidImageFile || props.isLargeFileToUpload) ? (props.invalidImageFile ? props.localeFile.invalidImageFileMultiline : props.localeFile.isLargeFileToUpload) : ''}
-                    />
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-12">
+            <div className="row">
+                <div className="col-md-12">
                 <TextArea
                     cssClassName="input_span"
                     changeHandler={props.changeHandler}
-                    name="productDiscription"
-                    placeholder={props.localeFile.discription}
+                    name="remarks"
+                    placeholder="Remarks"
                     validationFun="isEmpty"
                     maxLength={255}
-                    value={props.productDiscription}
-                    title={props.localeFile.discription}
-                    errorValidationState={props.discriptionErrorValidationState}
-                    errorMsg={props.localeFile.err_discription}
-                    />
+                    value={props.remarks}
+                    title="Remarks"
+                    errorValidationState={props.remarksErrorValidationState}
+                    errorMsg="Remarks is required"
+                />
+                </div>
             </div>
         </div>
-    </div>
     );
 };
 export default ProductForm;
