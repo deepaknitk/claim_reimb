@@ -42,7 +42,7 @@ public class ReimbursementItem extends ClaimBaseEntity {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = FieldNames.RMB_ID, referencedColumnName = FieldNames.RMB_ID,
+    @JoinColumn(name = FieldNames.RMB_ID, referencedColumnName = FieldNames.REIMBURSEMENT_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_REIMBURSEMENT_FK), nullable = false)
     private Reimbursement reimbursementId;
 

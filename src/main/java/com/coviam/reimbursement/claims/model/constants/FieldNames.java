@@ -20,6 +20,24 @@ public interface FieldNames {
     String STATUS_DESCRIPTION = "status_description";
     String STATUS_GROUP_NAME ="status_group_name";
 
+    // user master fields
+    String USER_ID = "user_id";
+    String USER_FULL_NAME = "user_full_name";
+    String USER_PHONE = "user_phone";
+    String USER_EMAIL = "user_email";
+    String USER_TYPE = "user_type_id";
+    String USER_SLACK_ID = "user_slack_id";
+    String EMPLOYEE_ID = "employee_id";
+
+    // user type master fields
+    String USER_TYPE_ID = "user_type_id";
+    String USER_TYPE_CODE = "user_type_code";
+    String USER_TYPE_DESCRIPTION = "user_type_description";
+
+    // reimbursement fields
+    String REIMBURSEMENT_ID = "reimbursement_id";
+    String REIMBURSEMENT_DATE = "reimbursement_date";
+
     //rmb_item entity fields
     String RMB_ITEM_ID = "reimbursement_item_id";
     String RMB_ID = "reimbursement_id";
