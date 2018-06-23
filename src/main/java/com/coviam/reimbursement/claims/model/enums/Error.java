@@ -13,7 +13,11 @@ public enum Error {
     EXPENSE_TYPE_NULL("expense type should not be null"),
     EXPENSE_TYPE_NOT_FOUND("expense type not found"),
     EXPENSE_TYPE_CODE_INVALID("expense type code already exists"),
-    EXPENSE_TYPE_NOT_SAVED("expense type is not saved");
+    EXPENSE_TYPE_NOT_SAVED("expense type is not saved"),
+
+    PARAMETER_NAME_NULL("parameter name should not be null"),
+    PARAMETER_NAME_INVALID("parameter name does not exists"),
+    PARAMETER_NAME_NOT_FOUND("parameter name is not found");
 
   private String message;
 

@@ -25,7 +25,7 @@ public interface Constants {
     String STATUS_MASTER_UK_01 = "status_master_uk_01";
     String USER_MASTER_UK_01 = "user_uk_01";
     String USER_TYPE_MASTER_UK_01 = "user_type_master_uk_01";
-
+    String SYSTEM_PARAMETER_UK_01 = "system_parameter_uk_01";
     /**
      * Table name constants
      */
@@ -36,6 +36,10 @@ public interface Constants {
     String REIMBURSEMENT = "reimbursement";
     String REIMBURSEMNET_ITEM = "reimbursement_item";
     String CURRENCY = "currency_master";
+    String REIMBURSEMENT_ITEM_STATUS_LOG = "reimbursement_item_status_log";
+    String REIMBURSEMENT_ITEM_WORK_FLOW_STATUS= "reimbursement_item_workflow_status";
+    String SYSTEM_PARAMETER = "system_parameter";
+
     /**
      * ForeignKey variables
      */
@@ -46,7 +50,12 @@ public interface Constants {
     String RMB_ITEM_REIMBURSEMENT_FK ="reimbursement_item_reimbursement_id_fk_01";
     String RMB_ITEM_STATUS_FK ="reimbursement_item_statusid_fk_01";
     String RMB_ITEM_EXPENSE_FK ="reimbursement_item_expensetype_id_fk_01";
-
+    String RMB_ITEM_STATUS_LOG_NEW_STATUS_FK_02 = "reimbursement_item_status_log_newstatus_fk_02";
+    String RMB_ITEM_STATUS_LOG_OLD_STATUS_FK_01= "reimbursement_item_status_log_oldstatus_fk_01";
+    String RMB_ITEM_STATUS_LOG_RMB_ITEM_ID_FK_03= "reimbursement_item_status_log_reimbursementitemid_fk_03";
+    String RMB_ITEM_WORK_FLOW_STATUS_RMB_ITEM_ID_FK_01 = "reimbursement_item_workflow_status_reimbursementitemid_fk_01";
+    String RMB_ITEM_WORK_FLOW_STATUS_USER_ID_FK_01 = "reimbursement_item_workflow_status_userid_id_fk_01";
+    String RMB_ITEM_WORK_FLOW_STATUS_STATUS_ID_FK_01= "reimbursement_item_workflow_status_statusid_fk_01";
     /**
      * Sequence name constants
      */
@@ -57,6 +66,9 @@ public interface Constants {
     String DB_NAME_REIMBURSEMENT = "reimbursement_seq";
     String DB_SEQ_NAME_CURRENCY_MASTER = "currency_master_seq";
     String DB_SEQ_NAME_REIMBURSEMENT_ITEM = "reimbursement_item_seq";
+    String DB_SEQ_NAME_REIMBURSEMENT_ITEM_STATUS_LOG = "reimbursement_item_status_log_seq";
+    String DB_SEQ_NAME_REIMBURSEMENT_ITEM_WORK_FLOW_STATUS = "reimbursement_item_workflow_status_seq";
+    String DB_SEQ_NAME_SYSTEM_PARAMETER = "system_parameter_seq";
 
     /**
      * Sequence generator name constants
@@ -68,4 +80,7 @@ public interface Constants {
     String SEQ_GEN_NAME_REIMBURSEMENT = "reimbursement_seq";
     String SEQ_GEN_NAME_REIMBURSEMENT_ITEM = "reimbursement_item_seq";
     String SEQ_GEN_NAME_CURRENCY = "currency_master_seq";
+    String SEQ_GEN_NAME_REIMBURSEMENT_ITEM_STATUS_LOG = "reimbursement_item_status_log_seq";
+    String SEQ_GEN_NAME_REIMBURSEMENT_ITEM_WORK_FLOW_STATUS = "reimbursement_item_workflow_status_seq";
+    String SEQ_GEN_NAME_SYSTEM_PARAMETER = "system_parameter_seq";
 }
