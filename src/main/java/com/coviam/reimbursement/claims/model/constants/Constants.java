@@ -17,4 +17,9 @@ public interface Constants {
     String DEFAULT_MAX_ALLOWED_FILE_SIZE_IN_MB = "2";
     String SERVER_DATE = "serverDate";
     String IMAGE_REGEX_PATTERN = "imageRegexPattern";
+    String REIMBURSEMNET_ITEM = "reimbursement_item";
+    String SEQ_GEN_NAME_REIMBURSEMENT_ITEM = "reimbursement_item_seq";
+    String CURRENCY = "currency_master";
+    String SEQ_GEN_NAME_CURRENCY = "currency_seq";
+    String RMB_ITEM_CURRENCY = "reimbursement_item_currencyid_fk_01";
 }
