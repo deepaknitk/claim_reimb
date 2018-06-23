@@ -1,5 +1,6 @@
 package com.coviam.reimbursement.claims.config;
 
+import com.coviam.reimbursement.claims.config.properties.SpringDataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

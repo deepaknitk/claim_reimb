@@ -37,4 +37,19 @@ public interface FieldNames {
     // reimbursement fields
     String REIMBURSEMENT_ID = "reimbursement_id";
     String REIMBURSEMENT_DATE = "reimbursement_date";
+
+    //rmb_item entity fields
+    String RMB_ITEM_ID = "reimbursement_item_id";
+    String RMB_ID = "reimbursement_id";
+    String RMB_BILL_NO = "reimbursement_item_bill_number";
+    String RMB_DESC  = "reimbursement_item_description";
+    String RMB_EXPENSE_TYPE_ID = "reimbursement_item_expense_type_id";
+    String RMB_ITEM_AMOUNT = "reimbursement_item_amount";
+    String RMB_ITEM_REMARKS = "reimbursement_item_remarks";
+    String RMB_ITEM_FILENAME = "reimbursement_item_filename";
+
+    //currency entity fields
+    String CURRENCY_CODE = "currency_code";
+    String CURRENCY_ID = "currency_id";
+    String CURRENCY_DESC = "currency_description";
 }

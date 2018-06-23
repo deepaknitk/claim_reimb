@@ -34,12 +34,18 @@ public interface Constants {
     String USER_MASTER = "user_master";
     String USER_TYPE_MASTER = "user_type_master";
     String REIMBURSEMENT = "reimbursement";
+    String REIMBURSEMNET_ITEM = "reimbursement_item";
+    String CURRENCY = "currency_master";
     /**
      * ForeignKey variables
      */
     String USER_MASTER_FK_01 = "user_typeid_fk_01";
     String REIMBURSEMENT_STATUS_FK_02 = "reimbursement_status_fk_02";
     String USER_ID_FK_01 = "user_id_fk_01";
+    String RMB_ITEM_CURRENCY_FK = "reimbursement_item_currencyid_fk_01";
+    String RMB_ITEM_REIMBURSEMENT_FK ="reimbursement_item_reimbursement_id_fk_01";
+    String RMB_ITEM_STATUS_FK ="reimbursement_item_statusid_fk_01";
+    String RMB_ITEM_EXPENSE_FK ="reimbursement_item_expensetype_id_fk_01";
 
     /**
      * Sequence name constants
@@ -49,6 +55,8 @@ public interface Constants {
     String DB_SEQ_NAME_USER_MASTER = "user_master_seq";
     String DB_SEQ_NAME_USER_TYPE_MASTER = "user_type_master_seq";
     String DB_NAME_REIMBURSEMENT = "reimbursement_seq";
+    String DB_SEQ_NAME_CURRENCY_MASTER = "currency_master_seq";
+    String DB_SEQ_NAME_REIMBURSEMENT_ITEM = "reimbursement_item_seq";
 
     /**
      * Sequence generator name constants
@@ -58,5 +66,6 @@ public interface Constants {
     String SEQ_GEN_NAME_USER_MASTER = "user_master_seq";
     String SEQ_GEN_NAME_USER_TYPE_MASTER = "user_type_master_seq";
     String SEQ_GEN_NAME_REIMBURSEMENT = "reimbursement_seq";
-
+    String SEQ_GEN_NAME_REIMBURSEMENT_ITEM = "reimbursement_item_seq";
+    String SEQ_GEN_NAME_CURRENCY = "currency_master_seq";
 }
