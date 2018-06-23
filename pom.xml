@@ -50,6 +50,7 @@
         <spring-cloud.version>Edgware.SR1</spring-cloud.version>
         <mock.ftp.server.version>2.3</mock.ftp.server.version>
         <commons.net.version>3.3</commons.net.version>
+        <spring-boot-starter-version>1.5.2.RELEASE</spring-boot-starter-version>
 	<h2database.version>1.3.156</h2database.version>
     </properties>
 
@@ -61,6 +62,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -112,6 +117,22 @@
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>${commons.net.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring-boot-starter-version}</version>
         </dependency>
     </dependencies>
 
