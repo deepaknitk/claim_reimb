@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +29,8 @@ public class Currency extends ClaimBaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Constants.SEQ_GEN_NAME_CURRENCY)
+  @SequenceGenerator(name = Constants.SEQ_GEN_NAME_CURRENCY,
+      sequenceName = Constants.DB_SEQ_NAME_CURRENCY_MASTER, allocationSize = 1)
   @Column(name = FieldNames.CURRENCY_ID)
   private Long currencyId;
 

@@ -35,30 +35,40 @@ public class ReimbursementItem extends ClaimBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Constants.SEQ_GEN_NAME_REIMBURSEMENT_ITEM)
+    @SequenceGenerator(name = Constants.SEQ_GEN_NAME_REIMBURSEMENT_ITEM,
+        sequenceName = Constants.DB_SEQ_NAME_REIMBURSEMENT_ITEM, allocationSize = 1)
     @Column(name = FieldNames.RMB_ITEM_ID)
     private Long reimbursementItemId;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = FieldNames.RFQ_ID, referencedColumnName = FieldNames.RFQ_ID,
-        foreignKey = @ForeignKey(name = Constants.RFQ_ITEM_RFQ_FK), nullable = false)
-    private RFQ rfq;
+    @JoinColumn(name = FieldNames.RMB_ID, referencedColumnName = FieldNames.RMB_ID,
+        foreignKey = @ForeignKey(name = Constants.RMB_ITEM_REIMBURSEMENT_FK), nullable = false)
+    private Reimbursement reimbursementId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = FieldNames.RFQ_STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
-        foreignKey = @ForeignKey(name = Constants.RFQ_ITEM_STATUS_FK), nullable = false)
+    @JoinColumn(name = FieldNames.STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
+        foreignKey = @ForeignKey(name = Constants.RMB_ITEM_STATUS_FK), nullable = false)
     private Status itemStatus;
 
-    @Column(name = FieldNames.RFQ_ITEM_NAME, nullable = false)
-    private String rfqItemName;
+    @Column(name = FieldNames.RMB_BILL_NO, nullable = false)
+    private String rmbItemBillNumber;
 
-    @Column(name = FieldNames.RFQ_ITEM_DESCRIPTION, nullable = false)
+    @Column(name = FieldNames.RMB_DESC, nullable = false)
     private String rfqItemDescription;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = FieldNames.RMB_EXPENSE_TYPE_ID, referencedColumnName = FieldNames.EXPENSE_TYPE_ID,
+        foreignKey = @ForeignKey(name = Constants.RMB_ITEM_EXPENSE_FK), nullable = false)
+    private ExpenseType expenseType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.CURRENCY_ID, referencedColumnName = FieldNames.CURRENCY_ID,
-        foreignKey = @ForeignKey(name = Constants.RFQ_ITEM_RFQ_FK), nullable = false)
+        foreignKey = @ForeignKey(name = Constants.RMB_ITEM_CURRENCY_FK), nullable = false)
     private Currency currency;
+
+    @Column(name = FieldNames.RMB_ITEM_AMOUNT, nullable = false)
+    private Double rmbItemAmount;
 
     @Column(name = FieldNames.RMB_ITEM_REMARKS, nullable = false)
     private String rmbItemRemarks;
@@ -66,11 +76,3 @@ public class ReimbursementItem extends ClaimBaseEntity {
     @Column(name = FieldNames.RMB_ITEM_FILENAME)
     private String rmbItemFilename;
 }
-    String RMB_ITEM_ID = "reimbursement_item_id";
-    String RMB_ID = "reimbursement_id";
-    String RMB_STATUS_ID = "reimbursement_status_id";
-    String RMB_BILL_NO = "reimbursement_item_bill_number";
-    String RMB_DESC  = "reimbursement_item_description";
-    String RMB_EXPENSE_TYPE_ID = "reimbursement_item_expense_type_id";
-    String RMB_ITEM_AMOUNT = "reimbursement_item_amount";
-    String RMB_CURRENCY_ID = "currency_id";
