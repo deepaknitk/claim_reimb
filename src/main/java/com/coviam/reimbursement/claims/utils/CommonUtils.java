@@ -8,6 +8,8 @@
 
 package com.coviam.reimbursement.claims.utils;
 
+import com.coviam.reimbursement.claims.model.enums.Error;
+import com.coviam.reimbursement.claims.model.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 import com.coviam.reimbursement.claims.model.constants.Constants;
@@ -24,6 +26,12 @@ public class CommonUtils {
         } catch (StringIndexOutOfBoundsException e) {
             log.error("fileSizeInMb is in invalid format, fileSizeInMb :{}", fileSizeInMb, e);
             return Constants.DEFAULT_MAX_ALLOWED_FILE_SIZE_IN_MB;
+        }
+    }
+
+    public static void checkError(boolean cond, Error error) {
+        if (!cond) {
+            throw new BusinessException(error);
         }
     }
 }
