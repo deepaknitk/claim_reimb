@@ -52,4 +52,18 @@ public interface FieldNames {
     String CURRENCY_CODE = "currency_code";
     String CURRENCY_ID = "currency_id";
     String CURRENCY_DESC = "currency_description";
+
+    //rmb item status log entity fields
+    String RMB_ITEM_STATUS_LOG_ID = "reimbursement_itemstatus_log_id";
+    String RMB_ITEM_OLD_STATUS_ID = "reimbursement_item_old_status_id";
+    String RMB_ITEM_NEW_STATUS_ID = "reimbursement_item_new_status_id";
+
+    // rmb item work flow status entity fields
+    String RMB_ITEM_WORK_FLOW_STATUS_ID = "reimbursement_item_workflow_status_id";
+
+    // system parameter entity fields
+    String PARAMETER_ID = "parameter_id";
+    String PARAMETER_NAME = "parameter_name";
+    String PARAMETER_VALUE = "parameter_value";
+    String PARAMETER_DESCRIPTION = "parameter_description";
 }
