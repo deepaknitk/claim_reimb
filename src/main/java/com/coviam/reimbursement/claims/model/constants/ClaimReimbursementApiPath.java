@@ -17,4 +17,7 @@ public interface ClaimReimbursementApiPath {
     String WILD_CARD = "**";
     String GET_CONFIGS = "/getConfigs";
 
+    String CURRENCY_BASE_PATH = "/currency";
+    String FIND_ALL = "/findAll";
+
 }

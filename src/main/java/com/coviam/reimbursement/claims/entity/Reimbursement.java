@@ -29,7 +29,6 @@ public class Reimbursement extends ClaimBaseEntity {
     @Column(name = FieldNames.REIMBURSEMENT_DATE, nullable = false)
     private Date reimbursement_date;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.USER_ID,
         referencedColumnName = FieldNames.USER_ID,
