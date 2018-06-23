@@ -8,19 +8,13 @@
 
 package com.coviam.reimbursement.claims.model.constants;
 
-/**
- * Created by jugalkishorsahu on Feb, 2018
- */
+
 public interface ClaimReimbursementApiPath {
 
     String BASE = "/";
     String LTS_UI = "views/";
 
     String WILD_CARD = "**";
-    String LOGIN = "/login";
-    String LOGOUT = "/logout";
-    String SECURED = "/secured";
-
     String GET_CONFIGS = "/getConfigs";
-    String SAVE_IMAGE = "/saveImage";
+
 }
