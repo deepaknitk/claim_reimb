@@ -29,7 +29,6 @@ public class IndexController {
         return Constants.INDEX;
     }
 
-
     @RequestMapping(
         ClaimReimbursementApiPath.BASE)
     public String index1(Model model, HttpServletRequest servletRequest) {
