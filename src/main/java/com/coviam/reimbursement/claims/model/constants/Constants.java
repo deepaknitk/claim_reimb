@@ -83,4 +83,17 @@ public interface Constants {
     String SEQ_GEN_NAME_REIMBURSEMENT_ITEM_STATUS_LOG = "reimbursement_item_status_log_seq";
     String SEQ_GEN_NAME_REIMBURSEMENT_ITEM_WORK_FLOW_STATUS = "reimbursement_item_workflow_status_seq";
     String SEQ_GEN_NAME_SYSTEM_PARAMETER = "system_parameter_seq";
+
+    /**
+     * Common validation
+     */
+    String REIMBURSEMENT_DATE_NULL = "reimbursement date null";
+    String USER_ID_NULL = "user id null";
+
+
+    /**
+     * status constants
+     */
+    String STATUS_CODE_OPEN = "OPEN";
+    String RMB_STATUS_GROUP = "RMB_STATUS_GROUP";
 }
