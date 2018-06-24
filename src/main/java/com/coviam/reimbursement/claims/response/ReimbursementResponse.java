@@ -10,12 +10,7 @@ import java.util.List;
 
     private Long reimbursementId;
 
-    private String status_Id;
+    private String statusCode;
 
     private Date reimbursement_date;
-
-    private String user_Id;
-
-    private List<ReimbursementItemResponse> rmbItemList;
-
 }
