@@ -31,9 +31,9 @@ import org.springframework.stereotype.Service;
             .findByStatusCode(Constants.STATUS_CODE_OPEN);
         rmb.setStatusId(rfqInitialStatus);
 
-        this.reimbursementRepository.save(rmb);
-        rmb.getRmbItemList().forEach(rfqItem -> this.reimbursementItemService
-            .saveOrUpdate(this.populateRMBItemData(rmb, rfqInitialStatus, rfqItem)));
+//        this.reimbursementRepository.save(rmb);
+//        rmb.getRmbItemList().forEach(rfqItem -> this.reimbursementItemService
+//            .saveOrUpdate(this.populateRMBItemData(rmb, rfqInitialStatus, rfqItem)));
         return rmb;
 
     }
@@ -43,5 +43,9 @@ import org.springframework.stereotype.Service;
         rmbItem.setReimbursement(rmb);
         rmbItem.setItemStatus(status);
         return rmbItem;
+    }
+
+    @Override public ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId) {
+        return null;
     }
 }

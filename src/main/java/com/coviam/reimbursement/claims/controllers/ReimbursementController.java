@@ -34,9 +34,9 @@ public class ReimbursementController {
         try {
             Reimbursement rmbRequest =
                 this.restWebModelConverterService.convert(rmbWebRequest, Reimbursement.class);
-            List<ReimbursementItem> rmbItemRequestList = this.restWebModelConverterService
-                .convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
-            rmbRequest.setRmbItemList(rmbItemRequestList);
+//            List<ReimbursementItem> rmbItemRequestList = this.restWebModelConverterService
+//                .convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
+//            rmbRequest.setRmbItemList(rmbItemRequestList);
             Reimbursement saveRMB = this.reimbursementService.saveRmb(rmbRequest);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
         } catch (Exception e) {
