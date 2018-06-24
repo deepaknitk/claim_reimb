@@ -8,10 +8,9 @@
 
 package com.coviam.reimbursement.claims.utils;
 
+import com.coviam.reimbursement.claims.model.enums.Error;
+import com.coviam.reimbursement.claims.model.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.coviam.reimbursement.claims.model.constants.Constants;
 
@@ -21,21 +20,18 @@ import com.coviam.reimbursement.claims.model.constants.Constants;
 @Slf4j
 public class CommonUtils {
 
-    public static String getUserName() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.getPrincipal() != null && auth
-            .getPrincipal() instanceof UserDetails) {
-            return ((UserDetails) auth.getPrincipal()).getUsername();
-        }
-        return null;
-    }
-
     public static String getMaxAllowedFileSize(String fileSizeInMb) {
         try {
             return fileSizeInMb.substring(0, fileSizeInMb.length() - 2);
         } catch (StringIndexOutOfBoundsException e) {
             log.error("fileSizeInMb is in invalid format, fileSizeInMb :{}", fileSizeInMb, e);
             return Constants.DEFAULT_MAX_ALLOWED_FILE_SIZE_IN_MB;
+        }
+    }
+
+    public static void checkError(boolean cond, Error error) {
+        if (!cond) {
+            throw new BusinessException(error);
         }
     }
 }

@@ -7,21 +7,9 @@
  */
 package com.coviam.reimbursement.claims.service.impl;
 
-import com.coviam.reimbursement.claims.outbound.feign.LtsBackendFeign;
 import com.coviam.reimbursement.claims.service.api.FileService;
-import com.gdn.lts.backend.api.web.model.base.BaseRestResponse;
-import com.gdn.lts.backend.api.web.model.request.RFQItemWebRequest;
-import com.gdn.lts.backend.api.web.model.response.RFQItemResponse;
-import com.gdn.lts.backend.api.web.model.response.RFQResponse;
-import com.gdn.lts.backend.api.web.model.response.RFQTypeResponse;
-import com.gdn.lts.backend.api.web.model.response.SystemParameterWebResponse;
-import com.gdn.lts.backend.master.model.constants.Constants;
-import com.gdn.lts.backend.master.model.constants.SystemParameterNames;
-import com.gdn.lts.backend.master.model.enums.Error;
-import com.gdn.lts.backend.master.model.exceptions.BusinessException;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,12 +30,9 @@ import java.util.regex.Pattern;
 @Service
 public class FileServiceImpl implements FileService {
 
-  @Autowired
-  private LtsBackendFeign ltsBackendFeign;
-
   private static final String TYPES_SEPARATOR = "\\|";
 
-  public void saveFile(String rfqTypeId, String rfqId, String rfqItemId, String username,
+ /* public void saveFile(String rfqTypeId, String rfqId, String rfqItemId, String username,
       MultipartFile file) throws Exception {
     final String originalFileName = file.getOriginalFilename();
     RFQTypeResponse rfqTypeResponse = this.getRFQTypeResponse(username, rfqTypeId);
@@ -145,6 +130,6 @@ public class FileServiceImpl implements FileService {
 
   private String[] getAllowedExtension(String fileTypes) {
     return fileTypes.split(TYPES_SEPARATOR);
-  }
+  }*/
 
 }
