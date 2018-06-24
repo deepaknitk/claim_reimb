@@ -21,6 +21,7 @@ import com.coviam.reimbursement.claims.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -141,10 +142,22 @@ import java.util.stream.Collectors;
 
     @Override public List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
         List<ReimbursementItem> reimbursementItems = new ArrayList<>();
+        List<MultipartFile> fileList = new ArrayList<>();
         for (ReimbursementDto reimbursementDto: reimbursementDtos){
             reimbursementItems.add(convertRmbItem(reimbursementDto, reimbursement));
+            fileList.add(reimbursementDto.getFile());
         }
+
         return reimbursementItems;
+    }
+    @Override public List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
+
+        List<MultipartFile> fileList = new ArrayList<>();
+        for (ReimbursementDto reimbursementDto: reimbursementDtos){
+            fileList.add(reimbursementDto.getFile());
+        }
+
+        return fileList;
     }
 
     public ReimbursementItem convertRmbItem(ReimbursementDto reimbursementDto, Reimbursement reimbursement){

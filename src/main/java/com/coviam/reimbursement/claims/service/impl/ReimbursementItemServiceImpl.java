@@ -3,9 +3,11 @@ package com.coviam.reimbursement.claims.service.impl;
 import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.repository.ReimbursementItemRepository;
+import com.coviam.reimbursement.claims.service.api.FileService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,8 +20,11 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
   @Autowired
   private ReimbursementItemRepository reimbursementItemRepository;
 
+  @Autowired private FileService fileService;
+
   @Override
-  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList){
+  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList, List<MultipartFile> fileList){
+
     return reimbursementItemRepository.save(reimbursementItemList);
   }
 

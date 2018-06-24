@@ -12,6 +12,7 @@ import com.coviam.reimbursement.claims.model.base.ReimbursementItemDto;
 import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementItemResponse;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,4 +40,5 @@ public interface RestWebModelConverterService {
 
     List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
 
+    List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
 }
