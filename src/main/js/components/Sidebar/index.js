@@ -8,7 +8,7 @@ const Sidebar = () => {
         <div style={{width: '20%', float: 'left'}}>
             <div className="sidebar">
                 <div className="sidebar-menu">
-                    <NavLink to="/rfq" activeStyle={{ color: 'red' }}>New Claims</NavLink>
+                    <NavLink to="/createClaim" activeStyle={{ color: 'red' }}>New Claims</NavLink>
                     <NavLink to="/dashboard" activeStyle={{ color: 'red' }}>Claim History</NavLink>
                     <NavLink to="/manageClaims" activeStyle={{ color: 'red' }}>Manage Claims</NavLink>
                 </div>

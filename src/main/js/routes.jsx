@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SubmitClaim from './containers/Claimcontainer/SubmitClaim';
+import SubmitClaim from './containers/ClaimContainer';
 import NotFoundPage from './components/PageNotFound';
 import IndexPage from './containers/IndexPage';
 import ClaimHistory from './containers/ClaimHistory';

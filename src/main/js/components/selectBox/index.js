@@ -14,7 +14,7 @@ const PaymentSelectBox = (props) => {
                  <option disabled value="">{props.placeholder}</option>
                 {props.options.map(opt => {
                         return (
-                            <option key={opt.name} value={opt.value}>{opt.name}</option>
+                            <option key={opt.expenseTypeCode} value={opt.expenseTypeCode}>{opt.expenseTypeCode}</option>
                         );
                     })
                 }

@@ -7,23 +7,19 @@ import BAHASA from '../locales/lts.id';
 import ENGLISH from '../locales/lts.en';
 import {setErrorMessage} from './messageAction';
 
-export const sendRfqDetails = (rfqDetails) => {
-    const SAVE_RFQ = uiConstant.SAVE_RFQ;
+export const saveClaimRequest = (claimsDetails) => {
     return (dispatch) => {
-        dispatch(toggleLoader(true));
         Axios
-            .post(SAVE_RFQ, rfqDetails)
+            .post('/claims/reimbursement/create', claimsDetails)
             .then(response => {
                 if (response.data.success) {
-                    dispatch(saveRfqDetailsResponse(response.data));
+                    dispatch(setMessage.setSuccessMessage('Claim submitted'));
                 } else {
                     dispatch(setMessage.setErrorMessage(response.data.errorMessage));
                 }
-                dispatch(toggleLoader(false));
             })
             .catch(() => {
-                dispatch(setErrorMessage(localStorage.getItem('systemLang') === 'en' ? ENGLISH.errorCode.somethigWentWrong : BAHASA.errorCode.somethigWentWrong));
-                dispatch(toggleLoader(false));
+                dispatch(setMessage.setErrorMessage('Internal server error'));
             });
     };
 };

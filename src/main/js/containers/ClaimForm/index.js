@@ -80,7 +80,7 @@ const ProductForm = (props) => {
                         value={props.type}
                         errorMsg="Select your claim type"
                         errorValidationState={props.typeErrorValidationState}
-                        options={[{name: 'Meal', value: 'Meal'}, {name: 'Entertainment', value: 'Entertainment'}]}/>
+                        options={props.expenseType}/>
                 </div>
                 <div className="col-md-6">
                     <CurrencyType
@@ -90,10 +90,10 @@ const ProductForm = (props) => {
                         name="type"
                         placeholder="Select currency"
                         validationFun="isEmpty"
-                        value={props.type}
+                        value={'INR'}
                         errorMsg="Select your claim type"
                         errorValidationState={props.typeErrorValidationState}
-                        options={[{name: 'Id', value: 'Id'}, {name: 'INR', value: 'INR'}]}/>
+                        options={[{name: 'INR', value: 'INR'}, {name: 'Id', value: 'Id'}]}/>
                     <InputPrice
                         cssClassName="input_span"
                         changeHandler={props.changeHandler}

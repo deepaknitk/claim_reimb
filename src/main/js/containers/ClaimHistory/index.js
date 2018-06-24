@@ -41,6 +41,8 @@ class ClaimHistory extends Component {
                 <td>4</td>
                 <td>5</td>
                 <td>6</td>
+                <td className="product_image pointer">View File
+                </td>
                 <td>Status</td>
             </tr>
             <tr>
