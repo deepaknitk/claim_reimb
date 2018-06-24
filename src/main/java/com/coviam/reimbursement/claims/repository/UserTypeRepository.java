@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserTypeRepository extends JpaRepository<UserTypeMaster, Long> {
+
+    UserTypeMaster findByUserTypeCode(String userTypeCode);
 }
