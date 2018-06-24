@@ -2,6 +2,13 @@
 @import '../../styles/common';
 
 
+.user {
+    color: #fdfdfe;
+    &-logout {
+        color: #721c24;
+        font-weight: bold;
+    }
+}
 .navbar_container{
     padding: 0 20px !important;
         background-color: #456C95;
