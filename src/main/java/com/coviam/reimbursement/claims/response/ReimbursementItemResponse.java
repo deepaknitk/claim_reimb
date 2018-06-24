@@ -12,11 +12,15 @@ import lombok.Data;
 
     private String rfqItemDescription;
 
-    private ExpenseType expenseType;
+    private String expenseTypeCode;
 
-    private Currency currency;
+    private String currencyCode;
 
     private Double rmbItemAmount;
 
     private String rmbItemFilename;
+
+    private String remarks;
+
+    private String rmbItemDate;
 }

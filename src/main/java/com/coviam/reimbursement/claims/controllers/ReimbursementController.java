@@ -8,6 +8,7 @@ import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath
 import com.coviam.reimbursement.claims.model.enums.Error;
 import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
+import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,47 +20,48 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
-@RestController
-@RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
+@Slf4j @RestController @RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
 public class ReimbursementController {
 
-    @Autowired
-    private RestWebModelConverterService restWebModelConverterService;
+    @Autowired private RestWebModelConverterService restWebModelConverterService;
 
-    @Autowired
-    private ReimbursementService reimbursementService;
+    @Autowired private ReimbursementService reimbursementService;
 
-    public BaseRestResponse save( @Valid @RequestBody RmbWebRequest rmbWebRequest){
+    @Autowired private ReimbursementItemService reimbursementItemService;
+
+    @RequestMapping(value = {
+        ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
+        MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
-           Reimbursement rmbRequest =
-                this.restWebModelConverterService.convert(rmbWebRequest, Reimbursement.class);
-            List<ReimbursementItem> rmbItemRequestList =
-                this.restWebModelConverterService.convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
-            rmbRequest.setRmbItemList(rmbItemRequestList);
+           Reimbursement reimbursement =
+                this.restWebModelConverterService.convertRmbWebRequestToRmb(rmbWebRequest);
             Reimbursement saveRMB = this.reimbursementService
-                .saveRmb(rmbRequest);
-            rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
+                .saveRmb(reimbursement);
+           List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
+               .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
+            List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
+                .saveOrUpdate(reimbursementItem);
+            rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
         } catch (Exception e) {
-            log.error("Error in saving rmb  with user id: {}  due to: {} ", rmbWebRequest.getUserId(),
-                e.getMessage(), e);
+            log.error("Error in saving rmb  with user id: {}  due to: {} ",
+                rmbWebRequest.getUserId(), e.getMessage(), e);
         }
         return new BaseRestResponse<>(true, rmbResponse);
 
 
-
     }
 
-    @RequestMapping(value = {ClaimReimbursementApiPath.FIND_ALL}, method = RequestMethod.GET, produces = {
+    @RequestMapping(value = {
+        ClaimReimbursementApiPath.FIND_ALL}, method = RequestMethod.GET, produces = {
         MediaType.APPLICATION_JSON_VALUE})
-        public BaseRestResponse<List<ReimbursementResponse>> findAll(
-            @RequestParam Long userId,
+    public BaseRestResponse<List<ReimbursementResponse>> findAll(@RequestParam String userId,
         @RequestParam(defaultValue = "0") int pageNo,
         @RequestParam(defaultValue = "25") int pageSize) throws Exception {
 
         log.info("Accessed: findAll() with storeId: {}, requestId: {}, clientId: {},"
-                + " channelId: {} and userName: {} ", userId);
+            + " channelId: {} and userName: {} ", userId);
         List<ReimbursementResponse> ReimbursementResponseList;
         Page<Reimbursement> reimbursementPage;
 
@@ -74,9 +76,10 @@ public class ReimbursementController {
         }
 
         return new BaseRestResponse<>(true, ReimbursementResponseList,
-            Paging.builder().page(reimbursementPage.getNumber()).totalPage(reimbursementPage.getTotalPages())
-                .itemPerPage(reimbursementPage.getSize()).totalItem(reimbursementPage.getTotalElements())
-                .build());
+            Paging.builder().page(reimbursementPage.getNumber())
+                .totalPage(reimbursementPage.getTotalPages())
+                .itemPerPage(reimbursementPage.getSize())
+                .totalItem(reimbursementPage.getTotalElements()).build());
     }
 
 
