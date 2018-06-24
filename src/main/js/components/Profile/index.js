@@ -8,7 +8,7 @@ const Profile = ({user}) => {
                 <div className="col-3">
                     <img src={user.avatar_192} alt=""/>
                 </div>
-                <div className="col-5 profile__details">
+                <div className="col-7 profile__details">
                     <div className="row">
                         <div className="col-3">
                             Name

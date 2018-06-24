@@ -4,7 +4,7 @@ import './styles.scss';
 const Register = () => {
     return (
         <div>
-            <div className="container-fluid" style={{backgroundColor: '#456C95', height: '620px'}}>
+            <div className="container-fluid" style={{height: '100%'}}>
                 <div className="row" style={{height: '100%'}}>
                     <div className="col justify-content-center center-all" style={{ marginTop: '20px' }}>
                         <div className="registrationForm">

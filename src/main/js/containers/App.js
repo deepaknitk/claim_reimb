@@ -30,11 +30,12 @@ class App extends React.Component {
             uiConfigs: {},
             multilineImageUploadProgress: 0,
             userName: '',
-            profileImage: ''
+            profileImage: '',
+            isRegisterActive: false
         };
     }
-    componentDidMount() {
 
+    authUser() {
         if (!USER) {
             if (this.props.location.search !== '') {
                 let code = this.props.location.search.split('=')[1].split('&')[0];
@@ -55,6 +56,15 @@ class App extends React.Component {
                             avatar_24: response.data.user.image_24,
                             avatar_192: response.data.user.image_192
                         };
+                        axios({
+                            method: 'get',
+                            url: 'http://localhost:8080/claims/user/findById/?userEmail=' + tempUser.email
+                        })
+                            .then(function (res) {
+                                console.log('Response', res);
+                                this.setState({isRegisterActive: res.data.success});
+                                console.log('success', this.state.isRegisterActive);
+                            }.bind(this));
                         localStorage.setItem('user', JSON.stringify(tempUser));
                     }.bind(this));
             }
@@ -62,7 +72,11 @@ class App extends React.Component {
             this.setState({userName: USER.name});
             this.setState({profileImage: USER.avatar_192});
         }
+    }
 
+    componentDidMount() {
+
+        this.authUser();
     }
 
     componentWillMount() {
@@ -179,7 +193,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div style={{width: '100%'}}>
+            <div style={{width: '100%', height: '100vh'}}>
                 {this.getErrorMsg()}
                 {this.getLoader()}
                 <Header cssClassName={'navbar_container subheader_container'}
@@ -198,6 +212,7 @@ class App extends React.Component {
                 <Routes systemLang ={this.state.systemLang}
                     setAlert= {this.setAlert.bind(this)}
                     user={USER}
+                    isRegisterActive={this.state.isRegisterActive}
                     localeFile= {this.state.localeFile}
                     handleLanguageChange = {this.handleLanguageChange.bind(this)}
                     makeAppDirty = {this.makeAppDirty.bind(this)}

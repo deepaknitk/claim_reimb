@@ -5,7 +5,7 @@ import './styles.scss';
 
 const Sidebar = () => {
     return (
-        <div style={{width: '20%', float: 'left'}}>
+        <div style={{width: '20%', height:'100%', float: 'left'}}>
             <div className="sidebar">
                 <div className="sidebar-menu">
                     <NavLink to="/createClaim" activeStyle={{ color: 'red' }}>New Claims</NavLink>
