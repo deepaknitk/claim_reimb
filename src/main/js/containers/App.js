@@ -202,19 +202,7 @@ class App extends React.Component {
                     handleLanguageChange = {this.handleLanguageChange.bind(this)}
                     makeAppDirty = {this.makeAppDirty.bind(this)}
                     {...this.props}/>
-                        systemLang={this.state.systemLang}
-                        setAlert={this.setAlert.bind(this)}
-                        localeFile={this.state.localeFile}
-                        handleLanguageChange={this.handleLanguageChange.bind(this)}
-                        {...this.props}/>
 
-                <SideBar/>
-                <Routes systemLang={this.state.systemLang}
-                        setAlert={this.setAlert.bind(this)}
-                        localeFile={this.state.localeFile}
-                        handleLanguageChange={this.handleLanguageChange.bind(this)}
-                        makeAppDirty={this.makeAppDirty.bind(this)}
-                        {...this.props}/>
                 {this.state.ltsAlert}
                 <Footer copyrightMsg={this.state.localeFile.copy_right_msg}/>
             </div>

@@ -6,15 +6,12 @@ import NotFoundPage from './components/PageNotFound';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Register from './components/Register';
-import SubmitSuccess from './components/SubmitSuccess';
-import IndexPage from './containers/IndexPage';
 import ClaimHistory from './containers/ClaimHistory';
 import ManageClaims from './containers/ManageClaims';
 function buildRoutes(props) {
     return (
         <Switch>
             <Route path="/" exact render = {() => <Login property={props}/>}/>
-            <Route path="/submitSuccess" exact render = {()=> <SubmitSuccess/>}/>
             <Route path="/profile" exact render = {() => <Profile user={props.user}/>}/>
             <Route path="/register" component={Register}/>
 
