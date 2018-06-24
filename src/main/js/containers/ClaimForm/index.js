@@ -6,6 +6,7 @@ import TextArea from '../../components/TextArea/index';
 import SelectBox from '../../components/selectBox';
 import {formatDate} from 'react-day-picker/moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import CurrencyType from '../../components/CurrencyType';
 
 
 const ProductForm = (props) => {
@@ -23,7 +24,7 @@ const ProductForm = (props) => {
                         imageUrl={props.imageUrl}
                         title="Upload Bill"
                         errorValidationState={props.imageUrlErrorValidationState}
-                        errorMsg='Upload your bill'
+                        errorMsg= "Upload your bill"
                     />
                 </div>
             </div>
@@ -82,6 +83,17 @@ const ProductForm = (props) => {
                         options={[{name: 'Meal', value: 'Meal'}, {name: 'Entertainment', value: 'Entertainment'}]}/>
                 </div>
                 <div className="col-md-6">
+                    <CurrencyType
+                        cssClassName="input_span"
+                        changeHandler={props.changeHandler}
+                        title="Currency"
+                        name="type"
+                        placeholder="Select currency"
+                        validationFun="isEmpty"
+                        value={props.type}
+                        errorMsg="Select your claim type"
+                        errorValidationState={props.typeErrorValidationState}
+                        options={[{name: 'Id', value: 'Id'}, {name: 'INR', value: 'INR'}]}/>
                     <InputPrice
                         cssClassName="input_span"
                         changeHandler={props.changeHandler}

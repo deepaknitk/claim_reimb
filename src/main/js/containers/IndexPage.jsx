@@ -7,8 +7,8 @@ class IndexPage extends React.Component {
     render() {
         return(
             <div>
-                <h1 className="text-center"> Welcome to Lead Tracking System</h1>
-                <h6 className="text-center"><Link to="/rfq">Create a RFQ</Link></h6>
+                <h1 className="text-center"> Welcome</h1>
+                <h6 className="text-center"><Link to="/createClaim">Submit Your Claim</Link></h6>
             </div>
         );
     }

@@ -3,11 +3,12 @@
 
 .sidebar {
     background-color: #456C95;
-    height: 600px;
+    height: 576px;
     a {
+        color: white;
+        font-size: 18px;
         display: block;
         padding: 15px;
-        font-family: "Courier New";
         font-weight: bold;
     }
 }

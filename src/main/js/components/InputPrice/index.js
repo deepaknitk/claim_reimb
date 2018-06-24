@@ -4,15 +4,15 @@ import classNames from 'classnames';
 
 const InputPrice = (props) => {
     return (
-        <div className="form-group">
-            <label className={props.cssClassName}>{props.title}<span className= "required"> *</span></label>
+        <div className="form-group" style={{width: 'calc(100% - 70px)', float: 'left'}}>
+            <label className={props.cssClassName}>{props.title}<span className="required"> *</span></label>
             <div className="input-group">
                 <input className={classNames('form-control', {ltsError: !props.errorValidationState})}
-                    name={props.name}
-                    placeholder={props.placeholder}
-                    type={props.inputType}
-                    value={props.value}
-                    onChange = {(event) => props.changeHandler(props.name, props.validationFun, event)}/>
+                       name={props.name}
+                       placeholder={props.placeholder}
+                       type={props.inputType}
+                       value={props.value}
+                       onChange={(event) => props.changeHandler(props.name, props.validationFun, event)}/>
             </div>
             {!props.errorValidationState && <span className="priceRequired error-msg">{props.errorMsg}</span>}
 
@@ -33,7 +33,8 @@ InputPrice.defaultProps = {
     name: '',
     value: '',
     title: '',
-    changeHandler: () => {}
+    changeHandler: () => {
+    }
 };
 
 export default InputPrice;

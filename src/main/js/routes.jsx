@@ -1,15 +1,18 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import RFQForm from './containers/RFQ/RFQForm';
+import SubmitClaim from './containers/Claimcontainer/SubmitClaim';
 import NotFoundPage from './components/PageNotFound';
 import IndexPage from './containers/IndexPage';
-import SubmitSuccess from './components/SubmitSuccess';
+import ClaimHistory from './containers/ClaimHistory';
+import ManageClaims from './containers/ManageClaims';
+
 function buildRoutes(props) {
     return (
         <Switch>
             <Route path="/" exact render={() => <IndexPage {...props}/>}/>
-            <Route path="/rfq" exact render={() => <RFQForm {...props}/>}/>
-            <Route path="/submitSuccess" exact render = {()=> <SubmitSuccess/>}/>
+            <Route path="/createClaim" exact render={() => <SubmitClaim {...props}/>}/>
+            <Route path="/dashboard" exact component={ClaimHistory}/>
+            <Route path="/manageClaims" exact component={ManageClaims}/>
             <Route path="*" component={NotFoundPage}/>
         </Switch>
     );

@@ -9,12 +9,11 @@ import Button from '../../components/Button';
 import TableLayout from '../../components/Table';
 import '../../styles/RFQForm.scss';
 import Modal from '../../components/Modal';
-import ProductForm from '../ProductForm';
+import ClaimForm from '../ClaimForm';
 import ConfirmationBox from '../../components/AlertBox';
 import Input from '../../components/Input';
 
-
-class RFQForm extends Component {
+class SubmitClaim extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -80,7 +79,6 @@ class RFQForm extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted');
     }
 
     changeHandler(fieldName, validationFuncName, event) {
@@ -120,7 +118,6 @@ class RFQForm extends Component {
         }
         if (isFormValidationFlag) {
             this.setState({formValidationFlag: true}, () => {
-                console.log('yes');
                 //this.props.actions.sendRfqDetails(this.getClaimDetails());
             });
         }
@@ -304,7 +301,6 @@ class RFQForm extends Component {
             claims: this.state.claims
 
         };
-        console.log(claimPayload);
         return claimPayload;
     }
 
@@ -443,7 +439,7 @@ class RFQForm extends Component {
                             type="submit"
                             cssClassName="m-10 add_product_btn clr_light_black add_remove_btn p-t-5 p-b-5"
                             buttonClickFunc={this.addClaimHandler}
-                            buttonName='Add Claim'
+                            buttonName="Add Claim"
                             isDisabled={false}/>
 
                         <Button
@@ -451,10 +447,9 @@ class RFQForm extends Component {
                             type="submit"
                             cssClassName="m-10 delete_product_btn add_remove_btn p-t-5 p-b-5"
                             buttonClickFunc={this.deleteMultipalProductHandler}
-                            buttonName='Delete Claim'
+                            buttonName="Delete Claim"
                             isDisabled={this.state.checkedIndex ? false : true}/>
                     </div>
-
                 </div>
                 <div className="table-container">
                     <TableLayout
@@ -478,7 +473,7 @@ class RFQForm extends Component {
                     {this.state.showpopup && this.state.showAddProductpopUp && <Modal
                         headerText="Add claim"
                         extraClass={'vertical-modal'}
-                        bodyContent={<ProductForm localeFile={this.props.localeFile}
+                        bodyContent={<ClaimForm localeFile={this.props.localeFile}
                                                   billNo={this.state.billNo}
                                                   claimDiscription={this.state.claimDiscription}
                                                   quantity={this.state.quantity}
@@ -515,7 +510,7 @@ class RFQForm extends Component {
                     {this.state.showpopup && this.state.showEditProductPopUp && <Modal
                         headerText={this.props.localeFile.editProduct}
                         extraClass={'vertical-modal'}
-                        bodyContent={< ProductForm localeFile={this.props.localeFile}
+                        bodyContent={< ClaimForm localeFile={this.props.localeFile}
                                                    billNo={this.state.billNo}
                                                    claimDiscription={this.state.claimDiscription}
                                                    quantity={this.state.quantity}
@@ -577,10 +572,10 @@ class RFQForm extends Component {
                         confirmationSuccess={this.confirmationSuccessforMultipleItem.bind(this)}
                         confirmationCancel={this.confirmationCancel.bind(this)}/> : ''}
                 </div>
-
-                <div className="form_layout m-l-30 m-r-30 p-30 m-t-30">
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <div className="col-md-6 card p-30">
+                <div className="form_layout">
+                    <div style={{display: 'flex'}}>
+                        {/*<SideBar/>*/}
+                        <div className="card p-30" style={{width: '100%'}}>
                             <Input
                                 cssClassName="input_span"
                                 required={true}
@@ -595,8 +590,6 @@ class RFQForm extends Component {
                                 errorValidationState={this.state.isValidEmployeeId}
                                 errorMsg="Enter your employee Id"
                             />
-
-
                             <Input
                                 cssClassName="input_span"
                                 required={true}
@@ -611,27 +604,24 @@ class RFQForm extends Component {
                                 errorValidationState={this.state.isValidEmployeeEmail}
                                 errorMsg="Enter your email Id"
                             />
+                            <div className="m-r-10 m-t-30">{this.getClaimTableLayout()}</div>
+                            <div className="btn-container submit_form_container m-t-30">
+                                <Button
+                                    type="submit"
+                                    cssClassName="m-r-10 disable_btn btn-secondary"
+                                    buttonClickFunc={this.clearClaimForm}
+                                    buttonName="Cancel Claim"
+                                    isDisabled={this.props.isDisabled}/>
+                                <Button
+                                    type="submit"
+                                    cssClassName="m-r-10 submit_btn btn-success"
+                                    buttonClickFunc={this.validateformSubmission}
+                                    buttonName="Send Claim"
+                                    isDisabled={this.props.formValidationFlag}/>
+                            </div>
                         </div>
                     </div>
-                    <div className="m-r-10">{this.getClaimTableLayout()}</div>
                 </div>
-
-
-                <div className="btn-container submit_form_container">
-                    <Button
-                        type="submit"
-                        cssClassName="m-r-10 disable_btn btn-secondary"
-                        buttonClickFunc={this.clearClaimForm}
-                        buttonName="Cancel Claim"
-                        isDisabled={this.props.isDisabled}/>
-                    <Button
-                        type="submit"
-                        cssClassName="m-r-10 submit_btn btn-success"
-                        buttonClickFunc={this.validateformSubmission}
-                        buttonName="Send Claim"
-                        isDisabled={this.props.formValidationFlag}/>
-                </div>
-
             </div>
         );
     }
@@ -650,4 +640,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RFQForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SubmitClaim));
