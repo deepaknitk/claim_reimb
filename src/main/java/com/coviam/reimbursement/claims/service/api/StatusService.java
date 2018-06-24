@@ -4,5 +4,5 @@ import com.coviam.reimbursement.claims.entity.Status;
 
 public interface StatusService {
 
-    Status findByStatusCodeAndStatusGroupNameAndMarkForDeleteFalse(String statusCode, String statusGroupName);
+    Status findByStatusCode(String statusCode);
 }

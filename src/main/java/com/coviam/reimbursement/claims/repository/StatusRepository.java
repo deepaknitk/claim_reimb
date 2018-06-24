@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
 
-    Status findByStatusCodeAndStatusGroupNameAndMarkForDeleteFalse(String statusCode, String statusGroupName);
+    Status findByStatusCodeAndMarkForDeleteFalse(String statusCode);
 }

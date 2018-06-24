@@ -5,6 +5,7 @@ import com.coviam.reimbursement.claims.model.constants.FieldNames;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 //import org.springframework.data.annotation.Id;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = Constants.REIMBURSEMENT)

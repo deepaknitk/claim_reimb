@@ -28,13 +28,12 @@ import org.springframework.stereotype.Service;
 
     @Override public Reimbursement saveRmb(Reimbursement rmb) {
         Status rfqInitialStatus = this.statusService
-            .findByStatusCodeAndStatusGroupNameAndMarkForDeleteFalse(Constants.STATUS_CODE_OPEN,
-                Constants.RMB_STATUS_GROUP);
+            .findByStatusCode(Constants.STATUS_CODE_OPEN);
         rmb.setStatusId(rfqInitialStatus);
 
         this.reimbursementRepository.save(rmb);
         rmb.getRmbItemList().forEach(rfqItem -> this.reimbursementItemService
-            .save(this.populateRMBItemData(rmb, rfqInitialStatus, rfqItem)));
+            .saveOrUpdate(this.populateRMBItemData(rmb, rfqInitialStatus, rfqItem)));
         return rmb;
 
     }

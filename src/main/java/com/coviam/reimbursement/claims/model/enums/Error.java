@@ -21,8 +21,7 @@ public enum Error {
   PARAMETER_NAME_NULL("parameter name should not be null"),
   PARAMETER_NAME_INVALID("parameter name does not exists"),
   PARAMETER_NAME_NOT_FOUND("parameter name is not found"),
-  CONVERTING_EXCEPTION("error in converting"),
-  SYSTEM_ERROR("There is a system error");
+  CONVERTING_EXCEPTION("error in converting");
 
   private String message;
 
