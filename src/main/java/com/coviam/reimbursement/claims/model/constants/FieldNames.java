@@ -47,6 +47,7 @@ public interface FieldNames {
     String RMB_ITEM_AMOUNT = "reimbursement_item_amount";
     String RMB_ITEM_REMARKS = "reimbursement_item_remarks";
     String RMB_ITEM_FILENAME = "reimbursement_item_filename";
+    String RMB_ITEM_DATE = "reimbursement_item_date";
 
     //currency entity fields
     String CURRENCY_CODE = "currency_code";

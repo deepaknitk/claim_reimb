@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author Foram Shah on 23/06/18
@@ -75,4 +76,7 @@ public class ReimbursementItem extends ClaimBaseEntity {
 
     @Column(name = FieldNames.RMB_ITEM_FILENAME)
     private String rmbItemFilename;
+
+    @Column(name = FieldNames.RMB_ITEM_DATE)
+    private Date rmbItemDate;
 }

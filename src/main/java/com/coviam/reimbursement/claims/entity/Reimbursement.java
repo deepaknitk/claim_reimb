@@ -33,7 +33,6 @@ public class Reimbursement extends ClaimBaseEntity {
     @Column(name = FieldNames.REIMBURSEMENT_DATE, nullable = false)
     private Date reimbursement_date;
 
-
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = FieldNames.USER_ID,
         referencedColumnName = FieldNames.USER_ID,
@@ -44,10 +43,6 @@ public class Reimbursement extends ClaimBaseEntity {
     @JoinColumn(name = FieldNames.STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
         foreignKey = @ForeignKey(name = Constants.REIMBURSEMENT_STATUS_FK_02), nullable = false)
     private Status statusId;
-
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reimbursement")
-    private List<ReimbursementItem> rmbItemList;
 }
 
 

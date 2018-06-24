@@ -20,4 +20,8 @@ public class CurrencyServiceImpl implements CurrencyService {
   @Override public List<Currency> findAllCurrencies() {
     return currencyRepository.findAll();
   }
+
+    @Override public Currency findByCurrencyCode(String currencyCode) {
+        return currencyRepository.findByCurrencyCode(currencyCode);
+    }
 }

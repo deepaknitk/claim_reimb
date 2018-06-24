@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface ReimbursementItemService {
 
-  ReimbursementItem saveOrUpdate(ReimbursementItem reimbursementItemList);
-
-  List<ReimbursementItem> findByReimbursementItemByReimburesementId(Long rmbId);
+  List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList);
 
   ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId);
 }

@@ -1,5 +1,6 @@
 package com.coviam.reimbursement.claims.service.impl;
 
+import com.coviam.reimbursement.claims.entity.UserMaster;
 import com.coviam.reimbursement.claims.repository.UserRepository;
 import com.coviam.reimbursement.claims.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,4 +14,8 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
+
+    @Override public UserMaster findByUserMailId(String userMailId) {
+        return userRepository.findByUserEmail(userMailId);
+    }
 }

@@ -15,9 +15,7 @@ import java.util.List;
 
 public class RmbWebRequest {
 
-    @NotNull(message = Constants.USER_ID_NULL) Long userId;
-
-    @NotNull(message = Constants.REIMBURSEMENT_DATE_NULL) Date reimbursementDate;
+    @NotNull(message = Constants.USER_ID_NULL) String userId;
 
     @Valid List<ReimbursementDto> rmbItemList;
 
