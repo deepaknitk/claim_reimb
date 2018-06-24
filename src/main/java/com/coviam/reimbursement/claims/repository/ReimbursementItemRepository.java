@@ -12,9 +12,5 @@ import java.util.List;
 @Repository
 public interface ReimbursementItemRepository extends JpaRepository<ReimbursementItem, Long> {
 
-  /**
-   * @param rmbId rmb id for which we need to find the object
-   * @returnlist of rmb items
-   */
-  //List<ReimbursementItem> findByReimbursementId(Long rmbId);
+  ReimbursementItem findByReimbursementItemId(Long rmbItemId);
 }

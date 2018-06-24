@@ -8,9 +8,7 @@
 
 package com.coviam.reimbursement.claims.model.constants;
 
-/**
- * Created by jugalkishorsahu on Feb, 2018
- */
+
 public interface ClaimReimbursementApiPath {
 
     /**
@@ -22,11 +20,15 @@ public interface ClaimReimbursementApiPath {
     String REIMBURSEMENT = API + "/reimbursement";
 
     String WILD_CARD = "**";
-    String LOGIN = "/login";
-    String LOGOUT = "/logout";
-    String SECURED = "/secured";
-
     String GET_CONFIGS = "/getConfigs";
+
+    String CURRENCY_BASE_PATH = "/currency";
+    String EXPENSE_BASE_PATH = "/expense";
+    String RMB_ITEM_BASE_PATH = "/rmbItem";
+    String USER = "/user";
+    String FIND_RMB_ITEM_BY_ID = "/findRmbItemById";
+    String GET_AUTHENTICATION_KEYS = "/getAuthenticationKeys";
+
     String SAVE_IMAGE = "/saveImage";
 
     /**

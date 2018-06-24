@@ -25,13 +25,14 @@ public class ReimbursementItemStatusLog extends ClaimBaseEntity {
     private Long reimbursementItemStatusLogId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-        @JoinColumn(name = FieldNames.RMB_ITEM_OLD_STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
-        foreignKey = @ForeignKey(name = Constants.RMB_ITEM_STATUS_LOG_NEW_STATUS_FK_02), nullable = false),
-        @JoinColumn(name = FieldNames.RMB_ITEM_NEW_STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
+    @JoinColumn(name = FieldNames.RMB_ITEM_OLD_STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_STATUS_LOG_OLD_STATUS_FK_01), nullable = false)
-    })
-    private Status status;
+    private Status oldStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = FieldNames.RMB_ITEM_NEW_STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
+            foreignKey = @ForeignKey(name = Constants.RMB_ITEM_STATUS_LOG_NEW_STATUS_FK_02), nullable = false)
+    private Status newStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.RMB_ITEM_ID, referencedColumnName = FieldNames.RMB_ITEM_ID,

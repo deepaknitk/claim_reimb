@@ -6,15 +6,30 @@ import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 /**
  * @author Foram Shah on 23/06/18
  */
-@Service public class ReimbursementItemServiceImpl implements ReimbursementItemService {
+@Service
+public class ReimbursementItemServiceImpl implements ReimbursementItemService {
 
-    @Autowired private ReimbursementItemRepository reimbursementItemRepository;
+  @Autowired
+  private ReimbursementItemRepository reimbursementItemRepository;
 
-    @Override public ReimbursementItem save(ReimbursementItem reimbursementItem) {
-        return this.reimbursementItemRepository.save(reimbursementItem);
-    }
+  @Override
+  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList) {
+    return reimbursementItemRepository.save(reimbursementItemList);
+  }
+
+  @Override
+  public List<ReimbursementItem> findByReimbursementItemByReimburesementId(Long rmbId) {
+   // return reimbursementItemRepository.findByReimbursementId(rmbId);
+    return null;
+  }
+
+  @Override
+  public ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId) {
+    return reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
+  }
 }

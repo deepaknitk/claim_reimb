@@ -1,18 +1,13 @@
-/*
- *
- * Copyright (C) 2018 PT Global Digital Niaga - All Rights Reserved
- *
- * NOTICE:  All information contained herein is, and remains the property of PT Global Digital Niaga.
- *
- * Dissemination of this information or reproduction of this material is strictly forbidden.
- *
- */
-
 package com.coviam.reimbursement.claims.service.api;
 
-
+import com.coviam.reimbursement.claims.entity.Currency;
+import com.coviam.reimbursement.claims.entity.ExpenseType;
 import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
+import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
+import com.coviam.reimbursement.claims.model.base.CurrencyResponseDto;
+import com.coviam.reimbursement.claims.model.base.ExpenseTypeDto;
+import com.coviam.reimbursement.claims.model.base.ReimbursementItemDto;
 import com.coviam.reimbursement.claims.response.ReimbursementItemResponse;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
 
@@ -31,4 +26,11 @@ public interface RestWebModelConverterService {
 
     public List<ReimbursementItemResponse> convertRmbItemListToRMBItemResponseList(
         List<ReimbursementItem> rmbItemList) throws Exception;
+
+    BaseRestResponse<List<CurrencyResponseDto>> convertCurrencyResponse(List<Currency> currencies);
+
+    BaseRestResponse<List<ExpenseTypeDto>> convertExpenseResponse(List<ExpenseType> expenseTypes);
+
+    BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(ReimbursementItem rmbItem);
+
 }
