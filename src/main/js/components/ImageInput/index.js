@@ -5,7 +5,7 @@ import classNames from 'classnames';
 const ImageInput = (props) => {
     return (
         <div className="form-group" className={props.cssClassName}>
-            <label className={props.cssClassName}>{props.title}</label>
+            <label className={props.cssClassName}>{props.title} <span className="required">*</span> </label>
             <div className="custom-file">
                 <input type="file" multiple="false"
                        className={classNames('custom-file-input', {ltsError: !props.errorValidationState})}
@@ -14,7 +14,7 @@ const ImageInput = (props) => {
                 <label className="custom-file-label browsefile" htmlFor="id">
                     {props.fileName}
                 </label>
-                <span className="file_format error-msg">{props.errorMsg}</span>
+                {!props.errorValidationState ? <span className="file_format error-msg">{props.errorMsg}</span> : ''}
             </div>
         </div>
     );

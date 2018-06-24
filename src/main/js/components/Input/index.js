@@ -2,10 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Input = (props) =>{
-    return(
+const Input = (props) => {
+    return (
         <div className="form-group">
-            <label className={props.cssClassName}>{props.title} <span className="required">*</span></label>
+            <label className={props.cssClassName}>{props.title} {props.required ?
+                <span className="required">*</span> : ''}</label>
             <input className={classNames('form-control', {ltsError: !props.errorValidationState})}
                    name={props.name}
                    placeholder={props.placeholder}

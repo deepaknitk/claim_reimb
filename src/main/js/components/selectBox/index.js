@@ -12,17 +12,14 @@ const PaymentSelectBox = (props) => {
                 name={props.name}
                 onChange={(event) => props.changeHandler(props.name, props.validationFun, event)}>
                  <option disabled value="">{props.placeholder}</option>
-                {localStorage.getItem('systemLang') === 'en' ? props.options.map(opt => {
+                {props.options.map(opt => {
                         return (
-                            <option key={opt.paymentMethodId} value={opt.paymentMethodId}>{opt.paymentMethodDescriptionEn}</option>
+                            <option key={opt.name} value={opt.value}>{opt.name}</option>
                         );
-                    }) : props.options.map(opt => {
-                        return (
-                            <option key={opt.paymentMethodId} value={opt.paymentMethodId}>{opt.paymentMethodDescriptionId}</option>
-                        );
-                    })}
+                    })
+                }
             </select>
-            <span className="error-msg">{props.errorMsg}</span>
+            {props.errorValidationState ? <span className="error-msg">{props.errorMsg}</span> : ''}
         </div>
     );
 };
