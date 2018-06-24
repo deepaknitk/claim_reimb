@@ -11,4 +11,6 @@ public interface ReimbursementService {
     Page<Reimbursement> findAll(Long userId, int pageNo, int pageSize);
 
     Reimbursement saveRmb(Reimbursement rmb, List<ReimbursementItem> reimbursementItems);
+
+    ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId);
 }

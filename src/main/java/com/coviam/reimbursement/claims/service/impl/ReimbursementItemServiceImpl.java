@@ -1,5 +1,6 @@
 package com.coviam.reimbursement.claims.service.impl;
 
+import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.repository.ReimbursementItemRepository;
 import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
@@ -24,6 +25,10 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
 
   @Override
   public ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId) {
+
+      ReimbursementItem reimbursementItem = reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
+      Long reimbursementId = reimbursementItem.getReimbursement().getReimbursementId();
+      String  description = reimbursementItem.getReimbursement().getStatusId().getStatusDescription();
     return reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
   }
 }

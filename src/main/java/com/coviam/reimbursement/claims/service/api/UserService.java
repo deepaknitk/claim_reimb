@@ -7,5 +7,7 @@ import com.coviam.reimbursement.claims.entity.UserMaster;
  */
 public interface UserService {
 
-    UserMaster findByUserMailId(String userMailId);
+    UserMaster findByEmail(String email);
+
+    UserMaster save(UserMaster userMaster);
 }

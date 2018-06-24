@@ -36,4 +36,8 @@ import java.util.List;
         this.reimbursementItemService.saveOrUpdate(reimbursementItemList);
         return rmb;
     }
+
+    @Override public ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId) {
+        return null;
+    }
 }

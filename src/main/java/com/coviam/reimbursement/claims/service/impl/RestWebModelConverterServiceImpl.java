@@ -4,7 +4,6 @@ import com.coviam.reimbursement.claims.entity.Currency;
 import com.coviam.reimbursement.claims.entity.ExpenseType;
 import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
-import com.coviam.reimbursement.claims.entity.UserMaster;
 import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
 import com.coviam.reimbursement.claims.model.base.CurrencyResponseDto;
 import com.coviam.reimbursement.claims.model.base.ExpenseTypeDto;
@@ -118,9 +117,9 @@ import java.util.stream.Collectors;
     public BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(
         ReimbursementItem rmbItem) {
         ReimbursementItemDto reimbursementItemDto = new ReimbursementItemDto();
-        reimbursementItemDto.setCurrency(rmbItem.getCurrency());
-        reimbursementItemDto.setExpenseType(rmbItem.getExpenseType());
-        reimbursementItemDto.setItemStatus(rmbItem.getItemStatus());
+        reimbursementItemDto.setCurrencyCode(rmbItem.getCurrency().getCurrencyCode());
+        reimbursementItemDto.setExpenseTypeDescription(rmbItem.getExpenseType().getExpenseTypeDescription());
+        reimbursementItemDto.setItemStatusCode(rmbItem.getItemStatus().getStatusCode());
         reimbursementItemDto.setRfqItemDescription(rmbItem.getRfqItemDescription());
         reimbursementItemDto.setRmbItemFilename(rmbItem.getRmbItemFilename());
         reimbursementItemDto.setRmbItemAmount(rmbItem.getRmbItemAmount());
@@ -131,7 +130,7 @@ import java.util.stream.Collectors;
 
     @Override public Reimbursement convertRmbWebRequestToRmb(RmbWebRequest rmbWebRequest) {
         Reimbursement reimbursement = new Reimbursement();
-        reimbursement.setUserId(userService.findByUserMailId(rmbWebRequest.getUserId()));
+        reimbursement.setUserId(userService.findByEmail(rmbWebRequest.getUserId()));
         reimbursement.setStatusId(statusService.findByStatusCode(Constants.STATUS_CODE_OPEN));
         reimbursement.setReimbursement_date(new Date());
         return reimbursement;

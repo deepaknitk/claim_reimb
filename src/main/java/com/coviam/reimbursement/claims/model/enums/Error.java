@@ -21,7 +21,18 @@ public enum Error {
   PARAMETER_NAME_NULL("parameter name should not be null"),
   PARAMETER_NAME_INVALID("parameter name does not exists"),
   PARAMETER_NAME_NOT_FOUND("parameter name is not found"),
-  CONVERTING_EXCEPTION("error in converting");
+  CONVERTING_EXCEPTION("error in converting"),
+
+    USER_NULL("user should not be null"),
+    USER_TYPE_CODE_NULL("user type code should not be null"),
+    USER_TYPE_CODE_NOT_VALID("user type code not valid"),
+    ACCESS_TOKEN_NULL("access token should not be null"),
+    USER_NOT_SAVED("user could not be saved"),
+    USER_NOT_FOUND("user could not be found"),
+    EMPLOYEE_ID_INVALID("employee id already exists"),
+    EMPLOYEE_ID_NULL("employee id is null or empty"),
+    EMAIL_ID_INVALID("email id is invalid"),
+    EMAIL_ID_NULL("email is null or empty");
 
   private String message;
 
