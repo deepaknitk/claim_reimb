@@ -12,9 +12,9 @@ import lombok.Data;
 
     private String rfqItemDescription;
 
-    private ExpenseType expenseType;
+    private String expenseTypeCode;
 
-    private Currency currency;
+    private String currencyCode;
 
     private Double rmbItemAmount;
 

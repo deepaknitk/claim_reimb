@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReimbursementService {
 
-    Page<Reimbursement> findAll(Long userId, int pageNo, int pageSize);
+    Page<Reimbursement> findAll(String userId, int pageNo, int pageSize);
 
     Reimbursement saveRmb(Reimbursement rmb);
 

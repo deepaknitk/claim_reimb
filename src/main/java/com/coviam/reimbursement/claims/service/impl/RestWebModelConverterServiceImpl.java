@@ -65,7 +65,7 @@ import java.util.stream.Collectors;
     @Override public ReimbursementResponse convertRMBToRMBResponse(Reimbursement rmb)
         throws Exception {
         ReimbursementResponse rfqResponse = this.convert(rmb, ReimbursementResponse.class);
-        rfqResponse.setStatus_Id(rmb.getStatusId().getStatusCode());
+        rfqResponse.setStatusCode(rmb.getStatusId().getStatusCode());
         rfqResponse.setReimbursement_date(rmb.getReimbursement_date());
         return rfqResponse;
     }
