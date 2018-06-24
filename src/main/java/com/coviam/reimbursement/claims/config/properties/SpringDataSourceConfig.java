@@ -1,4 +1,4 @@
-package com.coviam.reimbursement.claims.config;
+package com.coviam.reimbursement.claims.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
