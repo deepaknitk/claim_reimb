@@ -56,7 +56,7 @@ public class ReimbursementController {
     @RequestMapping(value = {
         ClaimReimbursementApiPath.FIND_ALL}, method = RequestMethod.GET, produces = {
         MediaType.APPLICATION_JSON_VALUE})
-    public BaseRestResponse<List<ReimbursementResponse>> findAll(@RequestParam Long userId,
+    public BaseRestResponse<List<ReimbursementResponse>> findAll(@RequestParam String userId,
         @RequestParam(defaultValue = "0") int pageNo,
         @RequestParam(defaultValue = "25") int pageSize) throws Exception {
 
