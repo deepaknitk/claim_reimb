@@ -1,6 +1,7 @@
 package com.coviam.reimbursement.claims.service.impl;
 
 import com.coviam.reimbursement.claims.entity.SystemParameter;
+import com.coviam.reimbursement.claims.model.base.AuthenticationKeysDto;
 import com.coviam.reimbursement.claims.model.enums.Error;
 import com.coviam.reimbursement.claims.repository.SystemParameterRepository;
 import com.coviam.reimbursement.claims.service.api.SystemParameterService;
@@ -21,7 +22,13 @@ public class SystemParameterServiceImpl implements SystemParameterService {
         CommonUtils.checkError(parameterNameExists != false, Error.PARAMETER_NAME_INVALID);
         String parameterValue = systemParameterRepository.findByParameterName(parameterName);
         CommonUtils.checkError(parameterValue != null, Error.PARAMETER_NAME_NOT_FOUND);
-
         return parameterValue;
+    }
+
+    @Override public AuthenticationKeysDto getAuthKeys() {
+        String clientId = findByParameterName("CLIENT_ID");
+        String clientSecret = findByParameterName("CLIENT_SECRET");
+        return new AuthenticationKeysDto(clientId, clientSecret);
+
     }
 }

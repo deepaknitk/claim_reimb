@@ -12,6 +12,7 @@ public interface ReimbursementItemService {
 
   List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList);
 
-  List<ReimbursementItem> findByReimbursementItemBuReimburesement(Long rmbId);
+  List<ReimbursementItem> findByReimbursementItemByReimburesementId(Long rmbId);
 
+  ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId);
 }

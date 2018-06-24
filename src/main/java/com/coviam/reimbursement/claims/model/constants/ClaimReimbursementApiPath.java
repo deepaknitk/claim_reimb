@@ -18,6 +18,11 @@ public interface ClaimReimbursementApiPath {
     String GET_CONFIGS = "/getConfigs";
 
     String CURRENCY_BASE_PATH = "/currency";
+    String EXPENSE_BASE_PATH = "/expense";
     String FIND_ALL = "/findAll";
+    String RMB_ITEM_BASE_PATH = "/rmbItem";
+    String USER = "/user";
+    String FIND_RMB_ITEM_BY_ID = "/findRmbItemById";
+    String GET_AUTHENTICATION_KEYS = "/getAuthenticationKeys";
 
 }
