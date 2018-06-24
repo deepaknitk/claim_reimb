@@ -7,7 +7,9 @@ import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
 import com.coviam.reimbursement.claims.model.base.CurrencyResponseDto;
 import com.coviam.reimbursement.claims.model.base.ExpenseTypeDto;
+import com.coviam.reimbursement.claims.model.base.ReimbursementDto;
 import com.coviam.reimbursement.claims.model.base.ReimbursementItemDto;
+import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementItemResponse;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
 
@@ -32,5 +34,9 @@ public interface RestWebModelConverterService {
     BaseRestResponse<List<ExpenseTypeDto>> convertExpenseResponse(List<ExpenseType> expenseTypes);
 
     BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(ReimbursementItem rmbItem);
+
+    Reimbursement convertRmbWebRequestToRmb(RmbWebRequest rmbWebRequest);
+
+    List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
 
 }

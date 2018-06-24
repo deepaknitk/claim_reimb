@@ -34,7 +34,6 @@ public class ReimbursementItemController {
     try {
       ReimbursementItem rmbItem =
           reimbursementItemService.findByReimbursementItemByReimburesementItemId(rmbItemId);
-
       return this.restWebModelConverterService.convertRmbItemToRmbItemDto(rmbItem);
     } catch (Exception e) {
       return new BaseRestResponse<>(Error.SYSTEM_ERROR.getMessage(), Error.SYSTEM_ERROR.getCode(),

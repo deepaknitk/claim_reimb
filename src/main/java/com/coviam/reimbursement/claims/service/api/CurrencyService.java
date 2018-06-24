@@ -10,4 +10,6 @@ import java.util.List;
 public interface CurrencyService {
 
     List<Currency> findAllCurrencies();
+
+    Currency findByCurrencyCode(String currencyCode);
 }

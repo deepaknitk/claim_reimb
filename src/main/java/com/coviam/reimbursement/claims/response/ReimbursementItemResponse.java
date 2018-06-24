@@ -19,4 +19,8 @@ import lombok.Data;
     private Double rmbItemAmount;
 
     private String rmbItemFilename;
+
+    private String remarks;
+
+    private String rmbItemDate;
 }

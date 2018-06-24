@@ -7,15 +7,23 @@ import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
 import com.coviam.reimbursement.claims.model.base.CurrencyResponseDto;
 import com.coviam.reimbursement.claims.model.base.ExpenseTypeDto;
+import com.coviam.reimbursement.claims.model.base.ReimbursementDto;
 import com.coviam.reimbursement.claims.model.base.ReimbursementItemDto;
+import com.coviam.reimbursement.claims.model.constants.Constants;
+import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementItemResponse;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
+import com.coviam.reimbursement.claims.service.api.CurrencyService;
+import com.coviam.reimbursement.claims.service.api.ExpenseTypeService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
+import com.coviam.reimbursement.claims.service.api.StatusService;
+import com.coviam.reimbursement.claims.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,6 +35,18 @@ import java.util.stream.Collectors;
     implements RestWebModelConverterService {
 
     @Autowired private org.dozer.Mapper mapper;
+
+    @Autowired
+    private StatusService statusService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private CurrencyService currencyService;
+
+    @Autowired
+    private ExpenseTypeService expenseTypeService;
 
     @Override public <M, T> T convert(M entity, Class<T> clasz) throws Exception {
         T response = this.mapper.map(entity, clasz);
@@ -47,9 +67,6 @@ import java.util.stream.Collectors;
         ReimbursementResponse rfqResponse = this.convert(rmb, ReimbursementResponse.class);
         rfqResponse.setStatus_Id(rmb.getStatusId().getStatusCode());
         rfqResponse.setReimbursement_date(rmb.getReimbursement_date());
-//        rfqResponse
-//            .setRmbItemList(this.convertRmbItemListToRMBItemResponseList(rmb.getRmbItemList()));
-
         return rfqResponse;
     }
 
@@ -108,8 +125,43 @@ import java.util.stream.Collectors;
         reimbursementItemDto.setRmbItemAmount(rmbItem.getRmbItemAmount());
         reimbursementItemDto.setRmbItemBillNumber(rmbItem.getRmbItemBillNumber());
         reimbursementItemDto.setRemarks(rmbItem.getRmbItemRemarks());
-        reimbursementItemDto.setRmbDate(rmbItem.getReimbursement().getReimbursement_date());
         return new BaseRestResponse<>(true, reimbursementItemDto);
     }
 
+    @Override public Reimbursement convertRmbWebRequestToRmb(RmbWebRequest rmbWebRequest) {
+        Reimbursement reimbursement = new Reimbursement();
+        reimbursement.setUserId(userService.findByEmail(rmbWebRequest.getUserId()));
+        reimbursement.setStatusId(statusService.findByStatusCode(Constants.STATUS_CODE_OPEN));
+        reimbursement.setCreatedAt(new Date());
+        reimbursement.setCreatedBy("System");
+        reimbursement.setMarkForDelete(false);
+        reimbursement.setReimbursement_date(new Date());
+        return reimbursement;
+    }
+
+    @Override public List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
+        List<ReimbursementItem> reimbursementItems = new ArrayList<>();
+        for (ReimbursementDto reimbursementDto: reimbursementDtos){
+            reimbursementItems.add(convertRmbItem(reimbursementDto, reimbursement));
+        }
+        return reimbursementItems;
+    }
+
+    public ReimbursementItem convertRmbItem(ReimbursementDto reimbursementDto, Reimbursement reimbursement){
+        ReimbursementItem reimbursementItem = new ReimbursementItem();
+        reimbursementItem.setCurrency(currencyService.findByCurrencyCode(reimbursementDto.getCurrency()));
+        reimbursementItem.setExpenseType(expenseTypeService.findByExpenseTypeCode(reimbursementDto.getExpenseType()));
+        reimbursementItem.setItemStatus(statusService.findByStatusCode(Constants.STATUS_CODE_OPEN));
+        reimbursementItem.setRmbItemBillNumber(reimbursementDto.getRmbItemBillNumber());
+        reimbursementItem.setRmbItemRemarks(reimbursementDto.getRemarks());
+        reimbursementItem.setRfqItemDescription(reimbursementDto.getRfqItemDescription());
+        reimbursementItem.setRmbItemFilename(reimbursementDto.getRmbItemFilename());
+        reimbursementItem.setRmbItemAmount(reimbursementDto.getRmbItemAmount());
+        reimbursementItem.setRmbItemDate(reimbursementDto.getRmbItemDate());
+        reimbursementItem.setReimbursement(reimbursement);
+        reimbursementItem.setCreatedAt(new Date());
+        reimbursementItem.setCreatedBy("System");
+        reimbursementItem.setMarkForDelete(false);
+        return reimbursementItem;
+    }
 }
