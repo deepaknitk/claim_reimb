@@ -19,46 +19,44 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
-@RestController
-@RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
+@Slf4j @RestController @RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
 public class ReimbursementController {
 
-    @Autowired
-    private RestWebModelConverterService restWebModelConverterService;
+    @Autowired private RestWebModelConverterService restWebModelConverterService;
 
-    @Autowired
-    private ReimbursementService reimbursementService;
+    @Autowired private ReimbursementService reimbursementService;
 
-    public BaseRestResponse save( @Valid @RequestBody RmbWebRequest rmbWebRequest){
+    @RequestMapping(value = {
+        ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
+        MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
-           Reimbursement rmbRequest =
+            Reimbursement rmbRequest =
                 this.restWebModelConverterService.convert(rmbWebRequest, Reimbursement.class);
-            List<ReimbursementItem> rmbItemRequestList =
-                this.restWebModelConverterService.convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
+//            List<ReimbursementItem> rmbItemRequestList = this.restWebModelConverterService
+//                .convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
 //            rmbRequest.setRmbItemList(rmbItemRequestList);
-            Reimbursement saveRMB = this.reimbursementService
-                .saveRmb(rmbRequest);
+            Reimbursement saveRMB = this.reimbursementService.saveRmb(rmbRequest);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
         } catch (Exception e) {
-            log.error("Error in saving rmb  with user id: {}  due to: {} ", rmbWebRequest.getUserId(),
-                e.getMessage(), e);
+            log.error("Error in saving rmb  with user id: {}  due to: {} ",
+                rmbWebRequest.getUserId(), e.getMessage(), e);
         }
         return new BaseRestResponse<>(true, rmbResponse);
 
 
-
     }
 
-    @RequestMapping(value = {ClaimReimbursementApiPath.FIND_ALL}, method = RequestMethod.GET, produces = {
+    @RequestMapping(value = {
+        ClaimReimbursementApiPath.FIND_ALL}, method = RequestMethod.GET, produces = {
         MediaType.APPLICATION_JSON_VALUE})
-        public BaseRestResponse<List<ReimbursementResponse>> findAll(
-            @RequestParam Long userId,
+    public BaseRestResponse<List<ReimbursementResponse>> findAll(@RequestParam Long userId,
         @RequestParam(defaultValue = "0") int pageNo,
         @RequestParam(defaultValue = "25") int pageSize) throws Exception {
 
-        log.info("Accessed: findAll() with userId: {} ", userId);
+        log.info("Accessed: findAll() with storeId: {}, requestId: {}, clientId: {},"
+            + " channelId: {} and userName: {} ", userId);
         List<ReimbursementResponse> ReimbursementResponseList;
         Page<Reimbursement> reimbursementPage;
 
@@ -73,9 +71,10 @@ public class ReimbursementController {
         }
 
         return new BaseRestResponse<>(true, ReimbursementResponseList,
-            Paging.builder().page(reimbursementPage.getNumber()).totalPage(reimbursementPage.getTotalPages())
-                .itemPerPage(reimbursementPage.getSize()).totalItem(reimbursementPage.getTotalElements())
-                .build());
+            Paging.builder().page(reimbursementPage.getNumber())
+                .totalPage(reimbursementPage.getTotalPages())
+                .itemPerPage(reimbursementPage.getSize())
+                .totalItem(reimbursementPage.getTotalElements()).build());
     }
 
 
