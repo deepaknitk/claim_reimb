@@ -1,0 +1,15 @@
+@import '../../styles/theme';
+@import '../../styles/common';
+
+.profile {
+    margin: 10px;
+    &__details {
+        .row {
+            height: 25%;
+            font-size: 23px;
+            .col-3 {
+                color: #005cbf;
+            }
+        }
+    }
+}

@@ -12,6 +12,10 @@ import ENGLISH_LOCALE from '../locales/lts.en.js';
 import BAHASA_LOCALE from '../locales/lts.id.js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from 'axios/index';
+import Sidebar from '../components/Sidebar';
+
+let USER = JSON.parse(localStorage.getItem('user'))
 import SideBar from '../components/Sidebar';
 
 class App extends React.Component {
@@ -24,8 +28,41 @@ class App extends React.Component {
             ltsAlert: null,
             localeFile: {},
             uiConfigs: {},
-            multilineImageUploadProgress: 0
+            multilineImageUploadProgress: 0,
+            userName: '',
+            profileImage: ''
         };
+    }
+    componentDidMount() {
+
+        if (!USER) {
+            if (this.props.location.search !== '') {
+                let code = this.props.location.search.split('=')[1].split('&')[0];
+
+                axios({
+                    method: 'get',
+                    url: 'https://slack.com/api/oauth.access?client_id=304468210898.305541541543&client_secret=d93eb31dd7fbb9217ceeb713da523b2d&code=' + code,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        this.setState({userName: response.data.user.name});
+                        let tempUser = {
+                            email: response.data.user.email,
+                            name: response.data.user.name,
+                            avatar_24: response.data.user.image_24,
+                            avatar_192: response.data.user.image_192
+                        }
+                        localStorage.setItem('user', JSON.stringify(tempUser));
+                    }.bind(this));
+            }
+        } else {
+            this.setState({userName: USER.name});
+            this.setState({profileImage: USER.avatar_192});
+        }
+
     }
 
     componentWillMount() {
@@ -146,19 +183,26 @@ class App extends React.Component {
                 {this.getErrorMsg()}
                 {this.getLoader()}
                 <Header cssClassName={'navbar_container subheader_container'}
-                        systemLang={this.state.systemLang}
-                        setAlert={this.setAlert.bind(this)}
-                        localeFile={this.state.localeFile}
-                        handleLanguageChange={this.handleLanguageChange.bind(this)}
+                        userName={this.state.userName}
+                        systemLang ={this.state.systemLang}
+                        setAlert= {this.setAlert.bind(this)}
+                        localeFile= {this.state.localeFile}
+                        handleLanguageChange = {this.handleLanguageChange.bind(this)}
                         {...this.props}/>
 
-                <SideBar/>
-                <Routes systemLang={this.state.systemLang}
-                        setAlert={this.setAlert.bind(this)}
-                        localeFile={this.state.localeFile}
-                        handleLanguageChange={this.handleLanguageChange.bind(this)}
-                        makeAppDirty={this.makeAppDirty.bind(this)}
-                        {...this.props}/>
+                {USER ? <Sidebar/> : ''}
+
+                {/*<Profile user={USER}*/}
+                         {/*{...this.props}/>*/}
+
+                <Routes systemLang ={this.state.systemLang}
+                    setAlert= {this.setAlert.bind(this)}
+                    user={USER}
+                    localeFile= {this.state.localeFile}
+                    handleLanguageChange = {this.handleLanguageChange.bind(this)}
+                    makeAppDirty = {this.makeAppDirty.bind(this)}
+                    {...this.props}/>
+
                 {this.state.ltsAlert}
                 <Footer copyrightMsg={this.state.localeFile.copy_right_msg}/>
             </div>

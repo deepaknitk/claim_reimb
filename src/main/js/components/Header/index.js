@@ -5,11 +5,10 @@ const Header = (props) => {
     return (
         <div>
             <nav className={`navbar navbar-expand-lg ${props.cssClassName}`}>
-                <a className="navbar-brand p-t-10 p-b-10">
-                    <span>
-                        Claim Reimbursement process
-                    </span>
+                <a>
+                    <h4 className="check"><span style={{fontSize: '30px', color: '#EE8609'}}>₹</span>eimbursementBuzz</h4>
                 </a>
+                {props.userName}
             </nav>
         </div>
     );

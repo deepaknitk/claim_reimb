@@ -1,0 +1,39 @@
+@import '../../styles/theme';
+@import '../../styles/common';
+
+.registrationForm {
+    width: 60%;
+    background-color: #E7E6E4;
+    margin: auto;
+    border: 4px double #0b2e13;
+    .fields {
+        border: 2px solid #0c5460;
+        margin: 8px;
+        .formField {
+            text-align: left;
+            display: inline-block;
+            padding: 20px;
+            label {
+                display: block;
+            }
+            input {
+                width: 90%;
+                padding: 8px;
+                border-radius: 6px;
+            }
+            button {
+                padding: 8px 20px;
+                border-radius: 4px;
+                background-color: #062c33;
+                color: #f1f1f1;
+                border: 4px double #9b9b9b;
+                font-family: AppleMyungjo;
+            }
+        }
+
+    }
+}
+
+h3 {
+    padding: 10px;
+}
