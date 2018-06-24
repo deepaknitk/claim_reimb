@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import isEqual from 'lodash.isequal';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/index';
 import Validator from '../../utils/validator.js';
@@ -93,7 +94,11 @@ class RFQForm extends Component {
     }
 
    componentWillReceiveProps(nextProps) {
-       console.log('adsfads');
+    if (!isEqual(nextProps.appState.message.successMessage, this.state.successMessage) &&
+    nextProps.appState.message.successMessage) {
+    this.setState({successMessage: nextProps.appState.message.successMessage});
+    this.props.history.push('/dashboard');
+    }
    }
 
     changeHandler(fieldName, validationFuncName, event) {
@@ -245,7 +250,10 @@ class RFQForm extends Component {
         let tempProducts = this.state.claims;
         if (!isUpdatingExistingProduct) {
             tempProducts.push(claims);
-            this.setState({claims: tempProducts, showpopup: false, showAddProductPopUp: false});
+            this.setState({
+                claims: tempProducts,
+                 showpopup: false,
+                 showAddProductpopUp: false});
         } else {
             const selectedProductIndex = this.state.selectedProductIndex;
             const tempProducts = this.state.claims;
@@ -638,7 +646,8 @@ const mapStateToProps = (state) => {
     return {
         RfqState: state.rfq,
         uiConfigs: state.app.uiConfigs,
-        fileUpload: state.fileUpload
+        fileUpload: state.fileUpload,
+        message: state.message
     };
 };
 const mapDispatchToProps = (dispatch) => {

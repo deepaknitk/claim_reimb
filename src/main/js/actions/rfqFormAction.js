@@ -10,7 +10,7 @@ import {setErrorMessage} from './messageAction';
 export const saveClaimRequest = (claimsDetails) => {
     return (dispatch) => {
         Axios
-            .post('/claims/reimbursement/create', claimsDetails)
+            .post('/claims/api/reimbursement/create', claimsDetails)
             .then(response => {
                 if (response.data.success) {
                     dispatch(setMessage.setSuccessMessage('Claim submitted'));

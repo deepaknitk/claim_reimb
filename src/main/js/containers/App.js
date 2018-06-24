@@ -15,7 +15,7 @@ import Footer from '../components/Footer';
 import axios from 'axios/index';
 import Sidebar from '../components/Sidebar';
 
-let USER = JSON.parse(localStorage.getItem('user'))
+let USER = JSON.parse(localStorage.getItem('user'));
 import SideBar from '../components/Sidebar';
 
 class App extends React.Component {
@@ -54,7 +54,7 @@ class App extends React.Component {
                             name: response.data.user.name,
                             avatar_24: response.data.user.image_24,
                             avatar_192: response.data.user.image_192
-                        }
+                        };
                         localStorage.setItem('user', JSON.stringify(tempUser));
                     }.bind(this));
             }
@@ -190,7 +190,7 @@ class App extends React.Component {
                         handleLanguageChange = {this.handleLanguageChange.bind(this)}
                         {...this.props}/>
 
-                {USER ? <Sidebar/> : ''}
+                {this.state.userName ? <Sidebar/> : ''}
 
                 {/*<Profile user={USER}*/}
                          {/*{...this.props}/>*/}

@@ -13,7 +13,7 @@ const LOGIN = ({property}) => {
                         </div>
                     </div>
                 </div>
-                : property.history.push('/profile')}
+                : property.history.push('/createClaim')}
         </div>
     );
 };
