@@ -41,4 +41,10 @@ public class ClaimBaseEntity implements Serializable {
 
     @Column(name = FieldNames.MARK_FOR_DELETE,nullable = false)
     private boolean markForDelete;
+
+    @Override public String toString() {
+        return "ClaimBaseEntity{" + "createdBy='" + createdBy + '\'' + ", createdAt=" + createdAt
+            + ", updatedBy='" + updatedBy + '\'' + ", updatedAt=" + updatedAt + ", markForDelete="
+            + markForDelete + '}';
+    }
 }

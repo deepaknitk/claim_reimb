@@ -47,8 +47,8 @@ import java.util.stream.Collectors;
         ReimbursementResponse rfqResponse = this.convert(rmb, ReimbursementResponse.class);
         rfqResponse.setStatus_Id(rmb.getStatusId().getStatusCode());
         rfqResponse.setReimbursement_date(rmb.getReimbursement_date());
-        rfqResponse
-            .setRmbItemList(this.convertRmbItemListToRMBItemResponseList(rmb.getRmbItemList()));
+//        rfqResponse
+//            .setRmbItemList(this.convertRmbItemListToRMBItemResponseList(rmb.getRmbItemList()));
 
         return rfqResponse;
     }
@@ -100,14 +100,15 @@ import java.util.stream.Collectors;
     public BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(
         ReimbursementItem rmbItem) {
         ReimbursementItemDto reimbursementItemDto = new ReimbursementItemDto();
-        reimbursementItemDto.setCurrency(rmbItem.getCurrency());
-        reimbursementItemDto.setExpenseType(rmbItem.getExpenseType());
-        reimbursementItemDto.setItemStatus(rmbItem.getItemStatus());
+        reimbursementItemDto.setCurrencyCode(rmbItem.getCurrency().getCurrencyCode());
+        reimbursementItemDto.setExpenseTypeDescription(rmbItem.getExpenseType().getExpenseTypeDescription());
+        reimbursementItemDto.setItemStatusCode(rmbItem.getItemStatus().getStatusCode());
         reimbursementItemDto.setRfqItemDescription(rmbItem.getRfqItemDescription());
         reimbursementItemDto.setRmbItemFilename(rmbItem.getRmbItemFilename());
         reimbursementItemDto.setRmbItemAmount(rmbItem.getRmbItemAmount());
         reimbursementItemDto.setRmbItemBillNumber(rmbItem.getRmbItemBillNumber());
         reimbursementItemDto.setRemarks(rmbItem.getRmbItemRemarks());
+        reimbursementItemDto.setRmbDate(rmbItem.getReimbursement().getReimbursement_date());
         return new BaseRestResponse<>(true, reimbursementItemDto);
     }
 

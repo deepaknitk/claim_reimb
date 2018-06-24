@@ -10,10 +10,7 @@ import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Foram Shah on 23/06/18
@@ -32,7 +29,7 @@ public class ReimbursementItemController {
   @RequestMapping(value = {ClaimReimbursementApiPath.FIND_RMB_ITEM_BY_ID},
       method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
   @ResponseBody
-  public BaseRestResponse<ReimbursementItemDto> findRmbItemById(Long rmbItemId)
+  public BaseRestResponse<ReimbursementItemDto> findRmbItemById(@RequestParam Long rmbItemId)
       throws Exception {
     try {
       ReimbursementItem rmbItem =

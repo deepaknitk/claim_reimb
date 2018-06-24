@@ -37,7 +37,7 @@ public class ReimbursementController {
                 this.restWebModelConverterService.convert(rmbWebRequest, Reimbursement.class);
             List<ReimbursementItem> rmbItemRequestList =
                 this.restWebModelConverterService.convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
-            rmbRequest.setRmbItemList(rmbItemRequestList);
+//            rmbRequest.setRmbItemList(rmbItemRequestList);
             Reimbursement saveRMB = this.reimbursementService
                 .saveRmb(rmbRequest);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
@@ -58,8 +58,7 @@ public class ReimbursementController {
         @RequestParam(defaultValue = "0") int pageNo,
         @RequestParam(defaultValue = "25") int pageSize) throws Exception {
 
-        log.info("Accessed: findAll() with storeId: {}, requestId: {}, clientId: {},"
-                + " channelId: {} and userName: {} ", userId);
+        log.info("Accessed: findAll() with userId: {} ", userId);
         List<ReimbursementResponse> ReimbursementResponseList;
         Page<Reimbursement> reimbursementPage;
 

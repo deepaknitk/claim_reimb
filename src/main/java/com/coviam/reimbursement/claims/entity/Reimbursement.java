@@ -3,10 +3,7 @@ package com.coviam.reimbursement.claims.entity;
 import com.coviam.reimbursement.claims.model.constants.Constants;
 import com.coviam.reimbursement.claims.model.constants.FieldNames;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 //import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
@@ -17,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString
 @Entity
 @Table(name = Constants.REIMBURSEMENT)
 
@@ -34,20 +32,21 @@ public class Reimbursement extends ClaimBaseEntity {
     private Date reimbursement_date;
 
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(targetEntity = UserMaster.class ,fetch = FetchType.LAZY )
     @JoinColumn(name = FieldNames.USER_ID,
         referencedColumnName = FieldNames.USER_ID,
         foreignKey = @ForeignKey(name = Constants.USER_ID_FK_01), nullable = false)
     private UserMaster userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Status.class, fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
         foreignKey = @ForeignKey(name = Constants.REIMBURSEMENT_STATUS_FK_02), nullable = false)
     private Status statusId;
 
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reimbursement")
-    private List<ReimbursementItem> rmbItemList;
+//    @JsonManagedReference
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reimbursement")
+//    private List<ReimbursementItem> rmbItemList;
+
 }
 
 
