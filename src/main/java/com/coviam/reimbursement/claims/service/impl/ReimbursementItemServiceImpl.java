@@ -19,14 +19,8 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
   private ReimbursementItemRepository reimbursementItemRepository;
 
   @Override
-  public ReimbursementItem saveOrUpdate(ReimbursementItem reimbursementItem) {
-    return reimbursementItemRepository.save(reimbursementItem);
-  }
-
-  @Override
-  public List<ReimbursementItem> findByReimbursementItemByReimburesementId(Long rmbId) {
-   // return reimbursementItemRepository.findByReimbursementId(rmbId);
-    return null;
+  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList){
+    return reimbursementItemRepository.save(reimbursementItemList);
   }
 
   @Override

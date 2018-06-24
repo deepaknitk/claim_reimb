@@ -1,6 +1,7 @@
 package com.coviam.reimbursement.claims.service.impl;
 
 import com.coviam.reimbursement.claims.entity.UserMaster;
+import com.coviam.reimbursement.claims.entity.UserMaster;
 import com.coviam.reimbursement.claims.model.base.UserWebRequest;
 import com.coviam.reimbursement.claims.model.enums.Error;
 import com.coviam.reimbursement.claims.repository.UserRepository;

@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service public class ReimbursementServiceImpl implements ReimbursementService {
 
     @Autowired private ReimbursementRepository reimbursementRepository;
@@ -26,23 +28,13 @@ import org.springframework.stereotype.Service;
             .findByUserIdAndMarkForDeleteFalse(userId, new PageRequest(pageNo, pageSize));
     }
 
-    @Override public Reimbursement saveRmb(Reimbursement rmb) {
+    @Override public Reimbursement saveRmb(Reimbursement rmb, List<ReimbursementItem> reimbursementItemList) {
         Status rfqInitialStatus = this.statusService
             .findByStatusCode(Constants.STATUS_CODE_OPEN);
         rmb.setStatusId(rfqInitialStatus);
-
-//        this.reimbursementRepository.save(rmb);
-//        rmb.getRmbItemList().forEach(rfqItem -> this.reimbursementItemService
-//            .saveOrUpdate(this.populateRMBItemData(rmb, rfqInitialStatus, rfqItem)));
+        this.reimbursementRepository.save(rmb);
+        this.reimbursementItemService.saveOrUpdate(reimbursementItemList);
         return rmb;
-
-    }
-
-    private ReimbursementItem populateRMBItemData(Reimbursement rmb, Status status,
-        ReimbursementItem rmbItem) {
-        rmbItem.setReimbursement(rmb);
-        rmbItem.setItemStatus(status);
-        return rmbItem;
     }
 
     @Override public ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId) {

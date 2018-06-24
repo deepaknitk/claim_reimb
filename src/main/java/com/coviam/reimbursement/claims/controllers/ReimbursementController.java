@@ -32,12 +32,12 @@ public class ReimbursementController {
     public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
-            Reimbursement rmbRequest =
-                this.restWebModelConverterService.convert(rmbWebRequest, Reimbursement.class);
-//            List<ReimbursementItem> rmbItemRequestList = this.restWebModelConverterService
-//                .convert(rmbWebRequest.getRmbItemList(), ReimbursementItem.class);
-//            rmbRequest.setRmbItemList(rmbItemRequestList);
-            Reimbursement saveRMB = this.reimbursementService.saveRmb(rmbRequest);
+           Reimbursement reimbursement =
+                this.restWebModelConverterService.convertRmbWebRequestToRmb(rmbWebRequest);
+           List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
+               .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
+            Reimbursement saveRMB = this.reimbursementService
+                .saveRmb(reimbursement, reimbursementItem);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
         } catch (Exception e) {
             log.error("Error in saving rmb  with user id: {}  due to: {} ",
