@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Foram Shah on 23/06/18
@@ -17,17 +18,19 @@ import java.io.Serializable;
     implements Serializable {
     private static final long serialVersionUID = -2651399533796624539L;
 
-    private Reimbursement reimbursementId;
-
     private String rmbItemBillNumber;
 
     private String rfqItemDescription;
 
-    private ExpenseType expenseType;
+    private String expenseType;
 
-    private Currency currency;
+    private String currency;
 
     private Double rmbItemAmount;
 
     private String rmbItemFilename;
+
+    private String remarks;
+
+    private Date rmbItemDate;
 }

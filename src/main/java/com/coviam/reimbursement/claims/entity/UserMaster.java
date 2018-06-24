@@ -30,8 +30,8 @@ public class UserMaster extends ClaimBaseEntity{
     @Column(name = FieldNames.USER_FULL_NAME, nullable = false)
     private String userName;
 
-    @Column(name = FieldNames.USER_PHONE, nullable = false)
-    private String userPhone;
+//    @Column(name = FieldNames.USER_PHONE, nullable = false)
+//    private String userPhone;
 
     @Column(name = FieldNames.USER_EMAIL, nullable = false)
     private String userEmail;
@@ -42,11 +42,11 @@ public class UserMaster extends ClaimBaseEntity{
         foreignKey = @ForeignKey(name = Constants.USER_MASTER_FK_01), nullable = false)
     private UserTypeMaster userType;
 
-    @Column(name = FieldNames.USER_SLACK_ID, nullable = false)
-    private String userSlackId;
+//    @Column(name = FieldNames.USER_SLACK_ID, nullable = false)
+//    private String userSlackId;
 
     @Column(name = FieldNames.EMPLOYEE_ID, nullable = false)
-    private Long employeeId;
+    private String employeeId;
 
 
 }

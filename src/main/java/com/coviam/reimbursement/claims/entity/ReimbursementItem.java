@@ -3,10 +3,7 @@ package com.coviam.reimbursement.claims.entity;
 import com.coviam.reimbursement.claims.model.constants.Constants;
 import com.coviam.reimbursement.claims.model.constants.FieldNames;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,15 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author Foram Shah on 23/06/18
  */
-@Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Data
+@ToString
 @Table(name = Constants.REIMBURSEMNET_ITEM)
 public class ReimbursementItem extends ClaimBaseEntity {
 
@@ -41,12 +39,12 @@ public class ReimbursementItem extends ClaimBaseEntity {
     private Long reimbursementItemId;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(targetEntity = Reimbursement.class ,fetch = FetchType.LAZY )
     @JoinColumn(name = FieldNames.RMB_ID, referencedColumnName = FieldNames.REIMBURSEMENT_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_REIMBURSEMENT_FK), nullable = false)
     private Reimbursement reimbursement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Status.class,fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.STATUS_ID, referencedColumnName = FieldNames.STATUS_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_STATUS_FK), nullable = false)
     private Status itemStatus;
@@ -57,12 +55,12 @@ public class ReimbursementItem extends ClaimBaseEntity {
     @Column(name = FieldNames.RMB_DESC, nullable = false)
     private String rfqItemDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = ExpenseType.class ,fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.RMB_EXPENSE_TYPE_ID, referencedColumnName = FieldNames.EXPENSE_TYPE_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_EXPENSE_FK), nullable = false)
     private ExpenseType expenseType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Currency.class, fetch = FetchType.LAZY)
     @JoinColumn(name = FieldNames.CURRENCY_ID, referencedColumnName = FieldNames.CURRENCY_ID,
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_CURRENCY_FK), nullable = false)
     private Currency currency;
@@ -75,4 +73,10 @@ public class ReimbursementItem extends ClaimBaseEntity {
 
     @Column(name = FieldNames.RMB_ITEM_FILENAME)
     private String rmbItemFilename;
+
+    @Column(name = FieldNames.RMB_ITEM_DATE)
+    private Date rmbItemDate;
+
+    public ReimbursementItem() {
+    }
 }

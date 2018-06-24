@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends JpaRepository<UserMaster, Long> {
+    UserMaster findByUserEmailAndMarkForDeleteFalse(String userEmail);
+
+    UserMaster findByEmployeeIdAndMarkForDeleteFalse(String employeeId);
 }
