@@ -24,6 +24,7 @@ class ClaimHistory extends Component {
                 <th>ReimbursementId</th>
                 <th>Reimbursement Date</th>
                 <th>statusCode</th>
+                <th></th>
             </tr>
         );
     }
@@ -36,17 +37,19 @@ class ClaimHistory extends Component {
                 <td>{claimDetails.reimbursementId}</td>
                 <td>{new Date(claimDetails.reimbursement_date).toLocaleDateString()}</td>
                 <td>{claimDetails.statusCode}</td>
+                <button type="button" class="btn btn-info m-t-5">View Details</button>
             </tr>)}
             </tbody>
         );
     }
 
     componentDidMount() {
-        let user = localStorage.getItem('user');
+        let user = JSON.parse(localStorage.getItem('user'));
+        let email = user.email;
         Axios
             .get('/claims/api/reimbursement/findAll', {
                 params: {
-                    'userId': user.email
+                    'userId': 'vishnupriya.amara@coviam.com'
                   }
             })
             .then(response => {
