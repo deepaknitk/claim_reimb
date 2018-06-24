@@ -28,16 +28,16 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReimbursementDto implements Serializable {
+public class ReimbursementItemDto implements Serializable {
   private static final long serialVersionUID = -2651399533796624539L;
-
-  private Reimbursement reimbursementId;
 
   private Status itemStatus;
 
   private String rmbItemBillNumber;
 
   private String rfqItemDescription;
+
+  private String remarks;
 
   private ExpenseType expenseType;
 
@@ -46,4 +46,6 @@ public class ReimbursementDto implements Serializable {
   private Double rmbItemAmount;
 
   private String rmbItemFilename;
+
+  private Date rmbDate;
 }

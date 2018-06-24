@@ -1,7 +1,14 @@
 package com.coviam.reimbursement.claims.service.impl;
 
+import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.entity.ReimbursementItemStatusLog;
+import com.coviam.reimbursement.claims.model.base.ReimbursementItemStatusLogDto;
+import com.coviam.reimbursement.claims.repository.ReimbursementItemRepository;
+import com.coviam.reimbursement.claims.repository.ReimbursementItemStatusLogRepository;
+import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementItemStatusLogService;
+import com.coviam.reimbursement.claims.service.api.StatusService;
+import com.coviam.reimbursement.claims.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +21,25 @@ import java.util.List;
 public class ReimbursementItemStatusLogServiceImpl implements ReimbursementItemStatusLogService {
 
   @Autowired
-  private ReimbursementItemStatusLogService reimbursementItemStatusLogService;
+  private ReimbursementItemStatusLogRepository reimbursementItemStatusLogRepository;
 
-  @Override
-  public List<ReimbursementItemStatusLog> findAll() {
-    return reimbursementItemStatusLogService.findAll();
+  @Autowired
+  private StatusService statusService;
+
+  @Autowired
+  private ReimbursementItemService reimbursementItemService;
+
+  public ReimbursementItemStatusLog save(
+      ReimbursementItemStatusLogDto reimbursementItemStatusLogDto) {
+    ReimbursementItemStatusLog reimbursementItemStatusLog = new ReimbursementItemStatusLog();
+    reimbursementItemStatusLog.setNewStatus(
+        statusService.findByStatusCode(reimbursementItemStatusLogDto.getNewStatusCode()));
+    reimbursementItemStatusLog.setOldStatus(
+        statusService.findByStatusCode(reimbursementItemStatusLogDto.getNewStatusCode()));
+    reimbursementItemStatusLog.setReimbursementItem(
+        reimbursementItemService.findByReimbursementItemByReimburesementItemId(
+            reimbursementItemStatusLogDto.getReimbursementItemId()));
+    return reimbursementItemStatusLogRepository.save(reimbursementItemStatusLog);
+
   }
 }

@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface ReimbursementItemStatusLogService {
 
-  List<ReimbursementItemStatusLog> findAll();
+//  List<ReimbursementItemStatusLog> findAll();
+
+
 }

@@ -23,7 +23,13 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
   }
 
   @Override
-  public List<ReimbursementItem> findByReimbursementItemBuReimburesement(Long rmbId) {
-    return reimbursementItemRepository.findByReimbursementId(rmbId);
+  public List<ReimbursementItem> findByReimbursementItemByReimburesementId(Long rmbId) {
+   // return reimbursementItemRepository.findByReimbursementId(rmbId);
+    return null;
+  }
+
+  @Override
+  public ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId) {
+    return reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
   }
 }
