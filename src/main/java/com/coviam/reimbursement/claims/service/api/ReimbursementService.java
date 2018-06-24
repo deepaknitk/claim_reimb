@@ -10,7 +10,7 @@ public interface ReimbursementService {
 
     Page<Reimbursement> findAll(Long userId, int pageNo, int pageSize);
 
-    Reimbursement saveRmb(Reimbursement rmb, List<ReimbursementItem> reimbursementItems);
+    Reimbursement saveRmb(Reimbursement rmb);
 
     ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId);
 }
