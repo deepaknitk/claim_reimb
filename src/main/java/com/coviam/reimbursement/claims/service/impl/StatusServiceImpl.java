@@ -16,9 +16,11 @@ public class StatusServiceImpl implements StatusService {
     private StatusRepository statusRepository;
 
     @Override
-    public Status findByStatusCode(String statusCode){
+    public Status findByStatusCodeAndStatusGroupNameAndMarkForDeleteFalse(String statusCode,
+        String statusGroupName) {
         CommonUtils.checkError(statusCode != null, Error.STATUS_CODE_NULL);
-        Status status = statusRepository.findByStatusCodeAndMarkForDeleteFalse(statusCode);
+        Status status = statusRepository
+            .findByStatusCodeAndStatusGroupNameAndMarkForDeleteFalse(statusCode, statusGroupName);
         CommonUtils.checkError(status != null, Error.STATUS_NULL);
 
         return status;

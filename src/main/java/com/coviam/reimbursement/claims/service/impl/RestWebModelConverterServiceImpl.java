@@ -12,12 +12,10 @@ package com.coviam.reimbursement.claims.service.impl;
 
 import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
-import com.coviam.reimbursement.claims.model.base.ReimbursementDto;
 import com.coviam.reimbursement.claims.response.ReimbursementItemResponse;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
 import lombok.extern.slf4j.Slf4j;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ import java.util.List;
 @Slf4j @Service public class RestWebModelConverterServiceImpl
     implements RestWebModelConverterService {
 
-    @Autowired private Mapper mapper;
+    @Autowired private org.dozer.Mapper mapper;
 
     @Override public <M, T> T convert(M entity, Class<T> clasz) throws Exception {
         T response = this.mapper.map(entity, clasz);

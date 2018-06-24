@@ -40,4 +40,7 @@ public class ReimbursementItemWorkFlowStatus extends ClaimBaseEntity {
         foreignKey = @ForeignKey(name = Constants.RMB_ITEM_WORK_FLOW_STATUS_USER_ID_FK_01), nullable = false)
     private UserMaster userMaster;
 
+    @Column(name = FieldNames.RMB_ITEM_WORK_FLOW_STATUS_REMARKS, nullable = false)
+    private String remarks;
+
 }

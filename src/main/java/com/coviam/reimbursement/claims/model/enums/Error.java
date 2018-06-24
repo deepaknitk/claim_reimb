@@ -5,7 +5,7 @@ package com.coviam.reimbursement.claims.model.enums;
  */
 public enum Error {
   DEALER_NULL("dealer should not be null"),
-
+    SYSTEM_ERROR("Internal system error"),
     STATUS_CODE_NULL("status code should not be null"),
     STATUS_NULL("status should not be not null"),
 
@@ -17,7 +17,10 @@ public enum Error {
 
     PARAMETER_NAME_NULL("parameter name should not be null"),
     PARAMETER_NAME_INVALID("parameter name does not exists"),
-    PARAMETER_NAME_NOT_FOUND("parameter name is not found");
+    PARAMETER_NAME_NOT_FOUND("parameter name is not found"),
+
+    RMB_ITEM_WORK_FLOW_STATUS_NULL("rmb item work flow status should not be null"),
+    RMB_ITEM_WORK_FLOW_STATUS_NOT_SAVED("rmb item work flow status is not saved");
 
   private String message;
 

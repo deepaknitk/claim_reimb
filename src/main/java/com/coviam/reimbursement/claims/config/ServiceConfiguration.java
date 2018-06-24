@@ -8,6 +8,7 @@
 
 package com.coviam.reimbursement.claims.config;
 
+
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
     @ComponentScan(basePackages = "com.coviam.reimbursement.claims.service")
 
 })
-@EnableJpaAuditing(auditorAwareRef = "stringAuditorAware")
 public class ServiceConfiguration {
     @Bean
   public Mapper createDozerMapper() {

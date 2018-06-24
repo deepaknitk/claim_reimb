@@ -1,6 +1,5 @@
 package com.coviam.reimbursement.claims.response;
 
-import com.coviam.reimbursement.claims.model.base.ReimbursementDto;
 import lombok.Data;
 
 import java.io.Serializable;

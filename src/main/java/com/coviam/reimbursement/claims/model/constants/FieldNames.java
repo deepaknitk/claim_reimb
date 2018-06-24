@@ -60,6 +60,7 @@ public interface FieldNames {
 
     // rmb item work flow status entity fields
     String RMB_ITEM_WORK_FLOW_STATUS_ID = "reimbursement_item_workflow_status_id";
+    String RMB_ITEM_WORK_FLOW_STATUS_REMARKS = "remarks";
 
     // system parameter entity fields
     String PARAMETER_ID = "parameter_id";

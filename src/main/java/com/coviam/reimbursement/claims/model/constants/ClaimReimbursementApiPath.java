@@ -13,8 +13,13 @@ package com.coviam.reimbursement.claims.model.constants;
  */
 public interface ClaimReimbursementApiPath {
 
+    /**
+     * Base Api Paths
+     */
+    String API = "/api";
     String BASE = "/";
     String LTS_UI = "views/";
+    String REIMBURSEMENT = API + "/reimbursement";
 
     String WILD_CARD = "**";
     String LOGIN = "/login";
@@ -23,4 +28,16 @@ public interface ClaimReimbursementApiPath {
 
     String GET_CONFIGS = "/getConfigs";
     String SAVE_IMAGE = "/saveImage";
+
+    /**
+     * Common Api Paths
+     */
+    String SAVE = "/save";
+    String DELETE = "/delete";
+    String UPDATE = "/update";
+    String FIND_ALL = "/findAll";
+    String FIND_BY_PARAMETER_NAME = "/findByName";
+    String CREATE = "/create";
+    String FIND_BY_ID = "/findById";
+
 }
