@@ -62,6 +62,18 @@ import java.util.stream.Collectors;
         return responseList;
     }
 
+    @Override public List<ReimbursementResponse> convertFindAllResponse(List<Reimbursement> reimbursementResponses) {
+        List<ReimbursementResponse> responseList = new ArrayList<ReimbursementResponse>();
+        for (Reimbursement reimbursement : reimbursementResponses) {
+            ReimbursementResponse reimbursementResponse = new ReimbursementResponse();
+            reimbursementResponse.setStatusCode(reimbursement.getStatusId().getStatusCode());
+            reimbursementResponse.setReimbursement_date(reimbursement.getReimbursement_date());
+            reimbursementResponse.setReimbursementId(reimbursement.getReimbursementId());
+            responseList.add(reimbursementResponse);
+        }
+        return responseList;
+    }
+
     @Override public ReimbursementResponse convertRMBToRMBResponse(Reimbursement rmb)
         throws Exception {
         ReimbursementResponse rfqResponse = this.convert(rmb, ReimbursementResponse.class);
@@ -114,7 +126,7 @@ import java.util.stream.Collectors;
     }
 
     @Override
-    public BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(
+    public ReimbursementItemDto convertRmbItemToRmbItemDto(
         ReimbursementItem rmbItem) {
         ReimbursementItemDto reimbursementItemDto = new ReimbursementItemDto();
         reimbursementItemDto.setCurrencyCode(rmbItem.getCurrency().getCurrencyCode());
@@ -125,7 +137,7 @@ import java.util.stream.Collectors;
         reimbursementItemDto.setRmbItemAmount(rmbItem.getRmbItemAmount());
         reimbursementItemDto.setRmbItemBillNumber(rmbItem.getRmbItemBillNumber());
         reimbursementItemDto.setRemarks(rmbItem.getRmbItemRemarks());
-        return new BaseRestResponse<>(true, reimbursementItemDto);
+        return reimbursementItemDto;
     }
 
     @Override public Reimbursement convertRmbWebRequestToRmb(RmbWebRequest rmbWebRequest) {
