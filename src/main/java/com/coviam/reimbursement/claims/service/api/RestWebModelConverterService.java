@@ -34,11 +34,13 @@ public interface RestWebModelConverterService {
 
     BaseRestResponse<List<ExpenseTypeDto>> convertExpenseResponse(List<ExpenseType> expenseTypes);
 
-    BaseRestResponse<ReimbursementItemDto> convertRmbItemToRmbItemDto(ReimbursementItem rmbItem);
+    ReimbursementItemDto convertRmbItemToRmbItemDto(ReimbursementItem rmbItem);
 
     Reimbursement convertRmbWebRequestToRmb(RmbWebRequest rmbWebRequest);
 
     List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
+
+    List<ReimbursementResponse> convertFindAllResponse(List<Reimbursement> reimbursementResponses);
 
     List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
 }

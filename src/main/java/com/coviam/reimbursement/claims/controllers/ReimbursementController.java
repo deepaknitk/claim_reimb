@@ -75,7 +75,7 @@ public class ReimbursementController {
         try {
             reimbursementPage = this.reimbursementService.findAll(userId, pageNo, pageSize);
             ReimbursementResponseList = this.restWebModelConverterService
-                .convert(reimbursementPage.getContent(), ReimbursementResponse.class);
+                .convertFindAllResponse(reimbursementPage.getContent());
         } catch (Exception e) {
             log.error("Error in getting all claims due to : {} ", e.getMessage(), e);
             return new BaseRestResponse(Error.SYSTEM_ERROR.getCode(),
