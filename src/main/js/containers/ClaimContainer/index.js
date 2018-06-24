@@ -12,8 +12,9 @@ import Modal from '../../components/Modal';
 import ClaimForm from '../ClaimForm';
 import ConfirmationBox from '../../components/AlertBox';
 import Input from '../../components/Input';
+import Axios from 'axios';
 
-class SubmitClaim extends Component {
+class RFQForm extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -56,7 +57,8 @@ class SubmitClaim extends Component {
             multipleSelect: false,
             type: '',
             isValidType: true,
-            isValidClaimTable: true
+            isValidClaimTable: true,
+            expenseTypes: []
         };
         this.changeHandler = this.changeHandler.bind(this);
         this.onDayChange = this.onDayChange.bind(this);
@@ -75,11 +77,24 @@ class SubmitClaim extends Component {
         this.showProductImage = this.showProductImage.bind(this);
         this.editProductHandler = this.editProductHandler.bind(this);
         this.isDeleteGranted = this.isDeleteGranted.bind(this);
-        this.getRfqProducts = this.getRfqProducts.bind(this);
+        this.getClaimArray = this.getClaimArray.bind(this);
     }
 
     componentDidMount() {
+       Axios.get('/claims/expense/findAll')
+       .then(response => {
+            if(response.data.success) {
+                this.setState({expenseTypes: response.data.data});
+            }
+       })
+      .catch(error => {
+          console.log(error);
+      });
     }
+
+   componentWillReceiveProps(nextProps) {
+       console.log('adsfads');
+   }
 
     changeHandler(fieldName, validationFuncName, event) {
         this.setState({[fieldName]: event.target.value});
@@ -118,7 +133,7 @@ class SubmitClaim extends Component {
         }
         if (isFormValidationFlag) {
             this.setState({formValidationFlag: true}, () => {
-                //this.props.actions.sendRfqDetails(this.getClaimDetails());
+                this.props.actions.saveClaimRequest(this.getClaimDetails());
             });
         }
     }
@@ -191,8 +206,8 @@ class SubmitClaim extends Component {
         );
     }
 
-    showProductImage(selectedProduct) {
-        this.setState({showpopup: true, showProductImagePopUp: true, selectedProduct: selectedProduct});
+    showProductImage(selectedClaim) {
+        this.setState({showpopup: true, showProductImagePopUp: true, selectedProduct: selectedClaim});
     }
 
     getImageBody() {
@@ -296,38 +311,29 @@ class SubmitClaim extends Component {
 
     getClaimDetails() {
         const claimPayload = {
-            employeeId: this.state.employeeId,
-            employeeEmail: this.state.employeeEmail,
-            claims: this.state.claims
-
+            userId: this.state.employeeId,
+            rmbItemList: this.getClaimArray()
         };
         return claimPayload;
     }
 
-    getDefaultPayment() {
-        let defaultPaymentMethod = null;
-        const paymentTypeList = this.state.paymentMethods;
-        paymentTypeList.map(paymentMethod => {
-            if (paymentMethod.paymentMethodCode === 'DEFAULT') {
-                defaultPaymentMethod = paymentMethod.paymentMethodId;
-            }
-        });
-        return defaultPaymentMethod;
-    }
 
-    getRfqProducts() {
-        const rfqProduct = [];
-        this.state.claims.map(product => {
-            const lineItem = {
-                'rfqItemName': product.productName,
-                'rfqItemDescription': product.productDiscription,
-                'rfqItemQuantity': product.quantity,
-                'rfqItemPrice': product.price,
-                'rfqItemFileName': product.fileName
+    getClaimArray() {
+        const tempClaims = [];
+        this.state.claims.map(claim => {
+            const claims = {
+                'rmbItemDate': claim.date,
+                'rmbItemBillNumber': claim.billNo,
+                'rfqItemDescription': claim.claimDiscription,
+                'expenseType': claim.type,
+                'currency': 'INR',
+                'rmbItemAmount': claim.price,
+                'remarks': claim.remarks,
+                'rmbItemFilename': claim.fileName
             };
-            rfqProduct.push(lineItem);
+            tempClaims.push(claims);
         });
-        return rfqProduct;
+        return tempClaims;
     }
 
     handleCheckBox(index) {
@@ -474,6 +480,7 @@ class SubmitClaim extends Component {
                         headerText="Add claim"
                         extraClass={'vertical-modal'}
                         bodyContent={<ClaimForm localeFile={this.props.localeFile}
+                                                  expenseType ={this.state.expenseTypes}
                                                   billNo={this.state.billNo}
                                                   claimDiscription={this.state.claimDiscription}
                                                   quantity={this.state.quantity}
@@ -511,6 +518,7 @@ class SubmitClaim extends Component {
                         headerText={this.props.localeFile.editProduct}
                         extraClass={'vertical-modal'}
                         bodyContent={< ClaimForm localeFile={this.props.localeFile}
+                                                   expenseType ={this.state.expenseTypes}
                                                    billNo={this.state.billNo}
                                                    claimDiscription={this.state.claimDiscription}
                                                    quantity={this.state.quantity}
@@ -574,7 +582,6 @@ class SubmitClaim extends Component {
                 </div>
                 <div className="form_layout">
                     <div style={{display: 'flex'}}>
-                        {/*<SideBar/>*/}
                         <div className="card p-30" style={{width: '100%'}}>
                             <Input
                                 cssClassName="input_span"
@@ -640,4 +647,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SubmitClaim));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RFQForm));
