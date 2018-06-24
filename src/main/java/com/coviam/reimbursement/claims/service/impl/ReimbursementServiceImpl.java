@@ -28,12 +28,8 @@ import java.util.List;
             .findByUserIdAndMarkForDeleteFalse(userId, new PageRequest(pageNo, pageSize));
     }
 
-    @Override public Reimbursement saveRmb(Reimbursement rmb, List<ReimbursementItem> reimbursementItemList) {
-        Status rfqInitialStatus = this.statusService
-            .findByStatusCode(Constants.STATUS_CODE_OPEN);
-        rmb.setStatusId(rfqInitialStatus);
+    @Override public Reimbursement saveRmb(Reimbursement rmb) {
         this.reimbursementRepository.save(rmb);
-        this.reimbursementItemService.saveOrUpdate(reimbursementItemList);
         return rmb;
     }
 

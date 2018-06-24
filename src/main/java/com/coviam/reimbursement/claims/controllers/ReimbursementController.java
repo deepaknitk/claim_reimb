@@ -8,6 +8,7 @@ import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath
 import com.coviam.reimbursement.claims.model.enums.Error;
 import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
+import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class ReimbursementController {
 
     @Autowired private ReimbursementService reimbursementService;
 
+    @Autowired private ReimbursementItemService reimbursementItemService;
+
     @RequestMapping(value = {
         ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
         MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -34,11 +37,13 @@ public class ReimbursementController {
         try {
            Reimbursement reimbursement =
                 this.restWebModelConverterService.convertRmbWebRequestToRmb(rmbWebRequest);
+            Reimbursement saveRMB = this.reimbursementService
+                .saveRmb(reimbursement);
            List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
                .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
-            Reimbursement saveRMB = this.reimbursementService
-                .saveRmb(reimbursement, reimbursementItem);
-            rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(saveRMB);
+            List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
+                .saveOrUpdate(reimbursementItem);
+            rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
         } catch (Exception e) {
             log.error("Error in saving rmb  with user id: {}  due to: {} ",
                 rmbWebRequest.getUserId(), e.getMessage(), e);
