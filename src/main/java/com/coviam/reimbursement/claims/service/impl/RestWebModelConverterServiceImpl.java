@@ -132,6 +132,9 @@ import java.util.stream.Collectors;
         Reimbursement reimbursement = new Reimbursement();
         reimbursement.setUserId(userService.findByEmail(rmbWebRequest.getUserId()));
         reimbursement.setStatusId(statusService.findByStatusCode(Constants.STATUS_CODE_OPEN));
+        reimbursement.setCreatedAt(new Date());
+        reimbursement.setCreatedBy("System");
+        reimbursement.setMarkForDelete(false);
         reimbursement.setReimbursement_date(new Date());
         return reimbursement;
     }
@@ -148,12 +151,17 @@ import java.util.stream.Collectors;
         ReimbursementItem reimbursementItem = new ReimbursementItem();
         reimbursementItem.setCurrency(currencyService.findByCurrencyCode(reimbursementDto.getCurrency()));
         reimbursementItem.setExpenseType(expenseTypeService.findByExpenseTypeCode(reimbursementDto.getExpenseType()));
+        reimbursementItem.setItemStatus(statusService.findByStatusCode(Constants.STATUS_CODE_OPEN));
         reimbursementItem.setRmbItemBillNumber(reimbursementDto.getRmbItemBillNumber());
         reimbursementItem.setRmbItemRemarks(reimbursementDto.getRemarks());
         reimbursementItem.setRfqItemDescription(reimbursementDto.getRfqItemDescription());
         reimbursementItem.setRmbItemFilename(reimbursementDto.getRmbItemFilename());
+        reimbursementItem.setRmbItemAmount(reimbursementDto.getRmbItemAmount());
         reimbursementItem.setRmbItemDate(reimbursementDto.getRmbItemDate());
         reimbursementItem.setReimbursement(reimbursement);
+        reimbursementItem.setCreatedAt(new Date());
+        reimbursementItem.setCreatedBy("System");
+        reimbursementItem.setMarkForDelete(false);
         return reimbursementItem;
     }
 }
