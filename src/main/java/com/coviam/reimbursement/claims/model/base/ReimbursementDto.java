@@ -35,5 +35,5 @@ import java.util.Date;
 
     private Date rmbItemDate;
 
-    private MultipartFile file;
+    //private MultipartFile file;
 }
