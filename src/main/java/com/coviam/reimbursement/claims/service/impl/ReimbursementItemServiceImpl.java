@@ -59,10 +59,6 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
 
   @Override
   public ReimbursementItem findByReimbursementItemByReimburesementItemId(Long rmbItemId) {
-    ReimbursementItem reimbursementItem =
-        reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
-    Long reimbursementId = reimbursementItem.getReimbursement().getReimbursementId();
-    String description = reimbursementItem.getReimbursement().getStatusId().getStatusDescription();
     return reimbursementItemRepository.findByReimbursementItemId(rmbItemId);
   }
 
@@ -104,3 +100,9 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
     }
 
 
+
+  @Override
+  public ReimbursementItem update(ReimbursementItem reimbursementItem) {
+    return reimbursementItemRepository.save(reimbursementItem);
+  }
+}

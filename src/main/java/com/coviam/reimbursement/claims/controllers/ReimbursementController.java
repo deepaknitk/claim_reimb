@@ -13,6 +13,7 @@ import com.coviam.reimbursement.claims.service.api.FileService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
+import com.coviam.reimbursement.claims.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,8 @@ public class ReimbursementController {
 
     @Autowired private ReimbursementItemService reimbursementItemService;
 
+    @Autowired private UserService userService;
+
 
 
     @RequestMapping(value = {
@@ -52,8 +55,7 @@ public class ReimbursementController {
             List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
                 .saveOrUpdate(reimbursementItem,fileList);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
-
-             } catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error in saving rmb  with user id: {}  due to: {} ",
                 rmbWebRequest.getUserId(), e.getMessage(), e);
         }
@@ -71,24 +73,32 @@ public class ReimbursementController {
 
         log.info("Accessed: findAll() with storeId: {}, requestId: {}, clientId: {},"
             + " channelId: {} and userName: {} ", userId);
-        List<ReimbursementResponse> ReimbursementResponseList;
-        Page<Reimbursement> reimbursementPage;
+        List<ReimbursementResponse> reimbursementResponseList = null;
+        List<Reimbursement> reimbursementPage = null;
 
         try {
-            reimbursementPage = this.reimbursementService.findAll(userId, pageNo, pageSize);
-            ReimbursementResponseList = this.restWebModelConverterService
-                .convertFindAllResponse(reimbursementPage.getContent());
+            String userTypeCode = userService.findUserTypeCodeByUserEmail(userId);
+            if (userTypeCode.equals("EMPLOYEE")) {
+                reimbursementPage = this.reimbursementService.findAll(userId);
+                reimbursementResponseList =
+                    this.restWebModelConverterService.convertFindAllResponse(reimbursementPage);
+            } else if (userTypeCode.equals("FINANCE")) {
+                reimbursementPage = reimbursementService.findAllByUserTypeCode(userTypeCode);
+                reimbursementResponseList =
+                    this.restWebModelConverterService.convertFindAllResponse(reimbursementPage);
+            } else if (userTypeCode.equals("ADMIN")) {
+                reimbursementPage = reimbursementService.findAllByUserTypeCode(userTypeCode);
+                reimbursementResponseList =
+                    this.restWebModelConverterService.convertFindAllResponse(reimbursementPage);
+            }
+
         } catch (Exception e) {
             log.error("Error in getting all claims due to : {} ", e.getMessage(), e);
             return new BaseRestResponse(Error.SYSTEM_ERROR.getCode(),
                 Error.SYSTEM_ERROR.getMessage(), false);
         }
 
-        return new BaseRestResponse<>(true, ReimbursementResponseList,
-            Paging.builder().page(reimbursementPage.getNumber())
-                .totalPage(reimbursementPage.getTotalPages())
-                .itemPerPage(reimbursementPage.getSize())
-                .totalItem(reimbursementPage.getTotalElements()).build());
+        return new BaseRestResponse<>(true, reimbursementResponseList);
     }
 
     @RequestMapping(value = {
@@ -106,6 +116,4 @@ public class ReimbursementController {
         return null;
     }
 
-    }
-
-
+}

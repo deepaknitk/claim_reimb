@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service public class ReimbursementServiceImpl implements ReimbursementService {
@@ -22,11 +23,13 @@ import java.util.List;
 
     @Autowired private UserService userService;
 
+    @Autowired private StatusService statusService;
+
     private ReimbursementItemService reimbursementItemService;
 
-    @Override public Page<Reimbursement> findAll(String userId, int pageNo, int pageSize) {
+    @Override public List<Reimbursement> findAll(String userId) {
         return this.reimbursementRepository
-            .findByUserIdAndMarkForDeleteFalse(userService.findByEmail(userId), new PageRequest(pageNo, pageSize));
+            .findByUserIdAndMarkForDeleteFalse(userService.findByEmail(userId));
     }
 
     @Override public Reimbursement saveRmb(Reimbursement rmb) {
@@ -37,4 +40,21 @@ import java.util.List;
     @Override public Reimbursement findReimburesementByRmbItemId(Long rmbId) {
         return reimbursementRepository.findOne(rmbId);
     }
+
+    @Override public List<Reimbursement> findAllByUserTypeCode(String userTypeCode) {
+        List<Reimbursement> reimbursements = new ArrayList<>();
+
+        if (userTypeCode.equals("FINANCE")) {
+            Status status = statusService.findByStatusCode("OPEN");
+            reimbursements.addAll(reimbursementRepository.findByStatusId(status));
+            status = statusService.findByStatusCode("CLOSED");
+            reimbursements.addAll(reimbursementRepository.findByStatusId(status));
+
+        } else if (userTypeCode.equals("ADMIN")) {
+            Status status = statusService.findByStatusCode("VERIFIED");
+            reimbursements = reimbursementRepository.findByStatusId(status);
+        }
+        return reimbursements;
+    }
+
 }

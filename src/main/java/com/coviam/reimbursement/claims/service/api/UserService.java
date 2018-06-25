@@ -10,4 +10,6 @@ public interface UserService {
     UserMaster findByEmail(String email);
 
     UserMaster save(UserMaster userMaster);
+
+    String findUserTypeCodeByUserEmail(String userEmail);
 }
