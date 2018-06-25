@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j @RestController @RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
@@ -36,7 +38,7 @@ public class ReimbursementController {
 
     @RequestMapping(value = {
         ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
-        MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+        MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
@@ -46,7 +48,7 @@ public class ReimbursementController {
                 .saveRmb(reimbursement);
            List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
                .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
-            List<MultipartFile> fileList= this.restWebModelConverterService.convertRmbItemFileList((rmbWebRequest.getRmbItemList(), reimbursement);
+            List<MultipartFile> fileList= this.restWebModelConverterService.convertRmbItemFileList(rmbWebRequest.getRmbItemList(), reimbursement);
             List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
                 .saveOrUpdate(reimbursementItem,fileList);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
@@ -89,5 +91,21 @@ public class ReimbursementController {
                 .totalItem(reimbursementPage.getTotalElements()).build());
     }
 
+    @RequestMapping(value = {
+        "/file"}, method = RequestMethod.POST, consumes = {
+        MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public BaseRestResponse save( @RequestBody MultipartFile[] files) {
+        List<MultipartFile> fileList = new ArrayList<>();
+        fileList.add(files[0]);
 
-}
+//        ReimbursementItem reimbursementItem = new ReimbursementItem();
+//        reimbursementItem.setReimbursementItemId(999L);
+//        List<ReimbursementItem> reimbursementItemList = new ArrayList<>();
+//        reimbursementItemList.add(reimbursementItem);
+        this.reimbursementItemService.saveOrUpdate(new ArrayList<>(), fileList);
+        return null;
+    }
+
+    }
+
+

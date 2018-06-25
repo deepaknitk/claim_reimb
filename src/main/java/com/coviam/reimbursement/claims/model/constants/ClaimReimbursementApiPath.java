@@ -45,6 +45,7 @@ public interface ClaimReimbursementApiPath {
     /**
      * File API Paths
      */
-    String FILE_UPLOAD = "/upload";
+    String FILE_DOWNLOAD = "/download";
+
 
 }
