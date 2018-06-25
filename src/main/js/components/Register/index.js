@@ -8,23 +8,31 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            employeeId: '',
+            employeeName: '',
             isRegisterDone: false
         };
         this.submitChange = this.submitChange.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
+    }
+
+
+    changeHandler(event, fieldName) {
+        this.setState({[fieldName]: event.target.value});
     }
 
     submitChange() {
-        let empId = document.getElementById('employeeId').value;
-        let name = document.getElementById('employeeName').value;
+        // let empId = document.getElementById('employeeId').value;
+        // let name = document.getElementById('employeeName').value;
         USER = JSON.parse(localStorage.getItem('user'))
-        console.log('id', empId, 'name', name);
+        // console.log('id', empId, 'name', name);
         axios({
             method: 'post',
             url: 'http://localhost:8080/claims/user/save',
             data: {
-                userName: name,
+                userName: this.state.employeeName,
                 userEmail: USER.email,
-                employeeId: empId
+                employeeId: this.state.employeeId
             }
         })
             .then(function (response) {
@@ -34,7 +42,7 @@ class Register extends React.Component {
                     email: USER.email,
                     avatar_24: USER.avatar_24,
                     avatar_192: USER.avatar_192,
-                    empID: empId
+                    empID: this.state.employeeId
                 };
                 console.log(this.state.isRegisterDone);
                 this.setState({isRegisterDone: response.data.success});
@@ -62,11 +70,11 @@ class Register extends React.Component {
                                     <div className="fields">
                                         <div className="col-6 formField">
                                             <label htmlFor="employeeId">Employee ID: </label>
-                                            <input type="number" name="employeeId" id="employeeId" placeholder="eg. 2011232"/>
+                                            <input type="number" name="employeeId" id="employeeId" placeholder="eg. 2011232" onChange={(event) => this.changeHandler(event, 'employeeId')}/>
                                         </div>
                                         <div className="col-6 formField">
                                             <label htmlFor="employeeName">Name: </label>
-                                            <input type="text" name="employeeName" id="employeeName" placeholder="eg. Babu Rao"/>
+                                            <input type="text" name="employeeName" id="employeeName" placeholder="eg. Babu Rao" onChange={(event) => this.changeHandler(event, 'employeeName')}/>
                                         </div>
                                         <div className="center-all formField">
                                             <button onClick={this.submitChange} className="btn">Register</button>
