@@ -85,13 +85,14 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        if (localStorage.getItem('systemLang')) {
-            this.setState({systemLang: localStorage.getItem('systemLang')});
-        }
-        else {
-            //setting default lang to indonessian(id)
-            localStorage.setItem('systemLang', 'id');
-        }
+        localStorage.setItem('systemLang', 'en');
+        // if (localStorage.getItem('systemLang')) {
+        //     this.setState({systemLang: localStorage.getItem('systemLang')});
+        // }
+        // else {
+        //     //setting default lang to indonessian(id)
+        //     localStorage.setItem('systemLang', 'en');
+        // }
         this.handleLanguageChange(localStorage.getItem('systemLang'));
     }
 

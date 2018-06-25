@@ -15,7 +15,6 @@ import ConfirmationBox from '../../components/AlertBox';
 import Input from '../../components/Input';
 import Axios from 'axios';
 
-let USER = JSON.parse(localStorage.getItem('user'));
 
 class RFQForm extends Component {
     constructor(props, context) {
@@ -83,12 +82,20 @@ class RFQForm extends Component {
         this.getClaimArray = this.getClaimArray.bind(this);
     }
 
-    componentDidMount() {
-        console.log(this.props);
+    componentWillMount(){
+        let USER = JSON.parse(localStorage.getItem('user'));
         if (USER) {
             this.setState({employeeId: USER.empId});
             this.setState({employeeEmail: USER.email});
         }
+    }
+
+    componentDidMount() {
+        // console.log(this.props);
+        // if (USER) {
+        //     this.setState({employeeId: USER.empId});
+        //     this.setState({employeeEmail: USER.email});
+        // }
        Axios.get('/claims/expense/findAll')
        .then(response => {
             if(response.data.success) {
