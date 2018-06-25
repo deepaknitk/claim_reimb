@@ -130,6 +130,7 @@ import java.util.stream.Collectors;
     public ReimbursementItemDto convertRmbItemToRmbItemDto(
         ReimbursementItem rmbItem) {
         ReimbursementItemDto reimbursementItemDto = new ReimbursementItemDto();
+        reimbursementItemDto.setReimbursementItemId(rmbItem.getReimbursementItemId());
         reimbursementItemDto.setCurrencyCode(rmbItem.getCurrency().getCurrencyCode());
         reimbursementItemDto.setExpenseTypeDescription(rmbItem.getExpenseType().getExpenseTypeCode());
         reimbursementItemDto.setItemStatusCode(rmbItem.getItemStatus().getStatusCode());

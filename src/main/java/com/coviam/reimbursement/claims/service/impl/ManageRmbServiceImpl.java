@@ -97,7 +97,7 @@ public class ManageRmbServiceImpl implements ManageRmbService {
       rmbStatus = statusService.findByStatusCode("VERIFIED");
     }
     Reimbursement reimbursement = this.reimbursementService
-        .findReimburesementByRmbItemId(manageReimbursementRequest.getReimbursementId());
+        .findReimburesementByRmbId(manageReimbursementRequest.getReimbursementId());
     reimbursement.setStatusId(rmbStatus);
     reimbursement.setUpdatedAt(new Date());
     reimbursement.setUpdatedBy("System");

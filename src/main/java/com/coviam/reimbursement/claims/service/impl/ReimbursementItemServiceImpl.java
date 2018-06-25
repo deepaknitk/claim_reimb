@@ -67,7 +67,7 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
       Long rmbItemId) {
 
     List<ReimbursementItem> reimbursementItems = reimbursementItemRepository
-        .findByReimbursement(reimbursementService.findReimburesementByRmbItemId(rmbItemId));
+        .findByReimbursement(reimbursementService.findReimburesementByRmbId(rmbItemId));
     List<ReimbursementItemDto> reimbursementItemDtos = new ArrayList<>();
     for (ReimbursementItem reimbursementItem : reimbursementItems) {
       reimbursementItemDtos

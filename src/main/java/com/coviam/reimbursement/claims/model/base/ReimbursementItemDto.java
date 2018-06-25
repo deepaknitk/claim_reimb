@@ -31,6 +31,7 @@ import java.util.Date;
 public class ReimbursementItemDto implements Serializable {
   private static final long serialVersionUID = -2651399533796624539L;
 
+  private Long reimbursementItemId;
   private String itemStatusCode;
 
   private String rmbItemBillNumber;

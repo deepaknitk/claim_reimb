@@ -36,7 +36,7 @@ import java.util.List;
         return this.reimbursementRepository.save(rmb);
     }
 
-    @Override public Reimbursement findReimburesementByRmbItemId(Long rmbId) {
+    @Override public Reimbursement findReimburesementByRmbId(Long rmbId) {
         return reimbursementRepository.findOne(rmbId);
     }
 
