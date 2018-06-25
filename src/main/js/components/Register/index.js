@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.scss';
 import axios from 'axios';
 
-let USER = JSON.parse(localStorage.getItem('user'))
+let USER = JSON.parse(localStorage.getItem('user'));
 
 class Register extends React.Component {
     constructor(props) {
@@ -22,10 +22,7 @@ class Register extends React.Component {
     }
 
     submitChange() {
-        // let empId = document.getElementById('employeeId').value;
-        // let name = document.getElementById('employeeName').value;
-        USER = JSON.parse(localStorage.getItem('user'))
-        // console.log('id', empId, 'name', name);
+        USER = JSON.parse(localStorage.getItem('user'));
         axios({
             method: 'post',
             url: 'http://localhost:8080/claims/user/save',
@@ -36,7 +33,6 @@ class Register extends React.Component {
             }
         })
             .then(function (response) {
-                console.log(response);
                 let temp = {
                     name: name,
                     email: USER.email,
@@ -44,7 +40,6 @@ class Register extends React.Component {
                     avatar_192: USER.avatar_192,
                     empID: this.state.employeeId
                 };
-                console.log(this.state.isRegisterDone);
                 this.setState({isRegisterDone: response.data.success});
                 localStorage.setItem('user', JSON.stringify(temp));
             }.bind(this));
