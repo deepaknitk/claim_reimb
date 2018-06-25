@@ -62,10 +62,10 @@ class ManageClaims extends Component {
             <td>{claimDetails.remarks}</td>
             <td>{claimDetails.rmbItemFilename}</td>
             <td style = {{fontSize: '18px', fontWeight: '600', color: 'blue'}}>{claimDetails.itemStatusCode}</td>
-            { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
+            { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'deepak.mishra@coviam.com' ? <td>
             <input type="radio" name={i} value="APPROVED" onChange = {(event) => this.radiochangeHandler(event, claimDetails, i)} /> Approve
             </td> : ''}
-           {this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
+           {this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'deepak.mishra@coviam.com' ? <td>
             <input type="radio" name={i} value="REJECTED" onChange = {(event)=>this.radiochangeHandler(event, claimDetails, i)} /> Reject
             </td> : ''}
         </tr>)}
@@ -91,7 +91,8 @@ class ManageClaims extends Component {
                 Axios.post('/claims/manageClaims', obj)
                 .then(response => {
                     if(response.data.success) {
-                       this.porps.history.push('/views');
+                        console.log('dsasadfsa');
+                       this.props.history.push('/dashboard');
                     }
                 }).catch(error=> {
 
