@@ -130,7 +130,7 @@ import java.util.stream.Collectors;
         ReimbursementItem rmbItem) {
         ReimbursementItemDto reimbursementItemDto = new ReimbursementItemDto();
         reimbursementItemDto.setCurrencyCode(rmbItem.getCurrency().getCurrencyCode());
-        reimbursementItemDto.setExpenseTypeDescription(rmbItem.getExpenseType().getExpenseTypeDescription());
+        reimbursementItemDto.setExpenseTypeDescription(rmbItem.getExpenseType().getExpenseTypeCode());
         reimbursementItemDto.setItemStatusCode(rmbItem.getItemStatus().getStatusCode());
         reimbursementItemDto.setRfqItemDescription(rmbItem.getRfqItemDescription());
         reimbursementItemDto.setRmbItemFilename(rmbItem.getRmbItemFilename());

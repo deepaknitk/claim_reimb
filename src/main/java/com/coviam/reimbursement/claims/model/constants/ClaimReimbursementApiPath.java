@@ -30,6 +30,7 @@ public interface ClaimReimbursementApiPath {
     String GET_AUTHENTICATION_KEYS = "/getAuthenticationKeys";
 
     String SAVE_IMAGE = "/saveImage";
+    String MANAGE_CLAIMS = "/manageClaims";
 
     /**
      * Common Api Paths
