@@ -21,4 +21,11 @@ public class UserTypeServiceImpl implements UserTypeService {
       System.out.println("user type :"+userTypeMaster);
      return userTypeMaster;
   }
+
+  @Override
+  public UserTypeMaster findByUserTypeId(Long userTypeId){
+
+    UserTypeMaster userTypeMaster = userTypeRepository.findByUserTypeId(userTypeId);
+    return  userTypeMaster;
+  }
 }
