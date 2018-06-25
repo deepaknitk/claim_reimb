@@ -85,7 +85,7 @@ class App extends React.Component {
         }
         else {
             //setting default lang to indonessian(id)
-            localStorage.setItem('systemLang', 'id');
+            localStorage.setItem('systemLang', 'en');
         }
         this.handleLanguageChange(localStorage.getItem('systemLang'));
     }

@@ -45,7 +45,8 @@ class ManageClaims extends Component {
             ],
             openClaims: 0,
             closedClaims: 0,
-            rejectedClaims: 0
+            rejectedClaims: 0,
+            loggedInUseremail: null
         };
         this.getTableHeader = this.getTableHeader.bind(this);
         this.getTableBody = this.getTableBody.bind(this);
@@ -62,8 +63,9 @@ class ManageClaims extends Component {
                 <th>Amount</th>
                 <th>Remarks</th>
                 <th>Image</th>
-                <th>Approve</th>
-                <th>Reject</th>
+                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Approve</th> : '' }
+                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Reject</th> : '' }
+
             </tr>
         );
     }
@@ -76,47 +78,26 @@ class ManageClaims extends Component {
             <td>{new Date(claimDetails.reimbursement_date).toLocaleDateString()}</td>
             <td>{claimDetails.rmbItemBillNumber}</td>
             <td>{claimDetails.rfqItemDescription}</td>
-            <td>'Type'</td>
+            <td>{claimDetails.expenseTypeDescription}</td>
             <td>{claimDetails.rmbItemAmount}</td>
             <td>{claimDetails.remarks}</td>
             <td>{claimDetails.rmbItemFilename}</td>
-            <td>
+            { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
             <input type="radio" name={i} value="male"/> Approve
-            </td>
-            <td>
+            </td> : ''}
+           { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
             <input type="radio" name={i} value="male"/> Reject
-            </td>
+            </td> : ''}
         </tr>)}
         </tbody>
         );
     }
 
     componentDidMount() {
-        Axios
-            .get('getClaims')
-            .then(response => {
-                if (response.data.success) {
-                    this.setState({claims: response.data.data});
-                    let open = 0;
-                    let closed = 0;
-                    let rejected = 0;
-                    response.data.data.map(claim=>{
-                        if(claim.statusCode === 'OPEN') {
-                            open++;
-                        }
-                        if(claim.statusCode === 'CLOSED') {
-                            closed++;
-                        }
-                        if(claim.statusCode === 'REJECTED') {
-                            rejected++;
-                        }
-                    });
-                    this.setState({openClaims: open, closedClaims: closed, rejectedClaims: rejected});
-                }
-            })
-            .catch(() => {
-                console.log('Something went wrong in manage Claims Api');
-            });
+        let user = JSON.parse(localStorage.getItem('user'));
+        let loggedInUseremail = user.email;
+        this.setState({loggedInUseremail: loggedInUseremail});
+        this.setState({claims: this.props.history.location.state.some});
     }
 
     render() {
@@ -152,14 +133,14 @@ class ManageClaims extends Component {
                         getTableBody={this.getTableBody}
                      />
                 </div>
-                <div className="btn-container submit_form_container m-t-30">
+                { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'vishnu@coviam.com' ? <div className="btn-container submit_form_container m-t-30">
                                 <Button
                                     type="submit"
                                     cssClassName="m-r-10 p-l-30 p-r-30 btn-primary"
                                     buttonClickFunc={this.validateformSubmission}
                                     buttonName="Submit"
                                     isDisabled={this.props.formValidationFlag}/>
-                            </div>
+                            </div> : ''}
             </div>
 
 

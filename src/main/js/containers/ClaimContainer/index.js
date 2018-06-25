@@ -319,7 +319,7 @@ class RFQForm extends Component {
 
     getClaimDetails() {
         const claimPayload = {
-            userId: this.state.employeeId,
+            userId: this.state.employeeEmail,
             rmbItemList: this.getClaimArray()
         };
         return claimPayload;
