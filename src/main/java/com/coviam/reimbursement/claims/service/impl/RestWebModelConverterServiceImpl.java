@@ -154,15 +154,15 @@ import java.util.stream.Collectors;
 
     @Override public List<ReimbursementItem> convertRmbItemList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
         List<ReimbursementItem> reimbursementItems = new ArrayList<>();
-        List<MultipartFile> fileList = new ArrayList<>();
+        //List<MultipartFile> fileList = new ArrayList<>();
         for (ReimbursementDto reimbursementDto: reimbursementDtos){
             reimbursementItems.add(convertRmbItem(reimbursementDto, reimbursement));
-            fileList.add(reimbursementDto.getFile());
+
         }
 
         return reimbursementItems;
     }
-    @Override public List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
+    /*@Override public List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement){
 
         List<MultipartFile> fileList = new ArrayList<>();
         for (ReimbursementDto reimbursementDto: reimbursementDtos){
@@ -170,7 +170,7 @@ import java.util.stream.Collectors;
         }
 
         return fileList;
-    }
+    }*/
 
     public ReimbursementItem convertRmbItem(ReimbursementDto reimbursementDto, Reimbursement reimbursement){
         ReimbursementItem reimbursementItem = new ReimbursementItem();

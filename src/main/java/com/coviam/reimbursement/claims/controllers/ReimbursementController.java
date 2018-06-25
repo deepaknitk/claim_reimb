@@ -41,7 +41,7 @@ public class ReimbursementController {
 
     @RequestMapping(value = {
         ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
-        MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+        MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
@@ -51,9 +51,9 @@ public class ReimbursementController {
                 .saveRmb(reimbursement);
            List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
                .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
-            List<MultipartFile> fileList= this.restWebModelConverterService.convertRmbItemFileList(rmbWebRequest.getRmbItemList(), reimbursement);
+           // List<MultipartFile> fileList= this.restWebModelConverterService.convertRmbItemFileList(rmbWebRequest.getRmbItemList(), reimbursement);
             List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
-                .saveOrUpdate(reimbursementItem,fileList);
+                .saveOrUpdate(reimbursementItem);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
         } catch (Exception e) {
             log.error("Error in saving rmb  with user id: {}  due to: {} ",
@@ -101,7 +101,7 @@ public class ReimbursementController {
         return new BaseRestResponse<>(true, reimbursementResponseList);
     }
 
-    @RequestMapping(value = {
+    /*@RequestMapping(value = {
         "/file"}, method = RequestMethod.POST, consumes = {
         MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public BaseRestResponse save( @RequestBody MultipartFile[] files) {
@@ -114,6 +114,6 @@ public class ReimbursementController {
 //        reimbursementItemList.add(reimbursementItem);
         this.reimbursementItemService.saveOrUpdate(new ArrayList<>(), fileList);
         return null;
-    }
+    }*/
 
 }

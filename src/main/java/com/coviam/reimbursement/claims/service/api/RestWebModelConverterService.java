@@ -42,5 +42,5 @@ public interface RestWebModelConverterService {
 
     List<ReimbursementResponse> convertFindAllResponse(List<Reimbursement> reimbursementResponses);
 
-    List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
+   // List<MultipartFile> convertRmbItemFileList(List<ReimbursementDto> reimbursementDtos, Reimbursement reimbursement);
 }
