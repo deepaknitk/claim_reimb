@@ -13,14 +13,19 @@ class ClaimHistory extends Component {
             claimsByRembId: [],
             openClaims: 0,
             closedClaims: 0,
-            rejectedClaims: 0
+            rejectedClaims: 0,
+            remID: null,
+            remIdForClaim: null
+
         };
         this.getTableHeader = this.getTableHeader.bind(this);
         this.getTableBody = this.getTableBody.bind(this);
     }
 
     getRembDetails(claimDetails) {
-        console.log(JSON.stringify(claimDetails));
+        const tempRemId = claimDetails.reimbursementId;
+        console.log(tempRemId);
+        this.setState({remID: tempRemId});
         Axios
             .get('/claims/rmbItem/findRmbItemById', {
                 params: {
@@ -32,9 +37,8 @@ class ClaimHistory extends Component {
                     this.setState({claimsByRembId: response.data.data});
                     this.props.history.push({
                             pathname: '/manageClaims',
-                            state: { some: this.state.claimsByRembId }
+                            state: { some: this.state.claimsByRembId, remIdForClaim: this.state.remID}
                           });
-                    // this.setState({openClaims: open, closedClaims: closed, rejectedClaims: rejected});
                 }
             })
             .catch(() => {

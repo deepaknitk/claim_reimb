@@ -8,48 +8,18 @@ class ManageClaims extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            claims: [
-                {
-                    'itemStatusCode': 'OPEN',
-                    'rmbItemBillNumber': '12',
-                    'rfqItemDescription': 'rmb item desc 1',
-                    'remarks': 'for one person',
-                    'expenseTypeDescription': 'Food Expense Lunch',
-                    'currencyCode': 'INR',
-                    'rmbItemAmount': 200,
-                    'rmbItemFilename': 'file.pdf',
-                    'rmbDate': null
-                },
-                {
-                    'itemStatusCode': 'OPEN',
-                    'rmbItemBillNumber': '12',
-                    'rfqItemDescription': 'rmb item desc 1',
-                    'remarks': 'for one person',
-                    'expenseTypeDescription': 'Food Expense Lunch',
-                    'currencyCode': 'INR',
-                    'rmbItemAmount': 200,
-                    'rmbItemFilename': 'file.pdf',
-                    'rmbDate': null
-                },
-                {
-                    'itemStatusCode': 'OPEN',
-                    'rmbItemBillNumber': '12',
-                    'rfqItemDescription': 'rmb item desc 1',
-                    'remarks': 'for one person',
-                    'expenseTypeDescription': 'Food Expense Lunch',
-                    'currencyCode': 'INR',
-                    'rmbItemAmount': 200,
-                    'rmbItemFilename': 'file.pdf',
-                    'rmbDate': null
-                }
-            ],
+            claims: [],
             openClaims: 0,
             closedClaims: 0,
             rejectedClaims: 0,
-            loggedInUseremail: null
+            loggedInUseremail: null,
+            updatedClaimsWithAction: null,
+            tempRemId: null
         };
         this.getTableHeader = this.getTableHeader.bind(this);
         this.getTableBody = this.getTableBody.bind(this);
+        this.radiochangeHandler = this.radiochangeHandler.bind(this);
+        this.submitClaims = this.submitClaims.bind(this);
     }
 
     getTableHeader() {
@@ -63,12 +33,20 @@ class ManageClaims extends Component {
                 <th>Amount</th>
                 <th>Remarks</th>
                 <th>Image</th>
+                <th>Status</th>
                 { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Approve</th> : '' }
                 { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Reject</th> : '' }
-
             </tr>
         );
     }
+
+    radiochangeHandler(event, claimDetails, index) {
+        let arr = [];
+        claimDetails.action = event.target.value;
+        arr.splice( index, 0, claimDetails );
+        this.setState({updatedClaimsWithAction: arr});
+    }
+
 
     getTableBody() {
         return (
@@ -82,11 +60,12 @@ class ManageClaims extends Component {
             <td>{claimDetails.rmbItemAmount}</td>
             <td>{claimDetails.remarks}</td>
             <td>{claimDetails.rmbItemFilename}</td>
+            <td style = {{fontSize: '18px', fontWeight: '600', color: 'blue'}}>{claimDetails.itemStatusCode}</td>
             { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
-            <input type="radio" name={i} value="male"/> Approve
+            <input type="radio" name={i} value="Accept" onChange = {(event) => this.radiochangeHandler(event, claimDetails, i)} /> Approve
             </td> : ''}
-           { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
-            <input type="radio" name={i} value="male"/> Reject
+           {this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
+            <input type="radio" name={i} value="Reject" onChange = {(event)=>this.radiochangeHandler(event, claimDetails, i)} /> Reject
             </td> : ''}
         </tr>)}
         </tbody>
@@ -97,7 +76,38 @@ class ManageClaims extends Component {
         let user = JSON.parse(localStorage.getItem('user'));
         let loggedInUseremail = user.email;
         this.setState({loggedInUseremail: loggedInUseremail});
-        this.setState({claims: this.props.history.location.state.some});
+        this.setState({claims: this.props.history.location.state.some, tempRemId: this.props.history.location.state.remIdForClaim});
+        this.getList = this.getList.bind(this);
+    }
+
+    submitClaims() {
+        const temp = this.state.updatedClaimsWithAction;
+                let obj = {
+                    reimbursementId: this.state.tempRemId,
+                    userEmail: 'priya@coviam.com',
+                    reimbursementItemStatusDtos: this.getList(temp)
+                };
+                Axios.post('/claims/manageClaims', obj)
+                .then(response => {
+                    if(response.data.success) {
+                       this.porps.history.push('/views');
+                    }
+                }).catch(error=> {
+
+                });
+    }
+    getList(temp) {
+        let reimbursementItemStatusDtos = [];
+       temp.map(claims => {
+                let obj = {
+                    'reimbursementItemId': 11,
+                    'userEmail': this.state.loggedInUseremail,
+                    'remarks': claims.remarks,
+                    'action': claims.action
+                };
+                reimbursementItemStatusDtos.push(obj);
+       });
+       return reimbursementItemStatusDtos;
     }
 
     render() {
@@ -137,13 +147,11 @@ class ManageClaims extends Component {
                                 <Button
                                     type="submit"
                                     cssClassName="m-r-10 p-l-30 p-r-30 btn-primary"
-                                    buttonClickFunc={this.validateformSubmission}
+                                    buttonClickFunc={this.submitClaims}
                                     buttonName="Submit"
                                     isDisabled={this.props.formValidationFlag}/>
                             </div> : ''}
             </div>
-
-
         );
     }
 }
