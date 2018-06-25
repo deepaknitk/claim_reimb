@@ -12,6 +12,7 @@ class ManageClaims extends Component {
             openClaims: 0,
             closedClaims: 0,
             rejectedClaims: 0,
+            varifiedClaims: 0,
             loggedInUseremail: null,
             updatedClaimsWithAction: null,
             tempRemId: null
@@ -62,10 +63,10 @@ class ManageClaims extends Component {
             <td>{claimDetails.rmbItemFilename}</td>
             <td style = {{fontSize: '18px', fontWeight: '600', color: 'blue'}}>{claimDetails.itemStatusCode}</td>
             { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
-            <input type="radio" name={i} value="Accept" onChange = {(event) => this.radiochangeHandler(event, claimDetails, i)} /> Approve
+            <input type="radio" name={i} value="APPROVED" onChange = {(event) => this.radiochangeHandler(event, claimDetails, i)} /> Approve
             </td> : ''}
            {this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
-            <input type="radio" name={i} value="Reject" onChange = {(event)=>this.radiochangeHandler(event, claimDetails, i)} /> Reject
+            <input type="radio" name={i} value="REJECTED" onChange = {(event)=>this.radiochangeHandler(event, claimDetails, i)} /> Reject
             </td> : ''}
         </tr>)}
         </tbody>
@@ -101,7 +102,6 @@ class ManageClaims extends Component {
        temp.map(claims => {
                 let obj = {
                     'reimbursementItemId': 11,
-                    'userEmail': this.state.loggedInUseremail,
                     'remarks': claims.remarks,
                     'action': claims.action
                 };
@@ -113,7 +113,7 @@ class ManageClaims extends Component {
     render() {
         return (
             <div style={{margin: '50px'}}>
-                <div className="card-deck">
+                {/* <div className="card-deck">
                     <div className="card bg-primary p-30 claimHistoryHeader">
                         <h4 className="">Open Claims</h4>
                         <div className="card-body text-center">
@@ -132,9 +132,16 @@ class ManageClaims extends Component {
                             <h2>{this.state.rejectedClaims}</h2>
                         </div>
                     </div>
-                </div>
 
-                <h2 className="text-center m-t-20 m-b-20 card p-10" >Claim History</h2>
+                    <div className="card bg-secondary card p-30 claimHistoryHeader">
+                        <h4>Varified Claims</h4>
+                        <div className="card-body text-center">
+                            <h2>{this.state.rejectedClaims}</h2>
+                        </div>
+                    </div>
+                </div> */}
+
+                <h2 className="text-center m-t-20 m-b-20 card p-10" >Claim List</h2>
 
                 <div className="table-container">
                     <TableLayout

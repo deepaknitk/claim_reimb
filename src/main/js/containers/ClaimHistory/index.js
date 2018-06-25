@@ -111,7 +111,7 @@ class ClaimHistory extends Component {
     render() {
         return (
             <div style={{margin: '50px'}}>
-                <div className="card-deck">
+                {/* <div className="card-deck">
                     <div className="card bg-primary p-30 claimHistoryHeader">
                         <h4 className="">Open Reimbursement</h4>
                         <div className="card-body text-center">
@@ -130,7 +130,7 @@ class ClaimHistory extends Component {
                             <h2>{this.state.rejectedClaims}</h2>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <h2 className="text-center m-t-20 m-b-20 card p-10" >Reimbursement List</h2>
                 <div className="table-container">
