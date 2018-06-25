@@ -12,5 +12,5 @@ public interface ReimbursementService {
 
     Reimbursement saveRmb(Reimbursement rmb);
 
-    ReimbursementItem findReimburesementByRmbItemId(Long rmbItemId);
+    Reimbursement findReimburesementByRmbItemId(Long rmbId);
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import isEqual from 'lodash.isequal';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/index';
 import Validator from '../../utils/validator.js';
@@ -13,6 +14,8 @@ import ClaimForm from '../ClaimForm';
 import ConfirmationBox from '../../components/AlertBox';
 import Input from '../../components/Input';
 import Axios from 'axios';
+
+let USER = JSON.parse(localStorage.getItem('user'));
 
 class RFQForm extends Component {
     constructor(props, context) {
@@ -81,6 +84,8 @@ class RFQForm extends Component {
     }
 
     componentDidMount() {
+        this.setState({employeeId: USER.empId});
+        this.setState({employeeEmail: USER.email});
        Axios.get('/claims/expense/findAll')
        .then(response => {
             if(response.data.success) {
@@ -93,7 +98,11 @@ class RFQForm extends Component {
     }
 
    componentWillReceiveProps(nextProps) {
-       console.log('adsfads');
+    if (!isEqual(nextProps.appState.message.successMessage, this.state.successMessage) &&
+    nextProps.appState.message.successMessage) {
+    this.setState({successMessage: nextProps.appState.message.successMessage});
+    this.props.history.push('/dashboard');
+    }
    }
 
     changeHandler(fieldName, validationFuncName, event) {
@@ -245,7 +254,10 @@ class RFQForm extends Component {
         let tempProducts = this.state.claims;
         if (!isUpdatingExistingProduct) {
             tempProducts.push(claims);
-            this.setState({claims: tempProducts, showpopup: false, showAddProductPopUp: false});
+            this.setState({
+                claims: tempProducts,
+                 showpopup: false,
+                 showAddProductpopUp: false});
         } else {
             const selectedProductIndex = this.state.selectedProductIndex;
             const tempProducts = this.state.claims;
@@ -311,7 +323,7 @@ class RFQForm extends Component {
 
     getClaimDetails() {
         const claimPayload = {
-            userId: this.state.employeeId,
+            userId: this.state.employeeEmail,
             rmbItemList: this.getClaimArray()
         };
         return claimPayload;
@@ -329,9 +341,11 @@ class RFQForm extends Component {
                 'currency': 'INR',
                 'rmbItemAmount': claim.price,
                 'remarks': claim.remarks,
-                'rmbItemFilename': claim.fileName
+                'rmbItemFilename': claim.fileName,
+                'fileToUpload': claim.fileToUpload
             };
             tempClaims.push(claims);
+            console.log('Checking Fileupload', tempClaims);
         });
         return tempClaims;
     }
@@ -638,7 +652,8 @@ const mapStateToProps = (state) => {
     return {
         RfqState: state.rfq,
         uiConfigs: state.app.uiConfigs,
-        fileUpload: state.fileUpload
+        fileUpload: state.fileUpload,
+        message: state.message
     };
 };
 const mapDispatchToProps = (dispatch) => {

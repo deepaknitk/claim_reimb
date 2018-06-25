@@ -42,7 +42,7 @@ const ProductForm = (props) => {
                         inputType="number"
                         title="Bill NO"
                         errorValidationState={props.billNoErrorValidationState}
-                        errorMsg="Bill NO is required"
+                        errorMsg="Bill No is required"
                     />
                 </div>
                 <div className="col-md-6">
@@ -58,10 +58,7 @@ const ProductForm = (props) => {
                             id: 'date'
                         }}
                         dayPickerProps={{
-                            selectedDays: props.selectedDay,
-                            disabledDays: {
-                                before: new Date()
-                            }
+                            selectedDays: props.selectedDay
                         }}
                     />
                     {!props.dateErrorValidationState ? <span className="date error-msg" style={{color: 'red'}}>Enter Bill Date</span> : ''}
@@ -92,8 +89,8 @@ const ProductForm = (props) => {
                         validationFun="isEmpty"
                         value={'INR'}
                         errorMsg="Select your claim type"
-                        errorValidationState={props.typeErrorValidationState}
-                        options={[{name: 'INR', value: 'INR'}, {name: 'Id', value: 'Id'}]}/>
+                        errorValidationState={true}
+                        options={[{name: 'INR', value: 'INR'}]}/>
                     <InputPrice
                         cssClassName="input_span"
                         changeHandler={props.changeHandler}

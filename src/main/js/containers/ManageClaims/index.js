@@ -8,7 +8,45 @@ class ManageClaims extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            claims: []
+            claims: [
+                {
+                    'itemStatusCode': 'OPEN',
+                    'rmbItemBillNumber': '12',
+                    'rfqItemDescription': 'rmb item desc 1',
+                    'remarks': 'for one person',
+                    'expenseTypeDescription': 'Food Expense Lunch',
+                    'currencyCode': 'INR',
+                    'rmbItemAmount': 200,
+                    'rmbItemFilename': 'file.pdf',
+                    'rmbDate': null
+                },
+                {
+                    'itemStatusCode': 'OPEN',
+                    'rmbItemBillNumber': '12',
+                    'rfqItemDescription': 'rmb item desc 1',
+                    'remarks': 'for one person',
+                    'expenseTypeDescription': 'Food Expense Lunch',
+                    'currencyCode': 'INR',
+                    'rmbItemAmount': 200,
+                    'rmbItemFilename': 'file.pdf',
+                    'rmbDate': null
+                },
+                {
+                    'itemStatusCode': 'OPEN',
+                    'rmbItemBillNumber': '12',
+                    'rfqItemDescription': 'rmb item desc 1',
+                    'remarks': 'for one person',
+                    'expenseTypeDescription': 'Food Expense Lunch',
+                    'currencyCode': 'INR',
+                    'rmbItemAmount': 200,
+                    'rmbItemFilename': 'file.pdf',
+                    'rmbDate': null
+                }
+            ],
+            openClaims: 0,
+            closedClaims: 0,
+            rejectedClaims: 0,
+            loggedInUseremail: null
         };
         this.getTableHeader = this.getTableHeader.bind(this);
         this.getTableBody = this.getTableBody.bind(this);
@@ -17,7 +55,7 @@ class ManageClaims extends Component {
     getTableHeader() {
         return (
             <tr className="table_layout table_header">
-                <th></th>
+                <th>SN.</th>
                 <th>Date</th>
                 <th>Bill No.</th>
                 <th>Discriptions</th>
@@ -25,8 +63,9 @@ class ManageClaims extends Component {
                 <th>Amount</th>
                 <th>Remarks</th>
                 <th>Image</th>
-                <th>Approve</th>
-                <th>Reject</th>
+                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Approve</th> : '' }
+                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Reject</th> : '' }
+
             </tr>
         );
     }
@@ -34,66 +73,31 @@ class ManageClaims extends Component {
     getTableBody() {
         return (
             <tbody className="table_body">
-            <tr>
-                <td>SN</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>Img</td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-            </tr>
-            <tr>
-                <td>SN</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>Img</td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-            </tr>
-            <tr>
-                <td>SN</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>Img</td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-                <td><input type="radio" name="claimAction" value="val1"/>
-                </td>
-            </tr>
-            </tbody>
+            {this.state.claims.map((claimDetails, i) => <tr key={i}>
+            <td>{i + 1}</td>
+            <td>{new Date(claimDetails.reimbursement_date).toLocaleDateString()}</td>
+            <td>{claimDetails.rmbItemBillNumber}</td>
+            <td>{claimDetails.rfqItemDescription}</td>
+            <td>{claimDetails.expenseTypeDescription}</td>
+            <td>{claimDetails.rmbItemAmount}</td>
+            <td>{claimDetails.remarks}</td>
+            <td>{claimDetails.rmbItemFilename}</td>
+            { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
+            <input type="radio" name={i} value="male"/> Approve
+            </td> : ''}
+           { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'priya@coviam.com' ? <td>
+            <input type="radio" name={i} value="male"/> Reject
+            </td> : ''}
+        </tr>)}
+        </tbody>
         );
     }
 
     componentDidMount() {
-        Axios
-            .get('getClaims')
-            .then(response => {
-                if (response.data.success) {
-                    ///success
-                }
-                else {
-                     ///fail
-                }
-            })
-            .catch(() => {
-                 ///fail
-            });
+        let user = JSON.parse(localStorage.getItem('user'));
+        let loggedInUseremail = user.email;
+        this.setState({loggedInUseremail: loggedInUseremail});
+        this.setState({claims: this.props.history.location.state.some});
     }
 
     render() {
@@ -103,19 +107,19 @@ class ManageClaims extends Component {
                     <div className="card bg-primary p-30 claimHistoryHeader">
                         <h4 className="">Open Claims</h4>
                         <div className="card-body text-center">
-                           <h2>4</h2>
+                           <h2>{this.state.openClaims}</h2>
                         </div>
                     </div>
                     <div className="card bg-success p-30 claimHistoryHeader">
                         <h4>Closed Claims</h4>
                         <div className="card-body text-center">
-                            <h2>9</h2>
+                            <h2>{this.state.closedClaims}</h2>
                         </div>
                     </div>
                     <div className="card bg-warning p-30 claimHistoryHeader">
                         <h4>Rejected Claims</h4>
                         <div className="card-body text-center">
-                            <h2>2</h2>
+                            <h2>{this.state.rejectedClaims}</h2>
                         </div>
                     </div>
                 </div>
@@ -129,14 +133,14 @@ class ManageClaims extends Component {
                         getTableBody={this.getTableBody}
                      />
                 </div>
-                <div className="btn-container submit_form_container m-t-30">
+                { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'vishnu@coviam.com' ? <div className="btn-container submit_form_container m-t-30">
                                 <Button
                                     type="submit"
                                     cssClassName="m-r-10 p-l-30 p-r-30 btn-primary"
                                     buttonClickFunc={this.validateformSubmission}
                                     buttonName="Submit"
                                     isDisabled={this.props.formValidationFlag}/>
-                            </div>
+                            </div> : ''}
             </div>
 
 

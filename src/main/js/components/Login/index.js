@@ -20,6 +20,7 @@ const LOGIN = (props) => {
             }
         </div>
     );
-};
+}
 
 export default LOGIN;
+

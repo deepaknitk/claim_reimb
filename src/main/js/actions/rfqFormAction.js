@@ -9,8 +9,14 @@ import {setErrorMessage} from './messageAction';
 
 export const saveClaimRequest = (claimsDetails) => {
     return (dispatch) => {
-        Axios
-            .post('/claims/reimbursement/create', claimsDetails)
+        Axios({
+            method: 'post',
+            url: '/claims/api/reimbursement/create',
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: claimsDetails
+        })
             .then(response => {
                 if (response.data.success) {
                     dispatch(setMessage.setSuccessMessage('Claim submitted'));
