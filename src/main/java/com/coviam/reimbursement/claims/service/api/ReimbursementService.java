@@ -13,7 +13,7 @@ public interface ReimbursementService {
 
     Reimbursement saveRmb(Reimbursement rmb);
 
-    Reimbursement findReimburesementByRmbItemId(Long rmbId);
+    Reimbursement findReimburesementByRmbId(Long rmbId);
 
     List<Reimbursement> findAllByUserTypeCode(String userTypeCode);
 }
