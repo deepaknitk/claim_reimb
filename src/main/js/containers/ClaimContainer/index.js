@@ -84,8 +84,11 @@ class RFQForm extends Component {
     }
 
     componentDidMount() {
-        this.setState({employeeId: USER.empId});
-        this.setState({employeeEmail: USER.email});
+        console.log(this.props);
+        if (USER) {
+            this.setState({employeeId: USER.empId});
+            this.setState({employeeEmail: USER.email});
+        }
        Axios.get('/claims/expense/findAll')
        .then(response => {
             if(response.data.success) {
@@ -342,7 +345,6 @@ class RFQForm extends Component {
                 'rmbItemAmount': claim.price,
                 'remarks': claim.remarks,
                 'rmbItemFilename': claim.fileName,
-                'fileToUpload': claim.fileToUpload
             };
             tempClaims.push(claims);
             console.log('Checking Fileupload', tempClaims);
