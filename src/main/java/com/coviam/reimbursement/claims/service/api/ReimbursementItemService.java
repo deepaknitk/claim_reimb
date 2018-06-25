@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ReimbursementItemService {
 
-  List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList, List<MultipartFile> fileList);
+  List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList);
 
   ReimbursementItem update(ReimbursementItem reimbursementItem);
 

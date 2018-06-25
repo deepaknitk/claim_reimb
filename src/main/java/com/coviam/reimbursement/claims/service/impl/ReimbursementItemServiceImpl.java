@@ -40,12 +40,12 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
   private RestWebModelConverterService restWebModelConverterService;
 
   @Override
-  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList, List<MultipartFile> fileList){
+  public List<ReimbursementItem> saveOrUpdate(List<ReimbursementItem> reimbursementItemList){
 
-      this.init();
+      //this.init();
       List<ReimbursementItem> reimbursementItemListResponse =
           reimbursementItemRepository.save(reimbursementItemList);
-      for (int index = 0; index < fileList.size(); index++) {
+      /*for (int index = 0; index < fileList.size(); index++) {
           try {
               Files.copy(fileList.get(index).getInputStream(), this.rootLocation.resolve(
                   "file_" + reimbursementItemListResponse.get(index) + "_"
@@ -53,7 +53,7 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
           } catch (Exception e) {
               throw new RuntimeException("FAIL! -> message = " + e.getMessage());
           }
-      }
+      }*/
       return reimbursementItemListResponse;
   }
 
@@ -97,7 +97,6 @@ public class ReimbursementItemServiceImpl implements ReimbursementItemService {
                 throw new RuntimeException("Could not initialize storage!");
             }
         }
-    }
 
 
 
