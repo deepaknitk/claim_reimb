@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping(ClaimReimbursementApiPath.USER)
 public class UserController {
 

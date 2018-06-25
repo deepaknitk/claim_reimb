@@ -10,6 +10,7 @@ import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,11 @@ public class ReimbursementItemController {
           false, null);
     }
   }
+    @RequestMapping(value = {ClaimReimbursementApiPath.FILE_DOWNLOAD},
+        method = {RequestMethod.GET}, produces = {MediaType.IMAGE_PNG_VALUE})
+    public Resource downloadFile(@RequestParam String filename, @RequestParam Long reimbursemntId) {
+        Resource file = this.reimbursementItemService.loadFile(filename, reimbursemntId);
+        return file;
+    }
 
 }

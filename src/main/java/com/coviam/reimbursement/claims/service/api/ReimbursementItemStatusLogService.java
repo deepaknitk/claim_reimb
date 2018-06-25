@@ -2,6 +2,7 @@ package com.coviam.reimbursement.claims.service.api;
 
 import com.coviam.reimbursement.claims.entity.ExpenseType;
 import com.coviam.reimbursement.claims.entity.ReimbursementItemStatusLog;
+import com.coviam.reimbursement.claims.model.base.ReimbursementItemStatusLogDto;
 
 import java.util.List;
 
@@ -10,7 +11,5 @@ import java.util.List;
  */
 public interface ReimbursementItemStatusLogService {
 
-//  List<ReimbursementItemStatusLog> findAll();
-
-
+  ReimbursementItemStatusLog save(ReimbursementItemStatusLogDto reimbursementItemStatusLogDto);
 }

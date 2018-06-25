@@ -61,4 +61,12 @@ public class UserServiceImpl implements UserService {
 
       return userMaster;
   }
+
+  @Override
+    public String findUserTypeCodeByUserEmail(String userEmail){
+      Long userTypeId = userRepository.findByUserEmailAndMarkForDeleteFalse(userEmail).getUserType().getUserTypeId();
+      String userTypeCode =  userTypeService.findByUserTypeId(userTypeId).getUserTypeCode();
+
+      return userTypeCode;
+    }
 }

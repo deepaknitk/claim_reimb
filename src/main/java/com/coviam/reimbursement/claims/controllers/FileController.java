@@ -9,6 +9,8 @@ package com.coviam.reimbursement.claims.controllers;
 
 import java.io.IOException;
 
+import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
+import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,8 @@ import com.coviam.reimbursement.claims.service.api.FileService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author manika_singh
- * @since 05/06/18
+ * @author Payal
+ * @since 24/06/18
  */
 @Slf4j
 @RestController
@@ -32,10 +34,10 @@ public class FileController {
   @Autowired
   FileService fileService;
 
-  /*@RequestMapping(value = LtsApiPath.FILE_UPLOAD, method = RequestMethod.POST,
+  /*@RequestMapping(value = ClaimReimbursementApiPath.FILE_UPLOAD, method = RequestMethod.POST,
       consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public BaseRestResponse<String> saveFile(
-      @RequestParam(required = false, defaultValue = "lts-ui-user") String userName,
+      @RequestParam(required = false, defaultValue = "rmb-ui-user") String userName,
       @RequestParam String rfqId, @RequestParam String rfqItemId, @RequestParam String rfqTypeId,
       @RequestParam("file") MultipartFile file) {
     try {
