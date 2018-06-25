@@ -43,4 +43,10 @@ public interface ClaimReimbursementApiPath {
     String CREATE = "/create";
     String FIND_BY_ID = "/findById";
 
+    /**
+     * File API Paths
+     */
+    String FILE_DOWNLOAD = "/download";
+
+
 }

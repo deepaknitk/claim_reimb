@@ -15,6 +15,8 @@ import ConfirmationBox from '../../components/AlertBox';
 import Input from '../../components/Input';
 import Axios from 'axios';
 
+let USER = JSON.parse(localStorage.getItem('user'));
+
 class RFQForm extends Component {
     constructor(props, context) {
         super(props, context);
@@ -82,6 +84,11 @@ class RFQForm extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
+        if (USER) {
+            this.setState({employeeId: USER.empId});
+            this.setState({employeeEmail: USER.email});
+        }
        Axios.get('/claims/expense/findAll')
        .then(response => {
             if(response.data.success) {
@@ -337,9 +344,10 @@ class RFQForm extends Component {
                 'currency': 'INR',
                 'rmbItemAmount': claim.price,
                 'remarks': claim.remarks,
-                'rmbItemFilename': claim.fileName
+                'rmbItemFilename': claim.fileName,
             };
             tempClaims.push(claims);
+            console.log('Checking Fileupload', tempClaims);
         });
         return tempClaims;
     }

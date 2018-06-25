@@ -15,7 +15,7 @@ import Footer from '../components/Footer';
 import axios from 'axios/index';
 import Sidebar from '../components/Sidebar';
 
-let USER = JSON.parse(localStorage.getItem('user'));
+let USER = JSON.parse(localStorage.getItem('user'))
 import SideBar from '../components/Sidebar';
 
 class App extends React.Component {
@@ -31,7 +31,8 @@ class App extends React.Component {
             multilineImageUploadProgress: 0,
             userName: '',
             profileImage: '',
-            isRegisterActive: false
+            isRegisterActive: false,
+            locationUrl: ''
         };
     }
 
@@ -56,6 +57,7 @@ class App extends React.Component {
                             avatar_24: response.data.user.image_24,
                             avatar_192: response.data.user.image_192
                         };
+                        localStorage.setItem('user', JSON.stringify(tempUser));
                         axios({
                             method: 'get',
                             url: 'http://localhost:8080/claims/user/findById/?userEmail=' + tempUser.email
@@ -63,9 +65,11 @@ class App extends React.Component {
                             .then(function (res) {
                                 console.log('Response', res);
                                 this.setState({isRegisterActive: res.data.success});
+                                tempUser.empId = res.data.data.employeeId;
+                                console.log(tempUser);
                                 console.log('success', this.state.isRegisterActive);
+                                localStorage.setItem('user', JSON.stringify(tempUser));
                             }.bind(this));
-                        localStorage.setItem('user', JSON.stringify(tempUser));
                     }.bind(this));
             }
         } else {
@@ -76,6 +80,7 @@ class App extends React.Component {
 
     componentDidMount() {
 
+        this.setState({locationUrl: this.props.location.pathname});
         this.authUser();
     }
 
@@ -85,7 +90,7 @@ class App extends React.Component {
         }
         else {
             //setting default lang to indonessian(id)
-            localStorage.setItem('systemLang', 'en');
+            localStorage.setItem('systemLang', 'id');
         }
         this.handleLanguageChange(localStorage.getItem('systemLang'));
     }
@@ -204,6 +209,7 @@ class App extends React.Component {
                         handleLanguageChange = {this.handleLanguageChange.bind(this)}
                         {...this.props}/>
 
+                {/*{this.state.userName && this.state.locationUrl !== '/register' ? <Sidebar/> : ''}*/}
                 {this.state.userName ? <Sidebar/> : ''}
 
                 {/*<Profile user={USER}*/}

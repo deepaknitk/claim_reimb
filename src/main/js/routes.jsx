@@ -11,9 +11,9 @@ import ManageClaims from './containers/ManageClaims';
 function buildRoutes(props) {
     return (
         <Switch>
-            <Route path="/" exact render = {() => <Login property={props}/>}/>
-            <Route path="/profile" exact render = {() => <Profile user={props.user}/>}/>
-            <Route path="/register" component={Register}/>
+            <Route path="/" exact render = {() => <Login {...props}/>}/>
+            <Route path="/profile" exact render = {() => <Profile property={props}/>}/>
+            <Route path="/register" exact render = {() => <Register {...props}/>}/>
 
             <Route path="/createClaim" exact render={() => <SubmitClaim {...props}/>}/>
             <Route path="/dashboard" exact component={ClaimHistory}/>
