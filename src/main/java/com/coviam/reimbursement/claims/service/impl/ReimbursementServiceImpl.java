@@ -47,7 +47,7 @@ import java.util.List;
         if (userTypeCode.equals("FINANCE")) {
             Status status = statusService.findByStatusCode("OPEN");
             reimbursements.addAll(reimbursementRepository.findByStatusId(status));
-            status = statusService.findByStatusCode("CLOSED");
+            status = statusService.findByStatusCode("APPROVED");
             reimbursements.addAll(reimbursementRepository.findByStatusId(status));
 
         } else if (userTypeCode.equals("ADMIN")) {

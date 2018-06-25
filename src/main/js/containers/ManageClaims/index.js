@@ -35,8 +35,8 @@ class ManageClaims extends Component {
                 <th>Remarks</th>
                 <th>Image</th>
                 <th>Status</th>
-                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Approve</th> : '' }
-                { this.state.userEmail === 'vishnu@coviam.com' || this.state.userEmail === 'priya@coviam.com' ? <th>Reject</th> : '' }
+                { this.state.userEmail === 'foram.shah@coviam.com' || this.state.userEmail === 'deepak.mishra@coviam.com' ? <th>Approve</th> : '' }
+                { this.state.userEmail === 'foram.shah@coviam.com' || this.state.userEmail === 'deepak.mishra@coviam.com' ? <th>Reject</th> : '' }
             </tr>
         );
     }
@@ -85,7 +85,7 @@ class ManageClaims extends Component {
         const temp = this.state.updatedClaimsWithAction;
                 let obj = {
                     reimbursementId: this.state.tempRemId,
-                    userEmail: 'priya@coviam.com',
+                    userEmail: this.state.loggedInUseremail,
                     reimbursementItemStatusDtos: this.getList(temp)
                 };
                 Axios.post('/claims/manageClaims', obj)
@@ -151,7 +151,7 @@ class ManageClaims extends Component {
                         getTableBody={this.getTableBody}
                      />
                 </div>
-                { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'vishnu@coviam.com' ? <div className="btn-container submit_form_container m-t-30">
+                { this.state.loggedInUseremail === 'foram.shah@coviam.com' || this.state.loggedInUseremail === 'deepak.mishra@coviam.com' ? <div className="btn-container submit_form_container m-t-30">
                                 <Button
                                     type="submit"
                                     cssClassName="m-r-10 p-l-30 p-r-30 btn-primary"
