@@ -31,7 +31,8 @@ class App extends React.Component {
             multilineImageUploadProgress: 0,
             userName: '',
             profileImage: '',
-            isRegisterActive: false
+            isRegisterActive: false,
+            locationUrl: ''
         };
     }
 
@@ -55,7 +56,8 @@ class App extends React.Component {
                             name: response.data.user.name,
                             avatar_24: response.data.user.image_24,
                             avatar_192: response.data.user.image_192
-                        }
+                        };
+                        localStorage.setItem('user', JSON.stringify(tempUser));
                         axios({
                             method: 'get',
                             url: 'http://localhost:8080/claims/user/findById/?userEmail=' + tempUser.email
@@ -63,9 +65,11 @@ class App extends React.Component {
                             .then(function (res) {
                                 console.log('Response', res);
                                 this.setState({isRegisterActive: res.data.success});
+                                tempUser.empId = res.data.data.employeeId;
+                                console.log(tempUser);
                                 console.log('success', this.state.isRegisterActive);
-                            }.bind(this))
-                        localStorage.setItem('user', JSON.stringify(tempUser));
+                                localStorage.setItem('user', JSON.stringify(tempUser));
+                            }.bind(this));
                     }.bind(this));
             }
         } else {
@@ -76,6 +80,7 @@ class App extends React.Component {
 
     componentDidMount() {
 
+        this.setState({locationUrl: this.props.location.pathname});
         this.authUser();
     }
 
@@ -204,6 +209,7 @@ class App extends React.Component {
                         handleLanguageChange = {this.handleLanguageChange.bind(this)}
                         {...this.props}/>
 
+                {/*{this.state.userName && this.state.locationUrl !== '/register' ? <Sidebar/> : ''}*/}
                 {this.state.userName ? <Sidebar/> : ''}
 
                 {/*<Profile user={USER}*/}
