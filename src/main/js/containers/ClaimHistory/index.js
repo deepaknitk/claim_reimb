@@ -24,7 +24,6 @@ class ClaimHistory extends Component {
 
     getRembDetails(claimDetails) {
         const tempRemId = claimDetails.reimbursementId;
-        console.log(tempRemId);
         this.setState({remID: tempRemId});
         Axios
             .get('/claims/rmbItem/findRmbItemById', {

@@ -82,7 +82,7 @@ class RFQForm extends Component {
         this.getClaimArray = this.getClaimArray.bind(this);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         let USER = JSON.parse(localStorage.getItem('user'));
         if (USER) {
             this.setState({employeeId: USER.empId});
@@ -148,6 +148,8 @@ class RFQForm extends Component {
             }
         });
         if (!this.state.claims.length) {
+            this.setState({formValidationFlag: false});
+            isFormValidationFlag = false;
             this.state.isValidClaimTable = false;
         }
         if (isFormValidationFlag) {
@@ -351,7 +353,7 @@ class RFQForm extends Component {
                 'currency': 'INR',
                 'rmbItemAmount': claim.price,
                 'remarks': claim.remarks,
-                'rmbItemFilename': claim.fileName,
+                'rmbItemFilename': claim.fileName
             };
             tempClaims.push(claims);
             console.log('Checking Fileupload', tempClaims);

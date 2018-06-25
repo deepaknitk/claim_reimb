@@ -54,7 +54,7 @@ class ManageClaims extends Component {
             <tbody className="table_body">
             {this.state.claims.map((claimDetails, i) => <tr key={i}>
             <td>{i + 1}</td>
-            <td>{new Date(claimDetails.reimbursement_date).toLocaleDateString()}</td>
+            <td>24/06/2018</td>
             <td>{claimDetails.rmbItemBillNumber}</td>
             <td>{claimDetails.rfqItemDescription}</td>
             <td>{claimDetails.expenseTypeDescription}</td>
@@ -91,7 +91,6 @@ class ManageClaims extends Component {
                 Axios.post('/claims/manageClaims', obj)
                 .then(response => {
                     if(response.data.success) {
-                        console.log('dsasadfsa');
                        this.props.history.push('/dashboard');
                     }
                 }).catch(error=> {
@@ -102,7 +101,7 @@ class ManageClaims extends Component {
         let reimbursementItemStatusDtos = [];
        temp.map(claims => {
                 let obj = {
-                    'reimbursementItemId': 11,
+                    'reimbursementItemId': claims.reimbursementItemId,
                     'remarks': claims.remarks,
                     'action': claims.action
                 };
