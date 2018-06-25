@@ -7,5 +7,7 @@ import com.coviam.reimbursement.claims.entity.UserTypeMaster;
  */
 public interface UserTypeService {
 
-    public UserTypeMaster findByUserTypeCode(String userTypeCode);
+    UserTypeMaster findByUserTypeCode(String userTypeCode);
+
+    UserTypeMaster findByUserTypeId(Long userTypeId);
 }
