@@ -4,10 +4,12 @@ import com.coviam.reimbursement.claims.entity.Reimbursement;
 import com.coviam.reimbursement.claims.entity.ReimbursementItem;
 import com.coviam.reimbursement.claims.model.base.BaseRestResponse;
 import com.coviam.reimbursement.claims.model.base.Paging;
+import com.coviam.reimbursement.claims.model.base.ReimbursementDto;
 import com.coviam.reimbursement.claims.model.constants.ClaimReimbursementApiPath;
 import com.coviam.reimbursement.claims.model.enums.Error;
 import com.coviam.reimbursement.claims.request.RmbWebRequest;
 import com.coviam.reimbursement.claims.response.ReimbursementResponse;
+import com.coviam.reimbursement.claims.service.api.FileService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementItemService;
 import com.coviam.reimbursement.claims.service.api.ReimbursementService;
 import com.coviam.reimbursement.claims.service.api.RestWebModelConverterService;
@@ -17,8 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j @RestController @RequestMapping(value = ClaimReimbursementApiPath.REIMBURSEMENT)
@@ -32,25 +37,30 @@ public class ReimbursementController {
 
     @Autowired private UserService userService;
 
+
+
     @RequestMapping(value = {
         ClaimReimbursementApiPath.CREATE}, method = RequestMethod.POST, consumes = {
-        MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+        MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public BaseRestResponse save(@Valid @RequestBody RmbWebRequest rmbWebRequest) {
         ReimbursementResponse rmbResponse = null;
         try {
-            Reimbursement reimbursement =
+           Reimbursement reimbursement =
                 this.restWebModelConverterService.convertRmbWebRequestToRmb(rmbWebRequest);
-            Reimbursement saveRMB = this.reimbursementService.saveRmb(reimbursement);
-            List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
-                .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
-            List<ReimbursementItem> reimbursementItems =
-                this.reimbursementItemService.saveOrUpdate(reimbursementItem);
+            Reimbursement saveRMB = this.reimbursementService
+                .saveRmb(reimbursement);
+           List<ReimbursementItem> reimbursementItem = this.restWebModelConverterService
+               .convertRmbItemList(rmbWebRequest.getRmbItemList(), reimbursement);
+            List<MultipartFile> fileList= this.restWebModelConverterService.convertRmbItemFileList(rmbWebRequest.getRmbItemList(), reimbursement);
+            List<ReimbursementItem> reimbursementItems = this.reimbursementItemService
+                .saveOrUpdate(reimbursementItem,fileList);
             rmbResponse = this.restWebModelConverterService.convertRMBToRMBResponse(reimbursement);
         } catch (Exception e) {
             log.error("Error in saving rmb  with user id: {}  due to: {} ",
                 rmbWebRequest.getUserId(), e.getMessage(), e);
         }
         return new BaseRestResponse<>(true, rmbResponse);
+
 
     }
 
@@ -91,5 +101,19 @@ public class ReimbursementController {
         return new BaseRestResponse<>(true, reimbursementResponseList);
     }
 
+    @RequestMapping(value = {
+        "/file"}, method = RequestMethod.POST, consumes = {
+        MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public BaseRestResponse save( @RequestBody MultipartFile[] files) {
+        List<MultipartFile> fileList = new ArrayList<>();
+        fileList.add(files[0]);
+
+//        ReimbursementItem reimbursementItem = new ReimbursementItem();
+//        reimbursementItem.setReimbursementItemId(999L);
+//        List<ReimbursementItem> reimbursementItemList = new ArrayList<>();
+//        reimbursementItemList.add(reimbursementItem);
+        this.reimbursementItemService.saveOrUpdate(new ArrayList<>(), fileList);
+        return null;
+    }
 
 }
